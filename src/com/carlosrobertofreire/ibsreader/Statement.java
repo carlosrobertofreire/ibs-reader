@@ -4,19 +4,19 @@ public class Statement {
 
     private String date;
     private String store;
-    private String type;
+    private StatementType type;
     private String value;
 
     public Statement(){}
 
-    public Statement(String date, String store, String value, String type){
+    public Statement(String date, String store, String value, StatementType type){
         this.date = date;
         this.store = store.trim();
         this.value = value;
         this.type = type;
     }
 
-    public Statement(String date, String value, String type){
+    public Statement(String date, String value, StatementType type){
         this.date = date;
         this.value = value;
         this.type = type;
@@ -24,10 +24,10 @@ public class Statement {
 
     @Override
     public String toString(){
-        if (this.type.equals("Balance"))
-            return "Date: " + this.date + "\nValue: " + this.value + "\nType: " + this.type;
+        if (type.equals(StatementType.Balance))
+            return "Date: " + date + "\nValue: " + value + "\nType: " + type;
         else
-            return "Date: " + this.date + "\nStore: " + this.store + "\nValue: " + this.value + "\nType: " + this.type;
+            return "Date: " + date + "\nStore: " + store + "\nValue: " + value + "\nType: " + type;
     }
 
     public String getDate() {
@@ -46,11 +46,11 @@ public class Statement {
         this.store = store;
     }
 
-    public String getType() {
+    public StatementType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(StatementType type) {
         this.type = type;
     }
 
