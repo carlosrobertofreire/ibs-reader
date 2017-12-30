@@ -17,9 +17,7 @@ public class Main {
                 "15/12\t\t\tSALDO FINAL DISPONIVEL       \t\t\t\t1.000,00\t"
         };
 
-        String separator = "++++++++++++++++++++++++++++++++";
         for (String statementString : statementStrings){
-            System.out.println(separator);
             Statement statement = Main.convert(statementString);
             System.out.println(statement.toString());
         }
