@@ -1,6 +1,6 @@
 package com.carlosrobertofreire.ibsreader;
 
-public enum StatementType {
+enum StatementType {
     Debit,
     Credit,
     Balance
