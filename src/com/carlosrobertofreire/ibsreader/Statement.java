@@ -24,10 +24,18 @@ public class Statement {
 
     @Override
     public String toString(){
-        if (type.equals(StatementType.Balance))
-            return "Date: " + date + "\nValue: " + value + "\nType: " + type;
-        else
-            return "Date: " + date + "\nStore: " + store + "\nValue: " + value + "\nType: " + type;
+        StringBuilder sb = new StringBuilder(80);
+        sb.append("Date: ");
+        sb.append(date);
+        if (!type.equals(StatementType.Balance)){
+            sb.append(" Store: ");
+            sb.append(store);
+        }
+        sb.append(" Value: ");
+        sb.append(value);
+        sb.append(" Type: ");
+        sb.append(type);
+        return sb.toString();
     }
 
     public String getDate() {
