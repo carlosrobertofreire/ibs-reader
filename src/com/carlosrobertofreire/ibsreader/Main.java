@@ -17,20 +17,30 @@ public class Main {
                 "18/12\t\t\tCEI 000015 DINHEIRO       \t719\t200,00\t\t\t",
                 "18/12\t\t\tREND PAGO APLIC AUT MAIS       \t\t0,01\t\t\t",
                 "13/12\t\t\tINT TED 140000101612830       \t\t250,00\t-",
-                "05/12\t\t\tREMUNERACAO/SALARIO       \t3032\t1.000,00\t\t\t"
+                "05/12\t\t\tREMUNERACAO/SALARIO       \t3032\t1.000,00\t\t\t",
+                "adsadas\t",
+                "dsanldnsa wqkndlaksndlkas"
         };
 
         for (String statementString : statementStrings){
-            Statement statement = Main.convert(statementString);
-            System.out.println(statement.toString());
+            try {
+                Statement statement = Main.convert(statementString);
+                System.out.println(statement);
+            } catch (InvalidStatementException e){
+                System.out.println(e.getMessage());
+            }
         }
     }
 
-    private static Statement convert(String statementString){
+    private static Statement convert(String statementString) throws InvalidStatementException {
         String[] parts = statementString.split("\t");
-        if (parts.length >= 8){
+
+        if (parts.length < 6)
+            throw new InvalidStatementException("Incorrect numbers of fields", statementString);
+
+        if (parts.length >= 8)
             return new Statement(parts[0], parts[7], StatementType.Balance);
-        }
+
         String date = parts[0];
         String store = parts[3];
         String value = parts[5];
