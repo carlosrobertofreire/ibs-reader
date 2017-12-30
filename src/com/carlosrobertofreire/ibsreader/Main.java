@@ -4,17 +4,20 @@ public class Main {
 
     public static void main(String[] args) {
         String[] statementStrings = {
-                "01/12\t\t\tRSHOP-KONI ARCO V-01/12       \t\t30,90\t-",
-                "01/12\t\t\tRSHOP-FETRANSPOR -01/12       \t\t20,00\t-",
-                "01/12\t\t\tRSHOP-SORVETE IT-01/12       \t\t3,50\t-",
-                "04/12\t\t\tRSHOP-COPACABANA -04/12       \t\t39,60\t-",
-                "04/12\t\t\tRSHOP-PAG*Magazin-04/12       \t\t53,50\t-",
+                "01/12\t\t\tRSHOP-KONI ARCO V-01/12       \t\t30,00\t-",
                 "01/12\t\t\tSAQUE 24H 06166946       \t5086\t20,00\t-",
-                "01/12\t\t\tTBI 7041.21944-0/500       \t\t1.000,00",
-                "04/12\t\t\tTBI 7041.21944-0/500       \t\t1.000,00\t-",
+                "01/12\t\t\tTBI 3333.22222-0/500       \t\t1.000,00",
                 "01/12\t\t\tIOF       \t\t0,57\t-\t\t",
                 "01/12\t\t\tSDO CTA/APL AUTOMATICAS       \t\t\t\t1.000,00",
-                "15/12\t\t\tSALDO FINAL DISPONIVEL       \t\t\t\t1.000,00\t"
+                "15/12\t\t\tSALDO FINAL DISPONIVEL       \t\t\t\t1.000,00\t",
+                "26/12\t\t\tSALDO DO DIA       \t\t\t\t500,00\t-",
+                "15/12\t\t\t(-) SALDO A LIBERAR       \t\t\t\t500,00\t",
+                "04/12\t\t\tCXE 001305 SAQUE       \t8410\t100,00\t-\t\t",
+                "05/12\t C\t\tDOC 104.0070MARIA R SA        \t\t100,00\t\t",
+                "18/12\t\t\tCEI 000015 DINHEIRO       \t719\t200,00\t\t\t",
+                "18/12\t\t\tREND PAGO APLIC AUT MAIS       \t\t0,01\t\t\t",
+                "13/12\t\t\tINT TED 140000101612830       \t\t250,00\t-",
+                "05/12\t\t\tREMUNERACAO/SALARIO       \t3032\t1.000,00\t\t\t"
         };
 
         for (String statementString : statementStrings){
