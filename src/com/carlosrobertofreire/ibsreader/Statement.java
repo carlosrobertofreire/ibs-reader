@@ -1,41 +1,26 @@
 package com.carlosrobertofreire.ibsreader;
 
-public class Statement {
+public abstract class Statement {
 
     private String date;
-    private String store;
-    private StatementType type;
     private String value;
 
     public Statement(){}
 
-    public Statement(String date, String store, String value, StatementType type){
-        this.date = date;
-        this.store = store.trim();
-        this.value = value;
-        this.type = type;
-    }
-
-    public Statement(String date, String value, StatementType type){
+    public Statement(String date, String value){
         this.date = date;
         this.value = value;
-        this.type = type;
     }
 
-    @Override
-    public String toString(){
+    public abstract String getPrefix();
+
+    protected StringBuilder getStatementStringBuilder(){
         StringBuilder sb = new StringBuilder(80);
+        sb.append(getPrefix());
+        sb.append(" ");
         sb.append("Date: ");
-        sb.append(date);
-        if (!type.equals(StatementType.Balance)){
-            sb.append(" Store: ");
-            sb.append(store);
-        }
-        sb.append(" Value: ");
-        sb.append(value);
-        sb.append(" Type: ");
-        sb.append(type);
-        return sb.toString();
+        sb.append(getDate());
+        return sb;
     }
 
     public String getDate() {
@@ -44,22 +29,6 @@ public class Statement {
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public String getStore() {
-        return store;
-    }
-
-    public void setStore(String store) {
-        this.store = store;
-    }
-
-    public StatementType getType() {
-        return type;
-    }
-
-    public void setType(StatementType type) {
-        this.type = type;
     }
 
     public String getValue() {

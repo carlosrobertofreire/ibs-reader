@@ -1,4 +1,10 @@
-package com.carlosrobertofreire.ibsreader;
+package com.carlosrobertofreire.myapp;
+
+import com.carlosrobertofreire.ibsreader.Balance;
+import com.carlosrobertofreire.ibsreader.Credit;
+import com.carlosrobertofreire.ibsreader.Debit;
+import com.carlosrobertofreire.ibsreader.InvalidStatementException;
+import com.carlosrobertofreire.ibsreader.Statement;
 
 public class Main {
 
@@ -36,17 +42,18 @@ public class Main {
 
     private static Statement convert(String statementString) throws InvalidStatementException {
         String[] parts = statementString.split("\t");
-
         if (parts.length < 6)
             throw new InvalidStatementException("Incorrect numbers of fields", statementString);
-
         if (parts.length >= 8)
-            return new Statement(parts[0], parts[7], StatementType.Balance);
+            return new Balance(parts[0], parts[7]);
 
         String date = parts[0];
-        String store = parts[3];
+        String details = parts[3].trim();
         String value = parts[5];
-        StatementType type = parts.length > 6 ? StatementType.Debit:StatementType.Credit;
-        return new Statement(date, store, value, type);
+
+        if (parts.length > 6)
+            return new Debit(date, details, value);
+        else
+            return new Credit(date, details, value);
     }
 }
