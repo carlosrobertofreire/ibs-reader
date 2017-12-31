@@ -10,14 +10,13 @@ public class Balance extends Statement {
         super(date,value);
     }
 
-
     @Override
-    public String getPrefix() {
+    protected String getPrefix() {
         return "BALANCE";
     }
 
     @Override
-    public String getContent(){
+    protected String getContent(){
         return "";
     }
 

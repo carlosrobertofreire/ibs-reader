@@ -14,12 +14,12 @@ public class Debit extends Statement {
     }
 
     @Override
-    public String getPrefix() {
+    protected String getPrefix() {
         return "DEBIT";
     }
 
     @Override
-    public String getContent(){
+    protected String getContent(){
         StringBuilder sb = new StringBuilder(20);
         sb.append(" Store: ");
         sb.append(store);

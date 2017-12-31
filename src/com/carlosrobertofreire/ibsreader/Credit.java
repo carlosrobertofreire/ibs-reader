@@ -14,12 +14,12 @@ public class Credit extends Statement {
     }
 
     @Override
-    public String getPrefix() {
+    protected String getPrefix() {
         return "CREDIT";
     }
 
     @Override
-    public String getContent(){
+    protected String getContent(){
         StringBuilder sb = new StringBuilder(20);
         sb.append(" From: ");
         sb.append(getFrom());

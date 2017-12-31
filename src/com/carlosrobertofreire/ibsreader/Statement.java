@@ -12,9 +12,9 @@ public abstract class Statement {
         this.value = value;
     }
 
-    public abstract String getPrefix();
+    protected abstract String getPrefix();
 
-    public abstract String getContent();
+    protected abstract String getContent();
 
     @Override
     public String toString(){
