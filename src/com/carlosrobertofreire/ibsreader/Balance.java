@@ -17,11 +17,8 @@ public class Balance extends Statement {
     }
 
     @Override
-    public String toString() {
-        StringBuilder sb = getStatementStringBuilder();
-        sb.append(" Value: ");
-        sb.append(getValue());
-        return sb.toString();
+    public String getContent(){
+        return "";
     }
 
 }

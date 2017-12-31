@@ -19,12 +19,10 @@ public class Credit extends Statement {
     }
 
     @Override
-    public String toString() {
-        StringBuilder sb = getStatementStringBuilder();
+    public String getContent(){
+        StringBuilder sb = new StringBuilder(20);
         sb.append(" From: ");
-        sb.append(from);
-        sb.append(" Value: ");
-        sb.append(getValue());
+        sb.append(getFrom());
         return sb.toString();
     }
 

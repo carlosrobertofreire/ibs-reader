@@ -14,13 +14,19 @@ public abstract class Statement {
 
     public abstract String getPrefix();
 
-    protected StringBuilder getStatementStringBuilder(){
+    public abstract String getContent();
+
+    @Override
+    public String toString(){
         StringBuilder sb = new StringBuilder(80);
         sb.append(getPrefix());
         sb.append(" ");
         sb.append("Date: ");
         sb.append(getDate());
-        return sb;
+        sb.append(getContent());
+        sb.append(" Value: ");
+        sb.append(getValue());
+        return sb.toString();
     }
 
     public String getDate() {

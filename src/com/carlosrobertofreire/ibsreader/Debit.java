@@ -18,6 +18,14 @@ public class Debit extends Statement {
         return "DEBIT";
     }
 
+    @Override
+    public String getContent(){
+        StringBuilder sb = new StringBuilder(20);
+        sb.append(" Store: ");
+        sb.append(store);
+        return sb.toString();
+    }
+
     public String getStore() {
         return store;
     }
@@ -26,13 +34,5 @@ public class Debit extends Statement {
         this.store = store;
     }
 
-    @Override
-    public String toString(){
-        StringBuilder sb = getStatementStringBuilder();
-        sb.append(" Store: ");
-        sb.append(store);
-        sb.append(" Value: ");
-        sb.append(getValue());
-        return sb.toString();
-    }
+
 }
