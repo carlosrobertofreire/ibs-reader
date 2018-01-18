@@ -1,12 +1,12 @@
 package com.carlosrobertofreire.ibsreader;
 
-public class Filter {
+public class KnowledgeItem {
 
     private String name;
     private String[] keywords;
     private Statement[] statements;
 
-    public Filter() {
+    public KnowledgeItem() {
     }
 
     public String getName() {
