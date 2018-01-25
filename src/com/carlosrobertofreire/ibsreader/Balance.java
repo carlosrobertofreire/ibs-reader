@@ -6,8 +6,8 @@ public class Balance extends Statement {
         super();
     }
 
-    public Balance(String date, String value){
-        super(date,value);
+    public Balance(String date, String value, String originalText){
+        super(date, value, originalText);
     }
 
     @Override

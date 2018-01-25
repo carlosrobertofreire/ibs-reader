@@ -8,8 +8,8 @@ public class Credit extends Statement {
         super();
     }
 
-    public Credit(String date, String from, String value){
-        super(date, value);
+    public Credit(String date, String from, String value, String originalText){
+        super(date, value, originalText);
         this.from = from;
     }
 

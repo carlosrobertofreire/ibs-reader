@@ -10,16 +10,16 @@ public class StatementHelper {
         if (parts.length < 6)
             throw new InvalidStatementException("Incorrect numbers of fields", statementString);
         if (parts.length >= 8)
-            return new Balance(parts[0], parts[7]);
+            return new Balance(parts[0], parts[7], statementString);
 
         String date = parts[0];
         String details = parts[3].trim();
         String value = parts[5];
 
         if (parts.length > 6)
-            return new Debit(date, details, value);
+            return new Debit(date, details, value, statementString);
         else
-            return new Credit(date, details, value);
+            return new Credit(date, details, value, statementString);
     }
 
 }

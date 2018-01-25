@@ -4,12 +4,14 @@ public abstract class Statement {
 
     private String date;
     private String value;
+    private String originalText;
 
     public Statement(){}
 
-    public Statement(String date, String value){
+    public Statement(String date, String value, String originalText){
         this.date = date;
         this.value = value;
+        this.originalText = originalText;
     }
 
     protected abstract String getPrefix();
@@ -43,5 +45,13 @@ public abstract class Statement {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public String getOriginalText() {
+        return originalText;
+    }
+
+    public void setOriginalText(String originalText) {
+        this.originalText = originalText;
     }
 }

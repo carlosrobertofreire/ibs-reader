@@ -18,7 +18,8 @@ public class KnowledgeItem {
         sb.append(name);
         sb.append("\n");
         for (Statement statement : statements){
-            sb.append(statement);
+            sb.append(statement.getOriginalText()
+            );
             sb.append("\n");
         }
         sb.append("\n");

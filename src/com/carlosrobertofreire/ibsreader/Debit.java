@@ -4,8 +4,8 @@ public class Debit extends Statement {
 
     private String store;
 
-    public Debit(String date, String store, String value){
-        super(date,value);
+    public Debit(String date, String store, String value, String originalText){
+        super(date,value,originalText);
         this.store = store;
     }
 
