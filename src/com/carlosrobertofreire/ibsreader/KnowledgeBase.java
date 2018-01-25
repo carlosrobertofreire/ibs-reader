@@ -2,17 +2,13 @@ package com.carlosrobertofreire.ibsreader;
 
 public class KnowledgeBase {
 
-    private KnowledgeItem[] items;
+    private static KnowledgeItem[] knowledgeItems;
 
-    public KnowledgeBase(){
-
+    static {
+        //Create sample data for knowledgeItems
     }
 
-    public KnowledgeItem[] getItems() {
-        return items;
-    }
-
-    public void setItems(KnowledgeItem[] items) {
-        this.items = items;
+    public static KnowledgeItem[] getKnowledgeItems() {
+        return knowledgeItems;
     }
 }

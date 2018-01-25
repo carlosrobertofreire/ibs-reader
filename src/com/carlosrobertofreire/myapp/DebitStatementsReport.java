@@ -11,20 +11,20 @@ public class DebitStatementsReport {
     public static void main(String[] args) {
         Statement[] statements = Extract.getStatements();
 
-        KnowledgeBase knowledgeBase = new KnowledgeBase();
+        KnowledgeItem[] knowledgeItems = KnowledgeBase.getKnowledgeItems();
 
-        processData(statements, knowledgeBase);
+        processData(statements, knowledgeItems);
 
-        printData(knowledgeBase);
+        printData(knowledgeItems);
     }
 
-    private static void processData(Statement[] statements, KnowledgeBase knowledgeBase) {
+    private static void processData(Statement[] statements, KnowledgeItem[] knowledgeItems) {
         for (Statement statement : statements){
             if (statement instanceof Debit){
                 Debit debit = (Debit) statement;
                 boolean found = false;
-                for (int i = 0; i < knowledgeBase.getItems().length && !found; i++){
-                    KnowledgeItem knowledgeItem = knowledgeBase.getItems()[i];
+                for (int i = 0; i < knowledgeItems.length && !found; i++){
+                    KnowledgeItem knowledgeItem = knowledgeItems[i];
                     for (String keyword : knowledgeItem.getKeywords()){
                         if (debit.getStore().toUpperCase().contains(keyword.toUpperCase())){
                             found = true;
@@ -37,8 +37,8 @@ public class DebitStatementsReport {
         }
     }
 
-    private static void printData(KnowledgeBase knowledgeBase) {
-        for (KnowledgeItem knowledgeItem : knowledgeBase.getItems()){
+    private static void printData(KnowledgeItem[] knowledgeItems) {
+        for (KnowledgeItem knowledgeItem : knowledgeItems){
             System.out.println(knowledgeItem.getName());
             for (Statement statement : knowledgeItem.getStatements()){
                 System.out.println(statement);
