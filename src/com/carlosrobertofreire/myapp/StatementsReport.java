@@ -8,9 +8,9 @@ import com.carlosrobertofreire.ibsreader.Statement;
 
 import java.util.ArrayList;
 
-public class DebitStatementsReport {
+public class StatementsReport {
 
-    private static final String SEPARATOR = "------------------------------------------------------------------------";
+    public static final String SEPARATOR = "------------------------------------------------------------------------";
 
     public static void main(String[] args) {
         Statement[] statements = Extract.getStatements();
@@ -37,6 +37,8 @@ public class DebitStatementsReport {
                         }
                     }
                 }
+            } else {
+                System.out.println(statement.getOriginalText());
             }
         }
     }

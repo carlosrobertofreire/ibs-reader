@@ -1,5 +1,7 @@
 package com.carlosrobertofreire.ibsreader;
 
+import com.carlosrobertofreire.myapp.StatementsReport;
+
 import java.util.ArrayList;
 
 public class Extract {
@@ -34,6 +36,7 @@ public class Extract {
                 System.out.println(e.getMessage());
                 if (e.getCause() != null)
                     System.out.println("  Original exception: " + e.getCause().getMessage());
+                System.out.println(StatementsReport.SEPARATOR);
             }
         }
         statements = statementsArrayList.toArray(new Statement[14]);
