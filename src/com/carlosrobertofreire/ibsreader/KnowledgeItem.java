@@ -1,10 +1,12 @@
 package com.carlosrobertofreire.ibsreader;
 
+import java.util.ArrayList;
+
 public class KnowledgeItem {
 
     private String name;
     private String[] keywords;
-    private Statement[] statements;
+    private ArrayList<Statement> statements;
 
     public KnowledgeItem() {
     }
@@ -25,11 +27,14 @@ public class KnowledgeItem {
         this.keywords = keywords;
     }
 
-    public Statement[] getStatements() {
+    public void addStatement(Statement s) {
+        if (statements == null) statements = new ArrayList<Statement>();
+        statements.add(s);
+    }
+
+    public ArrayList<Statement> getStatements() {
         return statements;
     }
 
-    public void setStatements(Statement[] statements) {
-        this.statements = statements;
-    }
+
 }
