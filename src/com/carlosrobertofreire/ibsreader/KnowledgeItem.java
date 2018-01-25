@@ -11,6 +11,27 @@ public class KnowledgeItem {
     public KnowledgeItem() {
     }
 
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(name);
+        sb.append("\n");
+        for (Statement statement : statements){
+            sb.append(statement);
+            sb.append("\n");
+        }
+        sb.append("\n");
+        for (int i = 0; i < statements.size(); i++){
+            Statement statement = statements.get(i);
+            sb.append(statement.getValue());
+            if (i != statements.size() - 1){
+                sb.append(" + ");
+            }
+        }
+        sb.append("\n");
+        return sb.toString();
+    }
+
     public String getName() {
         return name;
     }

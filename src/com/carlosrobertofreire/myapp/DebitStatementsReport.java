@@ -39,19 +39,7 @@ public class DebitStatementsReport {
 
     private static void printData(KnowledgeItem[] knowledgeItems) {
         for (KnowledgeItem knowledgeItem : knowledgeItems){
-            System.out.println(knowledgeItem.getName());
-            for (Statement statement : knowledgeItem.getStatements()){
-                System.out.println(statement);
-            }
-            System.out.println();
-            for (int i = 0; i < knowledgeItem.getStatements().size(); i++){
-                Statement statement = knowledgeItem.getStatements().get(i);
-                System.out.print(statement.getValue());
-                if (i != knowledgeItem.getStatements().size() - 1){
-                    System.out.print(" + ");
-                }
-            }
-            System.out.println();
+            System.out.println(knowledgeItem);
         }
     }
 
