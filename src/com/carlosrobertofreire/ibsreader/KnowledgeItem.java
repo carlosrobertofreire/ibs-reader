@@ -8,6 +8,7 @@ public class KnowledgeItem {
     private String[] keywords;
     private ArrayList<Statement> statements;
 
+
     public KnowledgeItem() {
     }
 
@@ -28,7 +29,6 @@ public class KnowledgeItem {
                 sb.append(" + ");
             }
         }
-        sb.append("\n");
         return sb.toString();
     }
 
