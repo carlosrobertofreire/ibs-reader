@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Extract {
 
-    private static Statement[] statements;
+    private static ArrayList<Statement> statements;
 
     static {
         String[] statementStrings = {
@@ -27,11 +27,11 @@ public class Extract {
                 "adsadas\t",
                 "dsanldnsa wqkndlaksndlkas"
         };
-        ArrayList<Statement> statementsArrayList = new ArrayList<Statement>();
+        statements = new ArrayList<Statement>();
         for (String statementString : statementStrings){
             try {
                 Statement statement = StatementHelper.convertStringToStatement(statementString);
-                statementsArrayList.add(statement);
+                statements.add(statement);
             } catch (InvalidStatementException e){
                 System.out.println(e.getMessage());
                 if (e.getCause() != null)
@@ -39,10 +39,9 @@ public class Extract {
                 System.out.println(StatementsReport.SEPARATOR);
             }
         }
-        statements = statementsArrayList.toArray(new Statement[14]);
     }
 
-    public static Statement[] getStatements() {
+    public static ArrayList<Statement> getStatements() {
         return statements;
     }
 }
