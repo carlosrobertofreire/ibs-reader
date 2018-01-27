@@ -60,14 +60,23 @@ public class KnowledgeBase {
                     if (hashMap.containsKey(knowledgeItem.getName())){
                         hashMap.get(knowledgeItem.getName()).add(debit);
                     } else {
-                        ArrayList<Statement> newStatementsList = new ArrayList<Statement>();
-                        newStatementsList.add(debit);
-                        hashMap.put(knowledgeItem.getName(), newStatementsList);
+                        ArrayList<Statement> debits = new ArrayList<Statement>();
+                        debits.add(debit);
+                        hashMap.put(knowledgeItem.getName(), debits);
                     }
                     break;
                 }
             }
-
+        }
+        if (!found){
+            String unknownKey = "Debit - Unknown";
+            if (hashMap.containsKey(unknownKey)){
+                hashMap.get(unknownKey).add(debit);
+            } else {
+                ArrayList<Statement> unknownDebits = new ArrayList<Statement>();
+                unknownDebits.add(debit);
+                hashMap.put(unknownKey, unknownDebits);
+            }
         }
     }
 }
