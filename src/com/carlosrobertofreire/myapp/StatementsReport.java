@@ -17,15 +17,15 @@ public class StatementsReport {
         System.out.println(SEPARATOR);
         ArrayList<Statement> statements = Extract.getStatements();
 
-        HashMap<KnowledgeItem, ArrayList<Statement>> analysisResult = KnowledgeBase.analyze(statements);
+        HashMap<String, ArrayList<Statement>> analysisResult = KnowledgeBase.analyze(statements);
 
         printData(analysisResult);
     }
 
-    private static void printData(HashMap<KnowledgeItem, ArrayList<Statement>> analysisResult) {
+    private static void printData(HashMap<String, ArrayList<Statement>> analysisResult) {
         analysisResult.forEach((k, v) -> {
             System.out.println(SEPARATOR);
-            System.out.println(k.getName());
+            System.out.println(k);
             for (Statement statement : v){
                 System.out.println(statement.getOriginalText());
             }
