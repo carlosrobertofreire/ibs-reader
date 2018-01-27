@@ -7,6 +7,7 @@ import com.carlosrobertofreire.ibsreader.KnowledgeItem;
 import com.carlosrobertofreire.ibsreader.Statement;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class StatementsReport {
 
@@ -14,42 +15,31 @@ public class StatementsReport {
 
     public static void main(String[] args) {
         System.out.println(SEPARATOR);
-        Statement[] statements = Extract.getStatements();
+        ArrayList<Statement> statements = Extract.getStatements();
 
-        ArrayList<KnowledgeItem> knowledgeItems = KnowledgeBase.getKnowledgeItems();
+        HashMap<KnowledgeItem, ArrayList<Statement>> analysisResult = KnowledgeBase.analyze(statements);
 
-        processData(statements, knowledgeItems);
-
-        printData(knowledgeItems);
+        printData(analysisResult);
     }
 
-    private static void processData(Statement[] statements, ArrayList<KnowledgeItem> knowledgeItems) {
-        for (Statement statement : statements){
-            if (statement instanceof Debit){
-                Debit debit = (Debit) statement;
-                boolean found = false;
-                for (int i = 0; i < knowledgeItems.size() && !found; i++){
-                    KnowledgeItem knowledgeItem = knowledgeItems.get(i);
-                    for (String keyword : knowledgeItem.getKeywords()){
-                        if (debit.getStore().toUpperCase().contains(keyword.toUpperCase())){
-                            found = true;
-                            knowledgeItem.addStatement(debit);
-                            break;
-                        }
-                    }
-                }
-            } else {
+    private static void printData(HashMap<KnowledgeItem, ArrayList<Statement>> analysisResult) {
+        analysisResult.forEach((k, v) -> {
+            System.out.println(SEPARATOR);
+            System.out.println(k.getName());
+            for (Statement statement : v){
                 System.out.println(statement.getOriginalText());
             }
-        }
-    }
-
-    private static void printData(ArrayList<KnowledgeItem> knowledgeItems) {
-        for (int i = 0; i < knowledgeItems.size(); i++){
-            if (i == 0) System.out.println(SEPARATOR);
-            System.out.println(knowledgeItems.get(i));
+            System.out.println();
+            for (int i = 0; i < v.size(); i++){
+                Statement statement = v.get(i);
+                System.out.print(statement.getValue());
+                if (i != v.size() - 1){
+                    System.out.print(" + ");
+                }
+            }
+            System.out.println();
             System.out.println(SEPARATOR);
-        }
+        });
     }
 
 }
