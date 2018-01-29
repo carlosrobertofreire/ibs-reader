@@ -3,12 +3,11 @@ package com.carlosrobertofreire.myapp;
 import com.carlosrobertofreire.ibsreader.Balance;
 import com.carlosrobertofreire.ibsreader.Credit;
 import com.carlosrobertofreire.ibsreader.Debit;
+import com.carlosrobertofreire.ibsreader.DebitKnowledgeBase;
 import com.carlosrobertofreire.ibsreader.DebitKnowledgeItem;
 import com.carlosrobertofreire.ibsreader.Extract;
-import com.carlosrobertofreire.ibsreader.DebitKnowledgeBase;
 import com.carlosrobertofreire.ibsreader.Statement;
 
-import javax.swing.plaf.nimbus.State;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -20,12 +19,11 @@ public class StatementsReport {
         System.out.println(SEPARATOR);
         ArrayList<Statement> statements = Extract.getStatements();
 
-
         ArrayList<Credit> credits = new ArrayList<Credit>();
         ArrayList<Balance> balances = new ArrayList<Balance>();
-
-        HashMap<DebitKnowledgeItem, ArrayList<Debit>> knownDebits = new HashMap<DebitKnowledgeItem, ArrayList<Debit>>();
         ArrayList<Debit> unknownDebits = new ArrayList<Debit>();
+        HashMap<DebitKnowledgeItem, ArrayList<Debit>> knownDebits = new HashMap<DebitKnowledgeItem, ArrayList<Debit>>();
+
         ArrayList<DebitKnowledgeItem> debitKnowledgeItems = DebitKnowledgeBase.getDebitKnowledgeItems();
         for (Statement statement : statements){
             if (statement instanceof Debit){
@@ -36,8 +34,8 @@ public class StatementsReport {
                     for (String keyword : debitKnowledgeItem.getKeywords()){
                         if (debit.getStore().toUpperCase().contains(keyword.toUpperCase())){
                             found = true;
-                            if (knownDebits.containsKey(debitKnowledgeItem.getName())){
-                                knownDebits.get(debitKnowledgeItem.getName()).add(debit);
+                            if (knownDebits.containsKey(debitKnowledgeItem)){
+                                knownDebits.get(debitKnowledgeItem).add(debit);
                             } else {
                                 ArrayList<Debit> debits = new ArrayList<Debit>();
                                 debits.add(debit);
@@ -50,11 +48,39 @@ public class StatementsReport {
                 if (!found){
                     unknownDebits.add(debit);
                 }
+            } else if (statement instanceof Credit){
+                credits.add( (Credit) statement);
+            } else if (statement instanceof Balance) {
+                balances.add((Balance) statement);
             }
         }
 
         printKnownDebits(knownDebits);
         printUnknownDebits(unknownDebits);
+        printCredits(credits);
+        printBalances(balances);
+    }
+
+    private static void printBalances(ArrayList<Balance> balances) {
+        if (balances.isEmpty()) return;
+
+        System.out.println(SEPARATOR);
+        System.out.println("BALANCES");
+        for (Balance balance : balances){
+            System.out.println(balance.getOriginalText());
+        }
+        System.out.println(SEPARATOR);
+    }
+
+    private static void printCredits(ArrayList<Credit> credits) {
+        if (credits.isEmpty()) return;
+
+        System.out.println(SEPARATOR);
+        System.out.println("CREDITS");
+        for (Credit credit : credits){
+            System.out.println(credit.getOriginalText());
+        }
+        System.out.println(SEPARATOR);
     }
 
     private static void printUnknownDebits(ArrayList<Debit> unknownDebits) {
@@ -68,8 +94,8 @@ public class StatementsReport {
         System.out.println(SEPARATOR);
     }
 
-    private static void printKnownDebits(HashMap<DebitKnowledgeItem, ArrayList<Debit>> analysisResult) {
-        analysisResult.forEach((k, v) -> {
+    private static void printKnownDebits(HashMap<DebitKnowledgeItem, ArrayList<Debit>> knownDebits) {
+        knownDebits.forEach((k, v) -> {
             System.out.println(SEPARATOR);
             System.out.println(k.getName());
             for (Statement statement : v){
@@ -87,7 +113,5 @@ public class StatementsReport {
             System.out.println(SEPARATOR);
         });
     }
-
-
 
 }
