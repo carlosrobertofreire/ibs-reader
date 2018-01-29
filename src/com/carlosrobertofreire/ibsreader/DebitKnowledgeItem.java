@@ -1,11 +1,11 @@
 package com.carlosrobertofreire.ibsreader;
 
-public class KnowledgeItem {
+public class DebitKnowledgeItem {
 
     private String name;
     private String[] keywords;
 
-    public KnowledgeItem() {
+    public DebitKnowledgeItem() {
     }
 
     public String getName() {
