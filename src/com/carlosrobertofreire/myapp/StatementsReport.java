@@ -16,9 +16,11 @@ public class StatementsReport {
     public static final String SEPARATOR = "------------------------------------------------------------------------";
 
     public static void main(String[] args) {
+        System.out.println("Loading statements...");
         System.out.println(SEPARATOR);
         ArrayList<Statement> statements = Extract.getStatements();
-
+        System.out.println(SEPARATOR);
+        System.out.println("Processing data...");
         ArrayList<Credit> credits = new ArrayList<Credit>();
         ArrayList<Balance> balances = new ArrayList<Balance>();
         ArrayList<Debit> unknownDebits = new ArrayList<Debit>();
@@ -69,7 +71,6 @@ public class StatementsReport {
         for (Balance balance : balances){
             System.out.println(balance.getOriginalText());
         }
-        System.out.println(SEPARATOR);
     }
 
     private static void printCredits(ArrayList<Credit> credits) {
@@ -80,7 +81,6 @@ public class StatementsReport {
         for (Credit credit : credits){
             System.out.println(credit.getOriginalText());
         }
-        System.out.println(SEPARATOR);
     }
 
     private static void printUnknownDebits(ArrayList<Debit> unknownDebits) {
@@ -91,7 +91,6 @@ public class StatementsReport {
         for (Debit unknownDebit : unknownDebits){
             System.out.println(unknownDebit.getOriginalText());
         }
-        System.out.println(SEPARATOR);
     }
 
     private static void printKnownDebits(HashMap<DebitKnowledgeItem, ArrayList<Debit>> knownDebits) {
@@ -110,7 +109,6 @@ public class StatementsReport {
                 }
             }
             System.out.println();
-            System.out.println(SEPARATOR);
         });
     }
 
