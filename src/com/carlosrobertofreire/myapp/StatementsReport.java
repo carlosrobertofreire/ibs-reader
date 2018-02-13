@@ -20,6 +20,12 @@ public class StatementsReport {
         System.out.println(SEPARATOR);
         ArrayList<Statement> statements = Extract.getStatements();
         System.out.println(SEPARATOR);
+        if (statements.isEmpty()){
+            System.out.println("No statements found.");
+            return;
+        }
+
+        System.out.println(SEPARATOR);
         System.out.println("Processing data...");
         ArrayList<Credit> credits = new ArrayList<Credit>();
         ArrayList<Balance> balances = new ArrayList<Balance>();
