@@ -6,11 +6,14 @@ public class StatementHelper {
         if (statementString == null || statementString.isEmpty())
             throw new InvalidStatementException("There is no statement value to convert", statementString);
 
+        if (StatementHelper.isHeader(statementString))
+            throw new InvalidStatementException("Invalid statement", statementString);
+
         String[] parts = statementString.split("\t");
         if (parts.length < 6)
             throw new InvalidStatementException("Incorrect numbers of fields", statementString);
 
-        if (parts.length >= 8 && StatementHelper.isNotHeader(statementString))
+        if (parts.length >= 8)
             return new Balance(parts[0], parts[7], statementString);
 
         String date = parts[0];
@@ -23,9 +26,9 @@ public class StatementHelper {
             return new Credit(date, details, value, statementString);
     }
 
-    public static boolean isNotHeader(String statementString){
+    public static boolean isHeader(String statementString){
         String header = "Data\t \t \tLançamento\tAg/Origem\tValor (R$)\t \tSaldo (R$)\t ";
-        return !header.toUpperCase().trim().equals(statementString.toUpperCase().trim());
+        return header.toUpperCase().trim().equals(statementString.toUpperCase().trim());
     }
 
 }
