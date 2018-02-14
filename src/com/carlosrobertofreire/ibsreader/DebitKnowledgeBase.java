@@ -11,17 +11,21 @@ public class DebitKnowledgeBase {
     private static ArrayList<DebitKnowledgeItem> debitKnowledgeItems;
 
     static {
+        loadDebitKnowledegeItems();
+    }
+
+    private static void loadDebitKnowledegeItems() {
+        debitKnowledgeItems = new ArrayList<DebitKnowledgeItem>();
+
         String userHome = System.getProperty("user.home");
         String fileName = userHome + "/IBSReader/debit-kb.txt";
-
-        debitKnowledgeItems = new ArrayList<DebitKnowledgeItem>();
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
             String line;
             HashMap<String, ArrayList<String>> contentFileHash = new HashMap<String, ArrayList<String>>();
             String currentKey = "";
             while ((line = bufferedReader.readLine()) != null) {
-                if (DebitKnowledgeBase.isNewDebitKnowledgeItem(line)){
+                if (isNewDebitKnowledgeItem(line)){
                     currentKey = line;
                     contentFileHash.put(line, new ArrayList<String>());
                 } else {

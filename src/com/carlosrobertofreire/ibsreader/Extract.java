@@ -10,9 +10,15 @@ public class Extract {
     private static ArrayList<Statement> statements;
 
     static {
+        loadStatements();
+    }
+
+    private static void loadStatements() {
+        statements = new ArrayList<Statement>();
+
         String userHome = System.getProperty("user.home");
         String fileName = userHome + "/IBSReader/input.txt";
-        statements = new ArrayList<Statement>();
+
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = bufferedReader.readLine()) != null){
