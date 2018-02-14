@@ -1,11 +1,14 @@
 package com.carlosrobertofreire.ibsreader;
 
+import java.util.ArrayList;
+
 public class DebitKnowledgeItem {
 
     private String name;
-    private String[] keywords;
+    private ArrayList<String> keywords;
 
     public DebitKnowledgeItem() {
+        keywords = new ArrayList<String>();
     }
 
     public String getName() {
@@ -16,12 +19,11 @@ public class DebitKnowledgeItem {
         this.name = name;
     }
 
-    public String[] getKeywords() {
+    public ArrayList<String> getKeywords() {
         return keywords;
     }
 
-    public void setKeywords(String[] keywords) {
+    public void setKeywords(ArrayList<String> keywords) {
         this.keywords = keywords;
     }
-
 }
