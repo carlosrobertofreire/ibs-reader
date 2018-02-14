@@ -18,19 +18,19 @@ public class DebitKnowledgeBase {
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
             String line;
-            HashMap<String, ArrayList<String>> fileHash = new HashMap<String, ArrayList<String>>();
+            HashMap<String, ArrayList<String>> contentFileHash = new HashMap<String, ArrayList<String>>();
             String currentKey = "";
             while ((line = bufferedReader.readLine()) != null) {
                 if (DebitKnowledgeBase.isNewDebitKnowledgeItem(line)){
                     currentKey = line;
-                    fileHash.put(line, new ArrayList<String>());
+                    contentFileHash.put(line, new ArrayList<String>());
                 } else {
-                    if (!line.isEmpty() && fileHash.containsKey(currentKey)){
-                        fileHash.get(currentKey).add(line);
+                    if (!line.isEmpty() && contentFileHash.containsKey(currentKey)){
+                        contentFileHash.get(currentKey).add(line);
                     }
                 }
             }
-            fileHash.forEach((k, v) -> {
+            contentFileHash.forEach((k, v) -> {
                 DebitKnowledgeItem item = new DebitKnowledgeItem();
                 item.setName(k);
                 item.setKeywords(v);
