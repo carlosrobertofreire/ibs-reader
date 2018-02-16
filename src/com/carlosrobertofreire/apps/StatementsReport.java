@@ -71,7 +71,9 @@ public class StatementsReport {
         appendUnknownDebits(output, unknownDebits);
         appendCredits(output, credits);
         appendBalances(output, balances);
+
         writeToFile(output);
+
         System.out.println(SEPARATOR);
         System.out.println("Finished!");
     }
