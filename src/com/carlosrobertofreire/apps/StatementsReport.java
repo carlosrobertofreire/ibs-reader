@@ -144,7 +144,7 @@ public class StatementsReport {
                 Statement statement = v.get(i);
                 output.append(statement.getValue());
                 if (i != v.size() - 1) {
-                    output.append(" + ");
+                    output.append("+");
                 }
             }
             output.append(System.lineSeparator());
