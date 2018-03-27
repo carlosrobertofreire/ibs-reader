@@ -135,14 +135,14 @@ public class StatementsReport {
             output.append(System.lineSeparator());
             output.append(k.getName());
             output.append(System.lineSeparator());
-            for (Statement statement : v) {
-                output.append(statement.getOriginalText());
+            for (Debit debit : v) {
+                output.append(debit.getOriginalText());
                 output.append(System.lineSeparator());
             }
             output.append(System.lineSeparator());
             for (int i = 0; i < v.size(); i++) {
-                Statement statement = v.get(i);
-                output.append(statement.getValue());
+                Debit debit = v.get(i);
+                output.append(debit.getValue());
                 if (i != v.size() - 1) {
                     output.append("+");
                 }
