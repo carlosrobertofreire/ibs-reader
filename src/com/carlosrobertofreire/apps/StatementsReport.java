@@ -127,6 +127,15 @@ public class StatementsReport {
             output.append(unknownDebit.getOriginalText());
             output.append(System.lineSeparator());
         }
+        output.append(System.lineSeparator());
+        for (int i = 0; i < unknownDebits.size(); i++) {
+            Debit unknownDebit = unknownDebits.get(i);
+            output.append(unknownDebit.getValue());
+            if (i != unknownDebits.size() - 1) {
+                output.append("+");
+            }
+        }
+        output.append(System.lineSeparator());
     }
 
     private static void appendKnownDebits(StringBuilder output, HashMap<DebitKnowledgeItem, ArrayList<Debit>> knownDebits) {
