@@ -1,6 +1,6 @@
 # IBS Reader
 
-A simple Java application to read and analyze Itaú Bank statements.
+A simple Java application to read and analyze [Itaú Bank](https://www.itau.com.br/) statements.
 
 ## Getting Started
 
@@ -19,11 +19,11 @@ extract to your home folder.
 
 ### Editing
 
-Open `debit-kb.txt` and edit your own knowledge base for debit statements, following the pattern already used in the file.
+Open `IBSReader/debit-kb.txt` and edit your own knowledge base for debit statements, following the pattern already used in the file.
 
 ## Running
 
-Paste your Itaú Bank statements into `input.txt` and execute `IBSReader.jar` to generate `output.txt`.
+Paste your [Itaú Bank](https://www.itau.com.br/) statements into `IBSReader/input.txt`, and execute `IBSReader/IBSReader.jar` to generate `IBSReader/output.txt`.
 
 ## Authors
 
