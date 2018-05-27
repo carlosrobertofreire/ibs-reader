@@ -1,6 +1,6 @@
 # IBS Reader
 
-A simple Java application to read and analyze [Itaú Bank](https://www.itau.com.br/) statements.
+A simple Java application to read and organize [Itaú Bank](https://www.itau.com.br/) statements.
 
 ## Getting Started
 
