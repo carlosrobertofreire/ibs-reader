@@ -26,7 +26,9 @@ Paste your [Itaú Bank](https://www.itau.com.br/) statements into `IBSReader/inp
 
 ## Viewing Results
 
-A new file `IBSReader/output.txt` was generated. Open this file and see how your debit knowledge base organized your [Itaú Bank](https://www.itau.com.br/) statements.
+A new file `IBSReader/output.txt` will be generated. 
+
+Open this file and see how your debit knowledge base organized your [Itaú Bank](https://www.itau.com.br/) statements.
 
 ## Authors
 
