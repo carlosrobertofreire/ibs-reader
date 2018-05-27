@@ -10,13 +10,7 @@ To run `IBS Reader` you need to have Java 8 installed on your machine.
 
 ### Installing
 
-Download the [lastest](https://github.com/carlosrobertofreire/ibs-reader/releases) `ibs-reader.zip` to your home folder.
-
-```
-/home/your_name/
-```
-
-Extract the zip at the same directory and you will see:
+Download and extract the [lastest](https://github.com/carlosrobertofreire/ibs-reader/releases) `ibs-reader.zip` to your home folder.
 
 ```
 /home/your_name/IBSReader
