@@ -1,4 +1,7 @@
-package com.carlosrobertofreire.ibsreader;
+package com.github.carlosrvff.bsreader.converter.domain;
+
+import com.github.carlosrvff.bsreader.converter.converter.StatementHelper;
+import com.github.carlosrvff.bsreader.converter.exception.InvalidStatementException;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

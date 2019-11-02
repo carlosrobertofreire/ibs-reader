@@ -1,13 +1,13 @@
-package com.carlosrobertofreire.apps;
+package com.github.carlosrvff.apps;
 
-import com.carlosrobertofreire.ibsreader.Balance;
-import com.carlosrobertofreire.ibsreader.Credit;
-import com.carlosrobertofreire.ibsreader.Debit;
-import com.carlosrobertofreire.ibsreader.DebitKnowledgeBase;
-import com.carlosrobertofreire.ibsreader.DebitKnowledgeItem;
-import com.carlosrobertofreire.ibsreader.Extract;
-import com.carlosrobertofreire.ibsreader.ReportData;
-import com.carlosrobertofreire.ibsreader.Statement;
+import com.github.carlosrvff.bsreader.converter.domain.Balance;
+import com.github.carlosrvff.bsreader.converter.domain.Credit;
+import com.github.carlosrvff.bsreader.converter.domain.Debit;
+import com.github.carlosrvff.bsreader.converter.kb.DebitKnowledgeBase;
+import com.github.carlosrvff.bsreader.converter.kb.DebitKnowledgeItem;
+import com.github.carlosrvff.bsreader.converter.domain.Extract;
+import com.github.carlosrvff.bsreader.converter.report.ReportData;
+import com.github.carlosrvff.bsreader.converter.domain.Statement;
 
 import java.io.IOException;
 import java.nio.file.Files;

@@ -1,4 +1,7 @@
-package com.carlosrobertofreire.ibsreader;
+package com.github.carlosrvff.bsreader.converter.report;
+
+import com.github.carlosrvff.bsreader.converter.kb.DebitKnowledgeItem;
+import com.github.carlosrvff.bsreader.converter.domain.Statement;
 
 import java.util.ArrayList;
 import java.util.HashMap;

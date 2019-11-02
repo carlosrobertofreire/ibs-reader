@@ -1,4 +1,4 @@
-package com.carlosrobertofreire.ibsreader;
+package com.github.carlosrvff.bsreader.converter.exception;
 
 public class InvalidStatementException extends Exception {
 

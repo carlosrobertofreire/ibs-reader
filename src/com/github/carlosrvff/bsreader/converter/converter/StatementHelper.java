@@ -1,4 +1,10 @@
-package com.carlosrobertofreire.ibsreader;
+package com.github.carlosrvff.bsreader.converter.converter;
+
+import com.github.carlosrvff.bsreader.converter.domain.Balance;
+import com.github.carlosrvff.bsreader.converter.exception.InvalidStatementException;
+import com.github.carlosrvff.bsreader.converter.domain.Credit;
+import com.github.carlosrvff.bsreader.converter.domain.Debit;
+import com.github.carlosrvff.bsreader.converter.domain.Statement;
 
 public class StatementHelper {
 

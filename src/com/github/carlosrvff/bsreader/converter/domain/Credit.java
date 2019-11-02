@@ -1,4 +1,4 @@
-package com.carlosrobertofreire.ibsreader;
+package com.github.carlosrvff.bsreader.converter.domain;
 
 public class Credit extends Statement {
 
