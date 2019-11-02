@@ -1,10 +1,10 @@
 package com.github.carlosrvff.bsreader.converter;
 
 import com.github.carlosrvff.bsreader.domain.Balance;
-import com.github.carlosrvff.bsreader.exception.InvalidStatementException;
 import com.github.carlosrvff.bsreader.domain.Credit;
 import com.github.carlosrvff.bsreader.domain.Debit;
 import com.github.carlosrvff.bsreader.domain.Statement;
+import com.github.carlosrvff.bsreader.exception.InvalidStatementException;
 
 public class ItauConverter implements StatementConverter {
 
