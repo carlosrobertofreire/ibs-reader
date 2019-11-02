@@ -8,37 +8,36 @@ import java.util.HashMap;
 
 public class ReportData {
 
-	private ArrayList<Statement> credits = new ArrayList<Statement>();
-	private ArrayList<Statement> balances = new ArrayList<Statement>();
-	private ArrayList<Statement> unknownDebits = new ArrayList<Statement>();
-	private HashMap<DebitKnowledgeItem, ArrayList<Statement>> knownDebits = new HashMap<DebitKnowledgeItem, ArrayList<Statement>>();
+  private ArrayList<Statement> credits = new ArrayList<>();
+  private ArrayList<Statement> balances = new ArrayList<>();
+  private ArrayList<Statement> unknownDebits = new ArrayList<>();
+  private HashMap<DebitKnowledgeItem, ArrayList<Statement>> knownDebits = new HashMap<>();
 
-	public ArrayList<Statement> getCredits() {
-		return credits;
-	}
+  public ArrayList<Statement> getCredits() {
+    return credits;
+  }
 
-	public void addCredit(Statement credit) {
-		credits.add(credit);
-	}
+  public void addCredit(Statement credit) {
+    credits.add(credit);
+  }
 
-	public ArrayList<Statement> getBalances() {
-		return balances;
-	}
+  public ArrayList<Statement> getBalances() {
+    return balances;
+  }
 
-	public void addBalance(Statement balance) {
-		balances.add(balance);
-	}
+  public void addBalance(Statement balance) {
+    balances.add(balance);
+  }
 
-	public ArrayList<Statement> getUnknownDebits() {
-		return unknownDebits;
-	}
+  public ArrayList<Statement> getUnknownDebits() {
+    return unknownDebits;
+  }
 
-	public void addUnknownDebit(Statement unknownDebit) {
-		unknownDebits.add(unknownDebit);
-	}
+  public void addUnknownDebit(Statement unknownDebit) {
+    unknownDebits.add(unknownDebit);
+  }
 
-	public HashMap<DebitKnowledgeItem, ArrayList<Statement>> getKnownDebits() {
-		return knownDebits;
-	}
-	
+  public HashMap<DebitKnowledgeItem, ArrayList<Statement>> getKnownDebits() {
+    return knownDebits;
+  }
 }

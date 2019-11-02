@@ -8,5 +8,4 @@ public interface StatementConverter {
   Statement toStatement(String text) throws InvalidStatementException;
 
   boolean isHeader(String text);
-
 }

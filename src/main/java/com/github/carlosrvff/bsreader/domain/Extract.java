@@ -33,9 +33,9 @@ public class Extract {
           statements.add(statement);
         } catch (InvalidStatementException e) {
           System.out.println(e.getMessage());
-            if (e.getCause() != null) {
-                System.out.println("  Original exception: " + e.getCause().getMessage());
-            }
+          if (e.getCause() != null) {
+            System.out.println("  Original exception: " + e.getCause().getMessage());
+          }
         }
       }
     } catch (IOException e) {
@@ -46,5 +46,4 @@ public class Extract {
   public static ArrayList<Statement> getStatements() {
     return statements;
   }
-
 }

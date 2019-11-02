@@ -7,8 +7,9 @@ import com.github.carlosrvff.bsreader.domain.Debit;
 import com.github.carlosrvff.bsreader.domain.Statement;
 
 public class ItauConverter implements StatementConverter {
-  
-  public static final String HEADER = "Data\t \t \tLançamento\tAg/Origem\tValor (R$)\t \tSaldo (R$)\t ";
+
+  public static final String HEADER =
+      "Data\t \t \tLançamento\tAg/Origem\tValor (R$)\t \tSaldo (R$)\t ";
 
   @Override
   public Statement toStatement(String text) throws InvalidStatementException {
@@ -44,5 +45,4 @@ public class ItauConverter implements StatementConverter {
   public boolean isHeader(String text) {
     return HEADER.toUpperCase().trim().equals(text.toUpperCase().trim());
   }
-
 }
