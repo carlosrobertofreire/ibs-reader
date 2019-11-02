@@ -1,6 +1,7 @@
 package com.github.carlosrvff.bsreader.converter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -91,11 +92,13 @@ class ItauConverterTest {
 
   @Test
   void isHeaderWhenTextIsDifferentToHeader() {
-    fail("Not implemented yet.");
+    String textFixture = "TEXT DIFFERENT";
+    assertFalse(target.isHeader(textFixture));
   }
 
   @Test
   void isHeaderWhenTextIsEqualToHeader() {
-    fail("Not implemented yet.");
+    String textFixture = ItauConverter.HEADER;
+    assertTrue(target.isHeader(textFixture));
   }
 }
