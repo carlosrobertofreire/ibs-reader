@@ -10,7 +10,7 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Package Files #
+# Package Files
 *.jar
 *.war
 *.ear
@@ -40,6 +40,15 @@ hs_err_pid*
 # Gradle:
 .idea/**/gradle.xml
 .idea/**/libraries
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+*.DS_STORE
+
+# GJF
+.cache
+.gitmessage
+.DS_Store
 
 # CMake
 cmake-build-debug/
@@ -53,7 +62,11 @@ cmake-build-release/
 
 ## Plugin-specific files:
 
-# IntelliJ
+# IntelliJ IDEA
+.idea
+*.iws
+*.iml
+*.ipr
 out/
 
 # mpeltonen/sbt-idea plugin
@@ -77,6 +90,13 @@ fabric.properties
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
 
 # Eclipse.gitignore
 .metadata
@@ -122,7 +142,14 @@ local.properties
 .texlipse
 
 # STS (Spring Tool Suite)
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
 .springBeans
+.sts4-cache
+.tests.executed
 
 # Code Recommenders
 .recommenders/
