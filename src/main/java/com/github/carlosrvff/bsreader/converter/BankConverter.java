@@ -9,5 +9,4 @@ public interface BankConverter {
 
   String getHeader();
 
-  boolean isHeader(String text);
 }

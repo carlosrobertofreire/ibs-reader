@@ -7,7 +7,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -24,15 +26,37 @@ public class Extract {
 
   private void processContent(List<Statement> result, BufferedReader bufferedReader)
       throws IOException {
-    ItauSiteConverter itauSiteConverter = new ItauSiteConverter();
+    BankConverter bankConverter = null;
+    boolean isHeader = true;
     String line;
     while ((line = bufferedReader.readLine()) != null) {
-      processLine(result, itauSiteConverter, line);
+      if (isHeader) {
+        bankConverter = getBankConverter(line);
+        isHeader = false;
+      } else {
+        processLine(result, bankConverter, line);
+      }
     }
   }
 
-  private void processLine(
-      List<Statement> result, BankConverter bankConverter, String line) {
+  private BankConverter getBankConverter(String header) {
+    Queue<BankConverter> queue = buildBankConverterQueue();
+    while (!queue.isEmpty()) {
+      BankConverter currentBankConverter = queue.poll();
+      if (header.equalsIgnoreCase(currentBankConverter.getHeader())) {
+        return currentBankConverter;
+      }
+    }
+    throw new IllegalArgumentException("Extract cannot be processed: unknown Bank.");
+  }
+
+  private Queue<BankConverter> buildBankConverterQueue() {
+    Queue<BankConverter> queue = new LinkedList<>();
+    queue.add(new ItauSiteConverter());
+    return queue;
+  }
+
+  private void processLine(List<Statement> result, BankConverter bankConverter, String line) {
     try {
       Statement statement = bankConverter.toStatement(line);
       result.add(statement);

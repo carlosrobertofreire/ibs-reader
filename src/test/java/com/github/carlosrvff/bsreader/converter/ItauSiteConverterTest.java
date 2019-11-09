@@ -84,16 +84,4 @@ class ItauSiteConverterTest {
     String textFixture = target.getHeader();
     assertThrows(InvalidStatementException.class, () -> target.toStatement(textFixture));
   }
-
-  @Test
-  void isHeaderWhenTextIsDifferentToHeader() {
-    String textFixture = "TEXT DIFFERENT";
-    assertFalse(target.isHeader(textFixture));
-  }
-
-  @Test
-  void isHeaderWhenTextIsEqualToHeader() {
-    String textFixture = target.getHeader();
-    assertTrue(target.isHeader(textFixture));
-  }
 }

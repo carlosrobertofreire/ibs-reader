@@ -11,7 +11,7 @@ public class ItauSiteConverter implements BankConverter {
 
   @Override
   public Statement toStatement(@NonNull String text) throws InvalidStatementException {
-    if (isHeader(text)) {
+    if (text.equalsIgnoreCase(getHeader())) {
       throw new InvalidStatementException("Header cannot be considered a Statement.", text);
     }
 
@@ -37,11 +37,6 @@ public class ItauSiteConverter implements BankConverter {
 
   @Override
   public String getHeader() {
-    return "Data\t \t \tLançamento\tAg/Origem\tValor (R$)\t \tSaldo (R$)\t ";
-  }
-
-  @Override
-  public boolean isHeader(@NonNull String text) {
-    return getHeader().toUpperCase().trim().equals(text.toUpperCase().trim());
+    return "Data\t \t \tLançamento\tAg/Origem\tValor (R$)\t \tSaldo (R$)\t";
   }
 }
