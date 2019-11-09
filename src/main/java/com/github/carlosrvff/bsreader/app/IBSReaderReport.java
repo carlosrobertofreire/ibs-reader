@@ -14,24 +14,27 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 public class IBSReaderReport {
 
   private static final String SEPARATOR =
       "------------------------------------------------------------------------";
 
-  public static void main(String[] args) {
-    ArrayList<Statement> statements = Extract.getStatements();
+  public static void main(String[] args) throws IOException {
+    List<Statement> statements = new Extract().load(args[0]);
     if (statements.isEmpty()) {
-      System.out.println("No statements found.");
+      log.info("No statements found.");
       return;
     }
-    System.out.println(SEPARATOR);
-    System.out.println("Processing data...");
+    log.info(SEPARATOR);
+    log.info("Processing data...");
 
     StringBuilder content = new StringBuilder();
 
-    ReportData reportData = processData(statements);
+    ReportData reportData = processData(statements, args[1]);
 
     appendKnownDebits(content, reportData.getKnownDebits());
     appendUnknownDebits(content, reportData.getUnknownDebits());
@@ -40,13 +43,14 @@ public class IBSReaderReport {
 
     writeToFile(content);
 
-    System.out.println(SEPARATOR);
-    System.out.println("Finished!");
+    log.info(SEPARATOR);
+    log.info("Finished!");
   }
 
-  private static ReportData processData(ArrayList<Statement> statements) {
+  private static ReportData processData(List<Statement> statements, String debitKnowledgeBaseFileName)
+      throws IOException {
     ReportData reportData = new ReportData();
-    ArrayList<DebitKnowledgeItem> debitKnowledgeItems = DebitKnowledgeBase.getDebitKnowledgeItems();
+    List<DebitKnowledgeItem> debitKnowledgeItems = new DebitKnowledgeBase().load(debitKnowledgeBaseFileName);
     for (Statement statement : statements) {
       if (statement instanceof Debit) {
         processDebitStatement(reportData, debitKnowledgeItems, statement);
@@ -61,7 +65,7 @@ public class IBSReaderReport {
 
   private static void processDebitStatement(
       ReportData reportData,
-      ArrayList<DebitKnowledgeItem> debitKnowledgeItems,
+      List<DebitKnowledgeItem> debitKnowledgeItems,
       Statement statement) {
     Debit debit = (Debit) statement;
     boolean found = false;
@@ -89,12 +93,12 @@ public class IBSReaderReport {
   private static void writeToFile(StringBuilder content) {
     String userHome = System.getProperty("user.home");
     String fileName = userHome + "/IBSReader/output.txt";
-    System.out.println(SEPARATOR);
-    System.out.println("Writing to " + fileName);
+    log.info(SEPARATOR);
+    log.info("Writing to " + fileName);
     try {
       Files.write(Paths.get(fileName), content.toString().getBytes());
     } catch (IOException e) {
-      System.out.println(e.getMessage());
+      log.info(e.getMessage());
     }
   }
 

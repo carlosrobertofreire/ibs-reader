@@ -14,13 +14,13 @@ import com.github.carlosrvff.bsreader.exception.InvalidStatementException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ItauConverterTest {
+class ItauSiteConverterTest {
 
-  private ItauConverter target;
+  private ItauSiteConverter target;
 
   @BeforeEach
   void setUp() {
-    target = new ItauConverter();
+    target = new ItauSiteConverter();
   }
 
   @Test

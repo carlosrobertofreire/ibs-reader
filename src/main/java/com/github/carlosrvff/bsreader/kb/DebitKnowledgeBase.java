@@ -5,52 +5,55 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import lombok.NonNull;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 public class DebitKnowledgeBase {
 
-  private static ArrayList<DebitKnowledgeItem> debitKnowledgeItems;
-
-  static {
-    loadDebitKnowledegeItems();
-  }
-
-  private static void loadDebitKnowledegeItems() {
-    debitKnowledgeItems = new ArrayList<DebitKnowledgeItem>();
-
-    String userHome = System.getProperty("user.home");
-    String fileName = userHome + "/IBSReader/debit-kb.txt";
-
+  public List<DebitKnowledgeItem> load(@NonNull String fileName) throws IOException {
+    List<DebitKnowledgeItem> result = new ArrayList<>();
     try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
-      String line;
-      HashMap<String, ArrayList<String>> contentFileHash = new HashMap<String, ArrayList<String>>();
-      String currentKey = "";
-      while ((line = bufferedReader.readLine()) != null) {
-        if (isNewDebitKnowledgeItem(line)) {
-          currentKey = line;
-          contentFileHash.put(line, new ArrayList<String>());
-        } else {
-          if (!line.isEmpty() && contentFileHash.containsKey(currentKey)) {
-            contentFileHash.get(currentKey).add(line);
-          }
-        }
-      }
-      contentFileHash.forEach(
-          (k, v) -> {
-            DebitKnowledgeItem item = new DebitKnowledgeItem();
-            item.setName(k);
-            item.setKeywords(v);
-            debitKnowledgeItems.add(item);
-          });
-    } catch (IOException e) {
-      System.out.println("Error: " + e.getMessage());
+      processContent(result, bufferedReader);
     }
+    return result;
   }
 
-  private static boolean isNewDebitKnowledgeItem(String line) {
-    return line != null && line.startsWith("#");
+  private void processContent(List<DebitKnowledgeItem> result, BufferedReader bufferedReader)
+      throws IOException {
+    HashMap<String, ArrayList<String>> contentHash = convertContentToHash(bufferedReader);
+    contentHash.forEach(
+        (key, value) -> {
+          result.add(DebitKnowledgeItem.builder().name(key).keywords(value).build());
+        });
   }
 
-  public static ArrayList<DebitKnowledgeItem> getDebitKnowledgeItems() {
-    return debitKnowledgeItems;
+  private HashMap<String, ArrayList<String>> convertContentToHash(BufferedReader bufferedReader)
+      throws IOException {
+    HashMap<String, ArrayList<String>> result = new HashMap<>();
+    String currentKey = "";
+    String line;
+    while ((line = bufferedReader.readLine()) != null) {
+      currentKey = processLine(result, currentKey, line);
+    }
+    return result;
+  }
+
+  private String processLine(
+      HashMap<String, ArrayList<String>> contentHash, String currentKey, String line) {
+    if (isNewDebitKnowledgeItem(line)) {
+      currentKey = line;
+      contentHash.put(line, new ArrayList<>());
+    } else {
+      if (!line.isEmpty() && contentHash.containsKey(currentKey)) {
+        contentHash.get(currentKey).add(line);
+      }
+    }
+    return currentKey;
+  }
+
+  private boolean isNewDebitKnowledgeItem(@NonNull String line) {
+    return line.startsWith("#");
   }
 }

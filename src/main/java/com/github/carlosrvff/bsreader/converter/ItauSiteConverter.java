@@ -5,10 +5,9 @@ import com.github.carlosrvff.bsreader.domain.Credit;
 import com.github.carlosrvff.bsreader.domain.Debit;
 import com.github.carlosrvff.bsreader.domain.Statement;
 import com.github.carlosrvff.bsreader.exception.InvalidStatementException;
-import com.sun.tools.javac.util.StringUtils;
 import lombok.NonNull;
 
-public class ItauConverter implements BankConverter {
+public class ItauSiteConverter implements BankConverter {
 
   @Override
   public Statement toStatement(@NonNull String text) throws InvalidStatementException {
