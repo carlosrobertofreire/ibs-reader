@@ -54,6 +54,6 @@ public class DebitKnowledgeBase {
   }
 
   private boolean isNewDebitKnowledgeItem(@NonNull String line) {
-    return line.startsWith("#");
+    return line.charAt(0) == '#';
   }
 }

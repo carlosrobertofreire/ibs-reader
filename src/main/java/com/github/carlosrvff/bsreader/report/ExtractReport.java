@@ -16,7 +16,7 @@ public class ExtractReport {
 
   private static final String SEPARATOR = "-----------------------------------------------------";
 
-  public static String generate(List<Statement> statements, String debitKnowledgeBaseFileName)
+  public String generate(List<Statement> statements, String debitKnowledgeBaseFileName)
       throws IOException {
     StringBuilder content = new StringBuilder();
     ReportData reportData = toReportData(statements, debitKnowledgeBaseFileName);
@@ -27,7 +27,7 @@ public class ExtractReport {
     return content.toString();
   }
 
-  private static ReportData toReportData(
+  private ReportData toReportData(
       List<Statement> statements, String debitKnowledgeBaseFileName) throws IOException {
     ReportData reportData = new ReportData();
     List<DebitKnowledgeItem> debitKnowledgeItems =
@@ -44,7 +44,7 @@ public class ExtractReport {
     return reportData;
   }
 
-  private static void processDebitStatement(
+  private void processDebitStatement(
       ReportData reportData, List<DebitKnowledgeItem> debitKnowledgeItems, Debit debit) {
     Optional<DebitKnowledgeItem> debitKnowledgeItemOptional =
         getDebitKnowledgeItemOptional(debitKnowledgeItems, debit);
@@ -59,10 +59,9 @@ public class ExtractReport {
     }
   }
 
-  private static Optional<DebitKnowledgeItem> getDebitKnowledgeItemOptional(
+  private Optional<DebitKnowledgeItem> getDebitKnowledgeItemOptional(
       List<DebitKnowledgeItem> debitKnowledgeItems, Debit debit) {
-    for (int i = 0; i < debitKnowledgeItems.size(); i++) {
-      DebitKnowledgeItem debitKnowledgeItem = debitKnowledgeItems.get(i);
+    for (DebitKnowledgeItem debitKnowledgeItem : debitKnowledgeItems) {
       for (String keyword : debitKnowledgeItem.getKeywords()) {
         if (debit.getStore().equalsIgnoreCase(keyword)) {
           return Optional.of(debitKnowledgeItem);
@@ -72,19 +71,19 @@ public class ExtractReport {
     return Optional.empty();
   }
 
-  private static void appendBalances(StringBuilder content, List<Statement> balances) {
+  private void appendBalances(StringBuilder content, List<Statement> balances) {
     append(content, "BALANCES", balances, false);
   }
 
-  private static void appendCredits(StringBuilder content, List<Statement> credits) {
+  private void appendCredits(StringBuilder content, List<Statement> credits) {
     append(content, "CREDITS", credits, false);
   }
 
-  private static void appendUnknownDebits(StringBuilder content, List<Statement> unknownDebits) {
+  private void appendUnknownDebits(StringBuilder content, List<Statement> unknownDebits) {
     append(content, "UNKNOWN DEBITS", unknownDebits, true);
   }
 
-  private static void appendKnownDebits(
+  private void appendKnownDebits(
       StringBuilder content, HashMap<DebitKnowledgeItem, List<Statement>> knownDebits) {
     knownDebits.forEach(
         (key, value) -> {
@@ -92,7 +91,7 @@ public class ExtractReport {
         });
   }
 
-  private static void append(
+  private void append(
       StringBuilder content, String title, List<Statement> statements, boolean printValues) {
     if (statements.isEmpty()) {
       return;
@@ -103,7 +102,7 @@ public class ExtractReport {
     }
   }
 
-  private static void appendBasicInformation(
+  private void appendBasicInformation(
       StringBuilder content, String title, List<Statement> statements) {
     content
         .append(SEPARATOR)
@@ -115,13 +114,13 @@ public class ExtractReport {
     }
   }
 
-  private static void appendValues(StringBuilder content, List<Statement> statements) {
+  private void appendValues(StringBuilder content, List<Statement> statements) {
     content.append(System.lineSeparator());
     for (int i = 0; i < statements.size(); i++) {
       Statement statement = statements.get(i);
       content.append(statement.getValue());
       if (i != statements.size() - 1) {
-        content.append("+");
+        content.append('+');
       }
     }
     content.append(System.lineSeparator());

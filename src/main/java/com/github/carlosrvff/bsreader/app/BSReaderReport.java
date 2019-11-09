@@ -19,7 +19,7 @@ public class BSReaderReport {
       return;
     }
     log.info("Processing data...");
-    String content = ExtractReport.generate(statements, args[1]);
+    String content = new ExtractReport().generate(statements, args[1]);
     writeToFile(content, args[2]);
     log.info("Finished!");
   }
