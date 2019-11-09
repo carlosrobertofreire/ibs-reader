@@ -1,17 +1,12 @@
 package com.github.carlosrvff.bsreader.domain;
 
+import lombok.Builder;
+import lombok.Data;
+
+@Data
 public class Debit extends Statement {
 
   private String store;
-
-  public Debit(String date, String store, String value, String originalText) {
-    super(date, value, originalText);
-    this.store = store;
-  }
-
-  public Debit() {
-    super();
-  }
 
   @Override
   protected String getPrefix() {
@@ -20,17 +15,12 @@ public class Debit extends Statement {
 
   @Override
   protected String getContent() {
-    StringBuilder sb = new StringBuilder(20);
-    sb.append(" Store: ");
-    sb.append(store);
-    return sb.toString();
+    return new StringBuilder(" Store: ").append(store).toString();
   }
 
-  public String getStore() {
-    return store;
-  }
-
-  public void setStore(String store) {
+  @Builder
+  public Debit(String date, String value, String originalText, String store) {
+    super(date, value, originalText);
     this.store = store;
   }
 }

@@ -1,17 +1,12 @@
 package com.github.carlosrvff.bsreader.domain;
 
+import lombok.Builder;
+import lombok.Data;
+
+@Data
 public class Credit extends Statement {
 
   private String from;
-
-  public Credit() {
-    super();
-  }
-
-  public Credit(String date, String from, String value, String originalText) {
-    super(date, value, originalText);
-    this.from = from;
-  }
 
   @Override
   protected String getPrefix() {
@@ -20,17 +15,12 @@ public class Credit extends Statement {
 
   @Override
   protected String getContent() {
-    StringBuilder sb = new StringBuilder(20);
-    sb.append(" From: ");
-    sb.append(getFrom());
-    return sb.toString();
+    return new StringBuilder(" From: ").append(getFrom()).toString();
   }
 
-  public String getFrom() {
-    return from;
-  }
-
-  public void setFrom(String from) {
+  @Builder
+  public Credit(String date, String value, String originalText, String from) {
+    super(date, value, originalText);
     this.from = from;
   }
 }

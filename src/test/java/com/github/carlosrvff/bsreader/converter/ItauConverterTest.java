@@ -2,6 +2,7 @@ package com.github.carlosrvff.bsreader.converter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -64,30 +65,24 @@ class ItauConverterTest {
   @Test
   void toStatementWhenTextIsBalanceIsInvalid() {
     String textFixture = "adsadas\t";
-    try {
-      Statement statement = target.toStatement(textFixture);
-    } catch (Exception e) {
-      assertTrue(e instanceof InvalidStatementException);
-    }
+    assertThrows(InvalidStatementException.class, () -> target.toStatement(textFixture));
   }
 
   @Test
   void toStatementWhenTextIsEmpty() {
     String textFixture = "";
-    try {
-      Statement statement = target.toStatement(textFixture);
-    } catch (Exception e) {
-      assertTrue(e instanceof InvalidStatementException);
-    }
+    assertThrows(InvalidStatementException.class, () -> target.toStatement(textFixture));
   }
 
   @Test
   void toStatementWhenTextIsIsNull() {
-    try {
-      Statement statement = target.toStatement(null);
-    } catch (Exception e) {
-      assertTrue(e instanceof InvalidStatementException);
-    }
+    assertThrows(NullPointerException.class, () -> target.toStatement(null));
+  }
+
+  @Test
+  void toStatementWhenTextIsHeader() throws InvalidStatementException {
+    String textFixture = target.getHeader();
+    assertThrows(InvalidStatementException.class, () -> target.toStatement(textFixture));
   }
 
   @Test
@@ -98,7 +93,7 @@ class ItauConverterTest {
 
   @Test
   void isHeaderWhenTextIsEqualToHeader() {
-    String textFixture = ItauConverter.HEADER;
+    String textFixture = target.getHeader();
     assertTrue(target.isHeader(textFixture));
   }
 }

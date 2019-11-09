@@ -5,20 +5,15 @@ import com.github.carlosrvff.bsreader.domain.Credit;
 import com.github.carlosrvff.bsreader.domain.Debit;
 import com.github.carlosrvff.bsreader.domain.Statement;
 import com.github.carlosrvff.bsreader.exception.InvalidStatementException;
+import com.sun.tools.javac.util.StringUtils;
+import lombok.NonNull;
 
-public class ItauConverter implements StatementConverter {
-
-  public static final String HEADER =
-      "Data\t \t \tLançamento\tAg/Origem\tValor (R$)\t \tSaldo (R$)\t ";
+public class ItauConverter implements BankConverter {
 
   @Override
-  public Statement toStatement(String text) throws InvalidStatementException {
-    if (text == null || text.isEmpty()) {
-      throw new InvalidStatementException("There is no statement value to convert", text);
-    }
-
+  public Statement toStatement(@NonNull String text) throws InvalidStatementException {
     if (isHeader(text)) {
-      throw new InvalidStatementException("Invalid statement", text);
+      throw new InvalidStatementException("Header cannot be considered a Statement.", text);
     }
 
     String[] parts = text.split("\t");
@@ -27,7 +22,7 @@ public class ItauConverter implements StatementConverter {
     }
 
     if (parts.length >= 8) {
-      return new Balance(parts[0], parts[7], text);
+      return Balance.builder().date(parts[0]).value(parts[7]).originalText(text).build();
     }
 
     String date = parts[0];
@@ -35,14 +30,19 @@ public class ItauConverter implements StatementConverter {
     String value = parts[5];
 
     if (parts.length > 6) {
-      return new Debit(date, details, value, text);
+      return Debit.builder().date(date).store(details).value(value).originalText(text).build();
     } else {
-      return new Credit(date, details, value, text);
+      return Credit.builder().date(date).from(details).value(value).originalText(text).build();
     }
   }
 
   @Override
-  public boolean isHeader(String text) {
-    return HEADER.toUpperCase().trim().equals(text.toUpperCase().trim());
+  public String getHeader() {
+    return "Data\t \t \tLançamento\tAg/Origem\tValor (R$)\t \tSaldo (R$)\t ";
+  }
+
+  @Override
+  public boolean isHeader(@NonNull String text) {
+    return getHeader().toUpperCase().trim().equals(text.toUpperCase().trim());
   }
 }
