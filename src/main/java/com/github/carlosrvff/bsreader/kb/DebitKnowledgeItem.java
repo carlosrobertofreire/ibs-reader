@@ -1,6 +1,6 @@
 package com.github.carlosrvff.bsreader.kb;
 
-import java.util.ArrayList;
+import java.util.List;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,5 +9,5 @@ import lombok.Data;
 public class DebitKnowledgeItem {
 
   private String name;
-  private ArrayList<String> keywords;
+  private List<String> keywords;
 }
