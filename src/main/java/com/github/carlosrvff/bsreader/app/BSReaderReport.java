@@ -12,19 +12,23 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class BSReaderReport {
 
-  public static void main(String[] args) throws IOException {
-    String inputFile = System.getProperty("inputFile", getDefaultFile("input.txt"));
-    String debitKbFile = System.getProperty("debitKbFile", getDefaultFile("debit-kb.txt"));
-    String outputFile = System.getProperty("outputFile", getDefaultFile("output.txt"));
-    List<Statement> statements = new Extract().load(inputFile);
-    if (statements.isEmpty()) {
-      log.info("No statements found.");
-      return;
+  public static void main(String[] args) {
+    try {
+      String inputFile = System.getProperty("inputFile", getDefaultFile("input.txt"));
+      String debitKbFile = System.getProperty("debitKbFile", getDefaultFile("debit-kb.txt"));
+      String outputFile = System.getProperty("outputFile", getDefaultFile("output.txt"));
+      List<Statement> statements = new Extract().load(inputFile);
+      if (statements.isEmpty()) {
+        log.info("No statements found.");
+        return;
+      }
+      log.info("Processing data...");
+      String content = new ExtractReport().generate(statements, debitKbFile);
+      writeToFile(content, outputFile);
+      log.info("Finished!");
+    } catch (Exception e) {
+      log.fatal("Error executing BSReaderReport:", e);
     }
-    log.info("Processing data...");
-    String content = new ExtractReport().generate(statements, debitKbFile);
-    writeToFile(content, outputFile);
-    log.info("Finished!");
   }
 
   private static String getDefaultFile(String expectedFileName) {
