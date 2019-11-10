@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.StringUtils;
 
 @Log4j2
 public class DebitKnowledgeBase {
@@ -42,11 +43,14 @@ public class DebitKnowledgeBase {
 
   private String processLine(
       HashMap<String, ArrayList<String>> contentHash, String currentKey, String line) {
+    if (StringUtils.isBlank(line)){
+      return currentKey;
+    }
     if (isNewDebitKnowledgeItem(line)) {
       currentKey = line;
       contentHash.put(line, new ArrayList<>());
     } else {
-      if (!line.isEmpty() && contentHash.containsKey(currentKey)) {
+      if (contentHash.containsKey(currentKey)) {
         contentHash.get(currentKey).add(line);
       }
     }
