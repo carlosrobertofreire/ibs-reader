@@ -7,6 +7,7 @@ import com.github.carlosrvff.bsreader.domain.Statement;
 import com.github.carlosrvff.bsreader.kb.DebitKnowledgeBase;
 import com.github.carlosrvff.bsreader.kb.DebitKnowledgeItem;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -27,9 +28,9 @@ public class ExtractReport {
     return content.toString();
   }
 
-  private ReportData toReportData(
-      List<Statement> statements, String debitKnowledgeBaseFileName) throws IOException {
-    ReportData reportData = new ReportData();
+  private ReportData toReportData(List<Statement> statements, String debitKnowledgeBaseFileName)
+      throws IOException {
+    ReportData reportData = createNewReportData();
     List<DebitKnowledgeItem> debitKnowledgeItems =
         new DebitKnowledgeBase().load(debitKnowledgeBaseFileName);
     for (Statement statement : statements) {
@@ -42,6 +43,15 @@ public class ExtractReport {
       }
     }
     return reportData;
+  }
+
+  private ReportData createNewReportData() {
+    return ReportData.builder()
+        .balances(new ArrayList<>())
+        .credits(new ArrayList<>())
+        .unknownDebits(new ArrayList<>())
+        .knownDebits(new HashMap<>())
+        .build();
   }
 
   private void processDebitStatement(
