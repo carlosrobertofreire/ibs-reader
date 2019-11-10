@@ -21,7 +21,6 @@ dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.12.1'
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
-
 }
 
 test {
