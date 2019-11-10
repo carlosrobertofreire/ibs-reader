@@ -14,6 +14,11 @@ import org.junit.jupiter.api.Test;
 
 class ItauSiteConverterTest {
 
+  public static final String DATE_FIXTURE = "01/12";
+  public static final String VALUE_FIXTURE = "1.000,00";
+  public static final String DETAIL_FIXTURE = "Detail";
+  public static final String EXTRA_DETAIL_FIXTURE = "Extra Detail";
+
   private ItauSiteConverter target;
 
   @BeforeEach
@@ -23,41 +28,77 @@ class ItauSiteConverterTest {
 
   @Test
   void toStatementWhenTextIsDebit() throws InvalidStatementException {
-    String textFixture = "01/12\t\t\tRSHOP-KONI ARCO V-01/12       \t\t30,00\t-";
+    String textFixture = getDebitStatementText();
+    Debit expectedDebit =
+        Debit.builder()
+            .date(DATE_FIXTURE)
+            .store(DETAIL_FIXTURE)
+            .value(VALUE_FIXTURE)
+            .originalText(textFixture)
+            .build();
 
-    Statement statement = target.toStatement(textFixture);
+    Debit debit = (Debit) target.toStatement(textFixture);
+    assertEquals(expectedDebit, debit);
+  }
 
-    assertTrue(statement instanceof Debit);
-
-    Debit debit = (Debit) statement;
-    assertEquals("01/12", debit.getDate());
-    assertEquals("RSHOP-KONI ARCO V-01/12", debit.getStore());
-    assertEquals("30,00", debit.getValue());
+  private String getDebitStatementText() {
+    return new StringBuilder(DATE_FIXTURE)
+        .append("\t\t\t")
+        .append(DETAIL_FIXTURE)
+        .append("\t\t")
+        .append(VALUE_FIXTURE)
+        .append("\t-")
+        .toString();
   }
 
   @Test
   void toStatementWhenTextIsCredit() throws InvalidStatementException {
-    String textFixture = "05/12\t\t\tREMUNERACAO/SALARIO       \t3032\t1.000,00\t\t\t";
+    String textFixture = getCreditStatementText();
 
-    Statement statement = target.toStatement(textFixture);
+    Credit expectedCredit =
+        Credit.builder()
+            .date(DATE_FIXTURE)
+            .from(DETAIL_FIXTURE)
+            .value(VALUE_FIXTURE)
+            .originalText(textFixture)
+            .build();
 
-    assertTrue(statement instanceof Credit);
-    Credit credit = (Credit) statement;
-    assertEquals("05/12", credit.getDate());
-    assertEquals("REMUNERACAO/SALARIO", credit.getFrom());
-    assertEquals("1.000,00", credit.getValue());
+    Credit credit = (Credit) target.toStatement(textFixture);
+
+    assertEquals(expectedCredit, credit);
+  }
+
+  private String getCreditStatementText() {
+    return new StringBuilder(DATE_FIXTURE)
+        .append("\t\t\t")
+        .append(DETAIL_FIXTURE)
+        .append("\t")
+        .append(EXTRA_DETAIL_FIXTURE)
+        .append("\t")
+        .append(VALUE_FIXTURE)
+        .append("\t\t\t")
+        .toString();
   }
 
   @Test
   void toStatementWhenTextIsBalance() throws InvalidStatementException {
-    String textFixture = "15/12\t\t\tSALDO FINAL DISPONIVEL       \t\t\t\t1.000,00\t";
+    String textFixture = getBalanceStatementText();
+    Balance expectedBalance =
+        Balance.builder().date(DATE_FIXTURE).value(VALUE_FIXTURE).originalText(textFixture).build();
 
-    Statement statement = target.toStatement(textFixture);
+    Balance balance = (Balance) target.toStatement(textFixture);
 
-    assertTrue(statement instanceof Balance);
-    Balance balance = (Balance) statement;
-    assertEquals("15/12", balance.getDate());
-    assertEquals("1.000,00", balance.getValue());
+    assertEquals(expectedBalance, balance);
+  }
+
+  private String getBalanceStatementText() {
+    return new StringBuilder(DATE_FIXTURE)
+        .append("\t\t\t")
+        .append(EXTRA_DETAIL_FIXTURE)
+        .append("\t\t\t\t")
+        .append(VALUE_FIXTURE)
+        .append("\t")
+        .toString();
   }
 
   @Test
