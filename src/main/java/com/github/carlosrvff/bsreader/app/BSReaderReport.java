@@ -13,15 +13,25 @@ import lombok.extern.log4j.Log4j2;
 public class BSReaderReport {
 
   public static void main(String[] args) throws IOException {
-    List<Statement> statements = new Extract().load(args[0]);
+    String inputFile = System.getProperty("inputFile", getDefaultFile("input.txt"));
+    String debitKbFile = System.getProperty("debitKbFile", getDefaultFile("debit-kb.txt"));
+    String outputFile = System.getProperty("outputFile", getDefaultFile("output.txt"));
+    List<Statement> statements = new Extract().load(inputFile);
     if (statements.isEmpty()) {
       log.info("No statements found.");
       return;
     }
     log.info("Processing data...");
-    String content = new ExtractReport().generate(statements, args[1]);
-    writeToFile(content, args[2]);
+    String content = new ExtractReport().generate(statements, debitKbFile);
+    writeToFile(content, outputFile);
     log.info("Finished!");
+  }
+
+  private static String getDefaultFile(String expectedFileName) {
+    return new StringBuilder(System.getProperty("user.home"))
+        .append("/bsreader/")
+        .append(expectedFileName)
+        .toString();
   }
 
   private static void writeToFile(String content, String outuputFileName) throws IOException {
