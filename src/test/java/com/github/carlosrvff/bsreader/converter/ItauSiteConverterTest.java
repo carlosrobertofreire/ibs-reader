@@ -47,7 +47,8 @@ class ItauSiteConverterTest {
         .append(DETAIL_FIXTURE)
         .append("\t\t")
         .append(VALUE_FIXTURE)
-        .append("\t-")
+        .append("-")
+        .append("\t\t\t")
         .toString();
   }
 
@@ -72,9 +73,7 @@ class ItauSiteConverterTest {
     return new StringBuilder(DATE_FIXTURE)
         .append("\t\t\t")
         .append(DETAIL_FIXTURE)
-        .append("\t")
-        .append(EXTRA_DETAIL_FIXTURE)
-        .append("\t")
+        .append("\t\t")
         .append(VALUE_FIXTURE)
         .append("\t\t\t")
         .toString();
