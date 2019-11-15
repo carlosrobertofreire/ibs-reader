@@ -1,9 +1,6 @@
 package com.github.carlosrvff.bsreader.converter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.carlosrvff.bsreader.domain.Balance;
 import com.github.carlosrvff.bsreader.domain.Credit;
@@ -13,18 +10,20 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ItauSiteConverterTest {
+class ItauCsvConverterTest {
 
-  public static final String DATE_FIXTURE = "01/12";
-  public static final String VALUE_FIXTURE = "1.000,00";
-  public static final String DETAIL_FIXTURE = "Detail";
-  public static final String EXTRA_DETAIL_FIXTURE = "Extra Detail";
+  public static final String DATE_FIXTURE = "14/01/2019";
+  public static final String VALUE_FIXTURE = "5000,00";
+  public static final String DEBIT_DETAIL_FIXTURE = "RSHOP-STORE-14/01";
+  public static final String BALANCE_DETAIL_FIXTURE = "RES APLIC AUT MAIS";
+  public static final String CREDIT_DETAIL_FIXTURE = "REND PAGO APLIC AUT MAIS";
+  public static final String SEPARATOR = ";";
 
-  private ItauSiteConverter target;
+  private ItauCsvConverter target;
 
   @BeforeEach
   void setUp() {
-    target = new ItauSiteConverter();
+    target = new ItauCsvConverter();
   }
 
   @Test
@@ -33,50 +32,23 @@ class ItauSiteConverterTest {
     Debit expectedDebit =
         Debit.builder()
             .date(DATE_FIXTURE)
-            .store(DETAIL_FIXTURE)
+            .store(DEBIT_DETAIL_FIXTURE)
             .value(VALUE_FIXTURE)
             .originalText(textFixture)
             .build();
 
     Debit debit = (Debit) target.toStatement(textFixture);
+
     assertEquals(expectedDebit, debit);
   }
 
   private String generateDebitStatementText() {
     return new StringBuilder(DATE_FIXTURE)
-        .append("\t\t\t")
-        .append(DETAIL_FIXTURE)
-        .append("\t\t")
+        .append(SEPARATOR)
+        .append(DEBIT_DETAIL_FIXTURE)
+        .append(SEPARATOR)
+        .append(target.DEBIT_SYMBOL)
         .append(VALUE_FIXTURE)
-        .append("-")
-        .append("\t\t\t")
-        .toString();
-  }
-
-  @Test
-  void toStatementWhenTextIsCredit() throws InvalidStatementException {
-    String textFixture = generateCreditStatementText();
-
-    Credit expectedCredit =
-        Credit.builder()
-            .date(DATE_FIXTURE)
-            .from(DETAIL_FIXTURE)
-            .value(VALUE_FIXTURE)
-            .originalText(textFixture)
-            .build();
-
-    Credit credit = (Credit) target.toStatement(textFixture);
-
-    assertEquals(expectedCredit, credit);
-  }
-
-  private String generateCreditStatementText() {
-    return new StringBuilder(DATE_FIXTURE)
-        .append("\t\t\t")
-        .append(DETAIL_FIXTURE)
-        .append("\t\t")
-        .append(VALUE_FIXTURE)
-        .append("\t\t\t")
         .toString();
   }
 
@@ -93,18 +65,37 @@ class ItauSiteConverterTest {
 
   private String generateBalanceStatementText() {
     return new StringBuilder(DATE_FIXTURE)
-        .append("\t\t\t")
-        .append(EXTRA_DETAIL_FIXTURE)
-        .append("\t\t\t\t")
+        .append(SEPARATOR)
+        .append(BALANCE_DETAIL_FIXTURE)
+        .append(SEPARATOR)
         .append(VALUE_FIXTURE)
-        .append("\t")
         .toString();
   }
 
   @Test
-  void toStatementWhenTextIsInvalid() {
-    String textFixture = "adsadas\t";
-    assertThrows(InvalidStatementException.class, () -> target.toStatement(textFixture));
+  void toStatementWhenTextIsCredit() throws InvalidStatementException {
+    String textFixture = generateCreditStatementText();
+
+    Credit expectedCredit =
+        Credit.builder()
+            .date(DATE_FIXTURE)
+            .from(CREDIT_DETAIL_FIXTURE)
+            .value(VALUE_FIXTURE)
+            .originalText(textFixture)
+            .build();
+
+    Credit credit = (Credit) target.toStatement(textFixture);
+
+    assertEquals(expectedCredit, credit);
+  }
+
+  private String generateCreditStatementText() {
+    return new StringBuilder(DATE_FIXTURE)
+        .append(SEPARATOR)
+        .append(CREDIT_DETAIL_FIXTURE)
+        .append(SEPARATOR)
+        .append(VALUE_FIXTURE)
+        .toString();
   }
 
   @Test
@@ -114,7 +105,13 @@ class ItauSiteConverterTest {
   }
 
   @Test
-  void toStatementWhenTextIsIsNull() {
+  void toStatementWhenTextIsInvalid() {
+    String textFixture = "03/01;Hello";
+    assertThrows(InvalidStatementException.class, () -> target.toStatement(textFixture));
+  }
+
+  @Test
+  void toStatementWhenTextIsNull() {
     assertThrows(NullPointerException.class, () -> target.toStatement(null));
   }
 

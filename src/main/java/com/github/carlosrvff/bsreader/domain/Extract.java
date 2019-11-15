@@ -1,6 +1,7 @@
 package com.github.carlosrvff.bsreader.domain;
 
 import com.github.carlosrvff.bsreader.converter.BankConverter;
+import com.github.carlosrvff.bsreader.converter.ItauCsvConverter;
 import com.github.carlosrvff.bsreader.converter.ItauSiteConverter;
 import com.github.carlosrvff.bsreader.exception.InvalidStatementException;
 import java.io.BufferedReader;
@@ -53,6 +54,7 @@ public class Extract {
   private Queue<BankConverter> buildBankConverterQueue() {
     Queue<BankConverter> queue = new LinkedList<>();
     queue.add(new ItauSiteConverter());
+    queue.add(new ItauCsvConverter());
     return queue;
   }
 

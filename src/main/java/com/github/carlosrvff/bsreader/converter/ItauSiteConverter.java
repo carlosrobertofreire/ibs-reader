@@ -8,9 +8,7 @@ import com.github.carlosrvff.bsreader.exception.InvalidStatementException;
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 
-public class ItauSiteConverter implements BankConverter {
-
-  public static final char DEBIT_SYMBOL = '-';
+public class ItauSiteConverter extends ItauConverter {
 
   @Override
   public Statement toStatement(@NonNull String text) throws InvalidStatementException {
@@ -25,11 +23,11 @@ public class ItauSiteConverter implements BankConverter {
     String date = parts[0];
     String details = parts[3].trim();
     String value = parts[5];
-    if (value.charAt(value.length() - 1) == DEBIT_SYMBOL) {
+    if (isDebitValue(value)) {
       return Debit.builder()
           .date(date)
           .store(details)
-          .value(StringUtils.chop(value))
+          .value(removeDebitSymbol(value))
           .originalText(text)
           .build();
     } else {
@@ -37,18 +35,16 @@ public class ItauSiteConverter implements BankConverter {
     }
   }
 
-  private void validate(@NonNull String text) throws InvalidStatementException {
-    if (StringUtils.isBlank(text)) {
-      throw new InvalidStatementException("Statement cannot be blank.", text);
-    }
-    if (text.equalsIgnoreCase(getHeader())) {
-      throw new InvalidStatementException("Header cannot be considered a Statement.", text);
-    }
+  private boolean isDebitValue(String value) {
+    return value.charAt(value.length() - 1) == DEBIT_SYMBOL;
+  }
+
+  private String removeDebitSymbol(String value) {
+    return StringUtils.chop(value);
   }
 
   @Override
   public String getHeader() {
     return "Data\t\t\tLançamento\t\tValor (R$)\t\tSaldo (R$)\t";
-    // return "Data\t \t \tLançamento\tAg/Origem\tValor (R$)\t \tSaldo (R$)\t";
   }
 }
