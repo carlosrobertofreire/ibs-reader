@@ -1,6 +1,15 @@
 package com.github.carlosrvff.bsreader.converter;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import com.github.carlosrvff.bsreader.builder.ItauStatementUtils;
+import com.github.carlosrvff.bsreader.domain.Balance;
+import com.github.carlosrvff.bsreader.domain.Credit;
+import com.github.carlosrvff.bsreader.domain.Debit;
 import com.github.carlosrvff.bsreader.exception.InvalidStatementException;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,73 +23,94 @@ class ItauSiteConverterTest {
   }
 
   private String generateDebitStatementText() {
-    return new StringBuilder(ItauConverterTestUtils.DATE_FIXTURE)
+    return new StringBuilder(ItauStatementUtils.DATE_FIXTURE)
         .append("\t\t\t")
-        .append(ItauConverterTestUtils.DEBIT_DETAIL_FIXTURE)
+        .append(ItauStatementUtils.DEBIT_DETAIL_FIXTURE)
         .append("\t\t")
-        .append(ItauConverterTestUtils.VALUE_FIXTURE)
+        .append(ItauStatementUtils.VALUE_FIXTURE)
         .append("-")
         .append("\t\t\t")
         .toString();
   }
 
   private String generateBalanceStatementText() {
-    return new StringBuilder(ItauConverterTestUtils.DATE_FIXTURE)
+    return new StringBuilder(ItauStatementUtils.DATE_FIXTURE)
         .append("\t\t\t")
-        .append(ItauConverterTestUtils.BALANCE_DETAIL_FIXTURE)
+        .append(ItauStatementUtils.BALANCE_DETAIL_FIXTURE)
         .append("\t\t\t\t")
-        .append(ItauConverterTestUtils.VALUE_FIXTURE)
+        .append(ItauStatementUtils.VALUE_FIXTURE)
         .append("\t")
         .toString();
   }
 
   private String generateCreditStatementText() {
-    return new StringBuilder(ItauConverterTestUtils.DATE_FIXTURE)
+    return new StringBuilder(ItauStatementUtils.DATE_FIXTURE)
         .append("\t\t\t")
-        .append(ItauConverterTestUtils.CREDIT_DETAIL_FIXTURE)
+        .append(ItauStatementUtils.CREDIT_DETAIL_FIXTURE)
         .append("\t\t")
-        .append(ItauConverterTestUtils.VALUE_FIXTURE)
+        .append(ItauStatementUtils.VALUE_FIXTURE)
         .append("\t\t\t")
         .toString();
   }
 
   @Test
   void toStatementWhenTextIsDebit() throws InvalidStatementException {
-    ItauConverterTestUtils.toStatementWhenTextIsDebit(target, generateDebitStatementText());
+    String textFixture = generateDebitStatementText();
+
+    Debit expectedDebit = ItauStatementUtils.generateDebitStatement(textFixture);
+
+    Debit debit = (Debit) target.toStatement(textFixture);
+
+    assertEquals(expectedDebit, debit);
   }
 
   @Test
   void toStatementWhenTextIsBalance() throws InvalidStatementException {
-    ItauConverterTestUtils.toStatementWhenTextIsBalance(target, generateBalanceStatementText());
+    String textFixture = generateBalanceStatementText();
+
+    Balance expectedBalance = ItauStatementUtils.generateBalanceStatement(textFixture);
+
+    Balance balance = (Balance) target.toStatement(textFixture);
+
+    assertEquals(expectedBalance, balance);
   }
 
   @Test
   void toStatementWhenTextIsCredit() throws InvalidStatementException {
-    ItauConverterTestUtils.toStatementWhenTextIsCredit(target, generateCreditStatementText());
+    String textFixture = generateCreditStatementText();
+
+    Credit expectedCredit = ItauStatementUtils.generateCreditStatement(textFixture);
+
+    Credit credit = (Credit) target.toStatement(textFixture);
+
+    assertEquals(expectedCredit, credit);
   }
 
   @Test
   void toStatementWhenTextIsEmpty() {
-    ItauConverterTestUtils.toStatementWhenTextIsEmpty(target);
+    String textFixture = "";
+    assertThrows(InvalidStatementException.class, () -> target.toStatement(textFixture));
   }
 
   @Test
   void toStatementWhenTextIsInvalid() {
-    ItauConverterTestUtils.toStatementWhenTextIsInvalid(target);
+    String textFixture = "InvalidText";
+    assertThrows(InvalidStatementException.class, () -> target.toStatement(textFixture));
   }
 
   @Test
   void toStatementWhenTextIsNull() {
-    ItauConverterTestUtils.toStatementWhenTextIsNull(target);
+    assertThrows(NullPointerException.class, () -> target.toStatement(null));
   }
 
   @Test
   void toStatementWhenTextIsHeader() {
-    ItauConverterTestUtils.toStatementWhenTextIsHeader(target);
+    String textFixture = target.getHeader();
+    assertThrows(InvalidStatementException.class, () -> target.toStatement(textFixture));
   }
 
   @Test
   void getHeader() {
-    ItauConverterTestUtils.getHeader(target);
+    assertTrue(StringUtils.isNotBlank(target.getHeader()));
   }
 }

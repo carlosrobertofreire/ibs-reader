@@ -1,11 +1,11 @@
-package com.github.carlosrvff.bsreader.report;
+package com.github.carlosrvff.bsreader.controller;
 
 import com.github.carlosrvff.bsreader.domain.Balance;
 import com.github.carlosrvff.bsreader.domain.Credit;
 import com.github.carlosrvff.bsreader.domain.Debit;
 import com.github.carlosrvff.bsreader.domain.Statement;
-import com.github.carlosrvff.bsreader.kb.DebitKnowledgeBase;
-import com.github.carlosrvff.bsreader.kb.DebitKnowledgeItem;
+import com.github.carlosrvff.bsreader.domain.kb.DebitKnowledgeItem;
+import com.github.carlosrvff.bsreader.domain.report.ReportData;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-public class ExtractReport {
+public class ReportGenerator {
 
   private static final String SEPARATOR = "-----------------------------------------------------";
 
@@ -32,7 +32,7 @@ public class ExtractReport {
       throws IOException {
     ReportData reportData = createNewReportData();
     List<DebitKnowledgeItem> debitKnowledgeItems =
-        new DebitKnowledgeBase().load(debitKnowledgeBaseFileName);
+        new DebitKnowledgeBaseReader().load(debitKnowledgeBaseFileName);
     for (Statement statement : statements) {
       if (statement instanceof Debit) {
         processDebitStatement(reportData, debitKnowledgeItems, (Debit) statement);

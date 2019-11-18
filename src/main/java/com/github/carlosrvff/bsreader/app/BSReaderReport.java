@@ -1,8 +1,8 @@
 package com.github.carlosrvff.bsreader.app;
 
-import com.github.carlosrvff.bsreader.domain.Extract;
+import com.github.carlosrvff.bsreader.controller.ExtractReader;
 import com.github.carlosrvff.bsreader.domain.Statement;
-import com.github.carlosrvff.bsreader.report.ExtractReport;
+import com.github.carlosrvff.bsreader.controller.ReportGenerator;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -17,13 +17,13 @@ public class BSReaderReport {
       String inputFile = System.getProperty("inputFile", getDefaultFile("input.txt"));
       String debitKbFile = System.getProperty("debitKbFile", getDefaultFile("debit-kb.txt"));
       String outputFile = System.getProperty("outputFile", getDefaultFile("output.txt"));
-      List<Statement> statements = new Extract().load(inputFile);
+      List<Statement> statements = new ExtractReader().load(inputFile);
       if (statements.isEmpty()) {
         log.info("No statements found.");
         return;
       }
       log.info("Processing data...");
-      String content = new ExtractReport().generate(statements, debitKbFile);
+      String content = new ReportGenerator().generate(statements, debitKbFile);
       writeToFile(content, outputFile);
       log.info("Finished!");
     } catch (Exception e) {

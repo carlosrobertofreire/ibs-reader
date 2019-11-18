@@ -1,5 +1,6 @@
-package com.github.carlosrvff.bsreader.kb;
+package com.github.carlosrvff.bsreader.controller;
 
+import com.github.carlosrvff.bsreader.domain.kb.DebitKnowledgeItem;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -11,7 +12,7 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 
 @Log4j2
-public class DebitKnowledgeBase {
+public class DebitKnowledgeBaseReader {
 
   public List<DebitKnowledgeItem> load(@NonNull String fileName) throws IOException {
     List<DebitKnowledgeItem> result = new ArrayList<>();

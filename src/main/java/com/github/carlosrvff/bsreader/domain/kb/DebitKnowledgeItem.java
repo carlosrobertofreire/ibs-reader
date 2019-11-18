@@ -1,4 +1,4 @@
-package com.github.carlosrvff.bsreader.kb;
+package com.github.carlosrvff.bsreader.domain.kb;
 
 import java.util.List;
 import lombok.Builder;

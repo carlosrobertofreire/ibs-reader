@@ -1,7 +1,7 @@
-package com.github.carlosrvff.bsreader.report;
+package com.github.carlosrvff.bsreader.domain.report;
 
 import com.github.carlosrvff.bsreader.domain.Statement;
-import com.github.carlosrvff.bsreader.kb.DebitKnowledgeItem;
+import com.github.carlosrvff.bsreader.domain.kb.DebitKnowledgeItem;
 import java.util.HashMap;
 import java.util.List;
 import lombok.Builder;

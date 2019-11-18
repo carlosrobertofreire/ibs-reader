@@ -1,8 +1,10 @@
-package com.github.carlosrvff.bsreader.domain;
+package com.github.carlosrvff.bsreader.controller;
 
 import com.github.carlosrvff.bsreader.converter.BankConverter;
+import com.github.carlosrvff.bsreader.converter.StatementConverter;
 import com.github.carlosrvff.bsreader.converter.ItauCsvConverter;
 import com.github.carlosrvff.bsreader.converter.ItauSiteConverter;
+import com.github.carlosrvff.bsreader.domain.Statement;
 import com.github.carlosrvff.bsreader.exception.InvalidStatementException;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,7 +16,7 @@ import java.util.Queue;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-public class Extract {
+public class ExtractReader {
 
   public List<Statement> load(String fileName) throws IOException {
     log.info("Loading statements from " + fileName);
@@ -27,7 +29,7 @@ public class Extract {
 
   private void processContent(List<Statement> result, BufferedReader bufferedReader)
       throws IOException {
-    BankConverter bankConverter = null;
+    StatementConverter bankConverter = null;
     boolean isHeader = true;
     String line;
     while ((line = bufferedReader.readLine()) != null) {
@@ -48,7 +50,7 @@ public class Extract {
         return currentBankConverter;
       }
     }
-    throw new IllegalArgumentException("Extract cannot be processed: unknown Bank.");
+    throw new IllegalArgumentException("ExtractReader cannot be processed: unknown Bank.");
   }
 
   private Queue<BankConverter> buildBankConverterQueue() {
@@ -58,7 +60,7 @@ public class Extract {
     return queue;
   }
 
-  private void processLine(List<Statement> result, BankConverter bankConverter, String line) {
+  private void processLine(List<Statement> result, StatementConverter bankConverter, String line) {
     try {
       Statement statement = bankConverter.toStatement(line);
       result.add(statement);

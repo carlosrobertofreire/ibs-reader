@@ -8,7 +8,7 @@ import com.github.carlosrvff.bsreader.exception.InvalidStatementException;
 import java.util.HashSet;
 import lombok.NonNull;
 
-public class ItauCsvConverter extends ItauConverter {
+public class ItauCsvConverter extends BankConverter {
 
   @Override
   public Statement toStatement(@NonNull String text) throws InvalidStatementException {

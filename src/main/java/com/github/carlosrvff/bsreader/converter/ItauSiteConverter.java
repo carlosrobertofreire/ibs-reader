@@ -8,7 +8,7 @@ import com.github.carlosrvff.bsreader.exception.InvalidStatementException;
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 
-public class ItauSiteConverter extends ItauConverter {
+public class ItauSiteConverter extends BankConverter {
 
   @Override
   public Statement toStatement(@NonNull String text) throws InvalidStatementException {
