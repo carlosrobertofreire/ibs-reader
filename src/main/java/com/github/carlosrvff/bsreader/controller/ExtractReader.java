@@ -1,6 +1,7 @@
 package com.github.carlosrvff.bsreader.controller;
 
 import com.github.carlosrvff.bsreader.converter.BankConverter;
+import com.github.carlosrvff.bsreader.converter.CheetahConverter;
 import com.github.carlosrvff.bsreader.converter.StatementConverter;
 import com.github.carlosrvff.bsreader.converter.ItauCsvConverter;
 import com.github.carlosrvff.bsreader.converter.ItauSiteConverter;
@@ -57,6 +58,7 @@ public class ExtractReader {
     Queue<BankConverter> queue = new LinkedList<>();
     queue.add(new ItauSiteConverter());
     queue.add(new ItauCsvConverter());
+    queue.add(new CheetahConverter());
     return queue;
   }
 
