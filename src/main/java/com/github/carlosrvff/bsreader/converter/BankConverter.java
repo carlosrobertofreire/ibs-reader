@@ -16,4 +16,6 @@ public abstract class BankConverter implements StatementConverter {
       throw new InvalidStatementException("Header cannot be considered a Statement.", text);
     }
   }
+
+  public abstract boolean isDebitValue(String value);
 }

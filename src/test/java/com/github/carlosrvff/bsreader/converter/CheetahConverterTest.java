@@ -13,17 +13,13 @@ import org.junit.jupiter.api.Test;
 
 class CheetahConverterTest {
 
-  private static final String SEPARATOR = ",";
   private static final String DATE_FIXTURE = "24/06/2019   17:36";
   private static final String TRANSACTION_TYPE_FIXTURE = "POS Domestic";
   private static final String MERCHANT_FIXTURE = "ANY STORE";
-  private static final String AMOUNT_FIXTURE = "5000.00";
+  private static final String FIVE_THOUSAND_AMOUNT_FIXTURE = "5000.00";
+  private static final String ZERO_AMOUNT_FIXTURE = "0.00";
   private static final String FEE_FIXTURE = "0.20";
-  private static final String FEE_MARKER_FIXTURE = "\"";
-  private static final String CURRENCY_SYMBOL = "€ ";
-  private static final String DEBIT_SYMBOL = "- ";
   private static final String RESULT_FIXTURE = "APPROVED";
-
 
   private CheetahConverter target;
 
@@ -34,31 +30,67 @@ class CheetahConverterTest {
 
   private String generatePurchaseDebitStatementText() {
     return new StringBuilder(DATE_FIXTURE)
-        .append(SEPARATOR)
+        .append(target.SEPARATOR)
         .append(TRANSACTION_TYPE_FIXTURE)
-        .append(SEPARATOR)
+        .append(target.SEPARATOR)
         .append(MERCHANT_FIXTURE)
-        .append(SEPARATOR)
-        .append(DEBIT_SYMBOL)
-        .append(CURRENCY_SYMBOL)
-        .append(AMOUNT_FIXTURE)
-        .append(SEPARATOR)
-        .append(FEE_MARKER_FIXTURE)
-        .append(DEBIT_SYMBOL)
-        .append(CURRENCY_SYMBOL)
+        .append(target.SEPARATOR)
+        .append(target.DEBIT_SYMBOL)
+        .append(" ")
+        .append(target.CURRENCY_SYMBOL)
+        .append(" ")
+        .append(FIVE_THOUSAND_AMOUNT_FIXTURE)
+        .append(target.SEPARATOR)
+        .append(target.FEE_MARKER_FIXTURE)
+        .append(target.DEBIT_SYMBOL)
+        .append(" ")
+        .append(target.CURRENCY_SYMBOL)
+        .append(" ")
         .append(FEE_FIXTURE)
-        .append(FEE_MARKER_FIXTURE)
-        .append(SEPARATOR)
+        .append(target.FEE_MARKER_FIXTURE)
+        .append(target.SEPARATOR)
         .append(RESULT_FIXTURE)
         .toString();
   }
 
   private String generateFeeDebitStatementText() {
-    return new StringBuilder().toString();
+    return new StringBuilder(DATE_FIXTURE)
+        .append(target.SEPARATOR)
+        .append(TRANSACTION_TYPE_FIXTURE)
+        .append(target.SEPARATOR)
+        .append(target.SEPARATOR)
+        .append(target.CURRENCY_SYMBOL)
+        .append(" ")
+        .append(ZERO_AMOUNT_FIXTURE)
+        .append(target.SEPARATOR)
+        .append(target.FEE_MARKER_FIXTURE)
+        .append(target.DEBIT_SYMBOL)
+        .append(" ")
+        .append(target.CURRENCY_SYMBOL)
+        .append(" ")
+        .append(FEE_FIXTURE)
+        .append(target.FEE_MARKER_FIXTURE)
+        .append(target.SEPARATOR)
+        .append(RESULT_FIXTURE)
+        .toString();
   }
 
   private String generateCreditStatementText() {
-    return new StringBuilder().toString();
+    return new StringBuilder(DATE_FIXTURE)
+        .append(target.SEPARATOR)
+        .append(TRANSACTION_TYPE_FIXTURE)
+        .append(target.SEPARATOR)
+        .append(MERCHANT_FIXTURE)
+        .append(target.SEPARATOR)
+        .append(target.CURRENCY_SYMBOL)
+        .append(" ")
+        .append(FIVE_THOUSAND_AMOUNT_FIXTURE)
+        .append(target.SEPARATOR)
+        .append(target.FEE_MARKER_FIXTURE)
+        .append(target.FEE_MARKER_FIXTURE)
+        .append(target.SEPARATOR)
+        .append(RESULT_FIXTURE)
+        .toString();
   }
 
   @Test
@@ -68,7 +100,11 @@ class CheetahConverterTest {
     Debit expectedDebit =
         Debit.builder()
             .originalText(textFixture)
-            .value(AMOUNT_FIXTURE)
+            .value(
+                new StringBuilder(ZERO_AMOUNT_FIXTURE)
+                    .append(target.ADD_SYMBOL)
+                    .append(FEE_FIXTURE)
+                    .toString())
             .date(DATE_FIXTURE)
             .build();
 
@@ -84,7 +120,11 @@ class CheetahConverterTest {
     Debit expectedDebit =
         Debit.builder()
             .originalText(textFixture)
-            .value(AMOUNT_FIXTURE)
+            .value(
+                new StringBuilder(FIVE_THOUSAND_AMOUNT_FIXTURE)
+                    .append(target.ADD_SYMBOL)
+                    .append(FEE_FIXTURE)
+                    .toString())
             .store(MERCHANT_FIXTURE)
             .date(DATE_FIXTURE)
             .build();
@@ -103,7 +143,7 @@ class CheetahConverterTest {
             .originalText(textFixture)
             .from(MERCHANT_FIXTURE)
             .date(DATE_FIXTURE)
-            .value(AMOUNT_FIXTURE)
+            .value(FIVE_THOUSAND_AMOUNT_FIXTURE)
             .build();
 
     Credit credit = (Credit) target.toStatement(textFixture);

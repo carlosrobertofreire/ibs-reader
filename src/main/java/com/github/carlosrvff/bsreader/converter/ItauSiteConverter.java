@@ -35,7 +35,8 @@ public class ItauSiteConverter extends BankConverter {
     }
   }
 
-  private boolean isDebitValue(String value) {
+  @Override
+  public boolean isDebitValue(String value) {
     return value.charAt(value.length() - 1) == DEBIT_SYMBOL;
   }
 
