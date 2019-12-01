@@ -1,7 +1,11 @@
 package com.github.carlosrvff.bsreader.domain;
 
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper=true)
 public class Balance extends Statement {
 
   @Builder
