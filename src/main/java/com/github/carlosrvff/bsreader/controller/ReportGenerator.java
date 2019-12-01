@@ -73,7 +73,7 @@ public class ReportGenerator {
       List<DebitKnowledgeItem> debitKnowledgeItems, Debit debit) {
     for (DebitKnowledgeItem debitKnowledgeItem : debitKnowledgeItems) {
       for (String keyword : debitKnowledgeItem.getKeywords()) {
-        if (debit.getStore().equalsIgnoreCase(keyword)) {
+        if (keyword.equalsIgnoreCase(debit.getStore())) {
           return Optional.of(debitKnowledgeItem);
         }
       }
