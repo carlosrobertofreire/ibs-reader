@@ -15,11 +15,11 @@ public class CheetahConverter extends BankConverter {
   public static final char ADD_SYMBOL = '+';
 
   @Override
-  public Statement toStatement(@NonNull String text) throws InvalidStatementException {
-    validate(text);
-    String[] parts = text.split(SEPARATOR);
+  public Statement toStatement(@NonNull String line) throws InvalidStatementException {
+    validate(line);
+    String[] parts = line.split(SEPARATOR);
     if (parts.length != 6) {
-      throw new InvalidStatementException("Incorrect numbers of fields.", text);
+      throw new InvalidStatementException("Incorrect numbers of fields.", line);
     }
 
     String date = parts[0];
@@ -35,14 +35,14 @@ public class CheetahConverter extends BankConverter {
           .date(date)
           .store(details)
           .value(removeExtraSymbols(value))
-          .originalText(text)
+          .originalText(line)
           .build();
     } else {
       return Credit.builder()
           .date(date)
           .from(details)
           .value(removeExtraSymbols(value))
-          .originalText(text)
+          .originalText(line)
           .build();
     }
   }

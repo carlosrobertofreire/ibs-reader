@@ -11,14 +11,14 @@ import org.apache.commons.lang3.StringUtils;
 public class ItauSiteConverter extends BankConverter {
 
   @Override
-  public Statement toStatement(@NonNull String text) throws InvalidStatementException {
-    validate(text);
-    String[] parts = text.split("\t");
+  public Statement toStatement(@NonNull String line) throws InvalidStatementException {
+    validate(line);
+    String[] parts = line.split("\t");
     if (parts.length < 6) {
-      throw new InvalidStatementException("Incorrect numbers of fields.", text);
+      throw new InvalidStatementException("Incorrect numbers of fields.", line);
     }
     if (parts.length >= 8) {
-      return Balance.builder().date(parts[0]).value(parts[7]).originalText(text).build();
+      return Balance.builder().date(parts[0]).value(parts[7]).originalText(line).build();
     }
     String date = parts[0];
     String details = parts[3].trim();
@@ -28,10 +28,10 @@ public class ItauSiteConverter extends BankConverter {
           .date(date)
           .store(details)
           .value(removeDebitSymbol(value))
-          .originalText(text)
+          .originalText(line)
           .build();
     } else {
-      return Credit.builder().date(date).from(details).value(value).originalText(text).build();
+      return Credit.builder().date(date).from(details).value(value).originalText(line).build();
     }
   }
 

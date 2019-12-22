@@ -1,8 +1,8 @@
 package com.github.carlosrvff.bsreader.app;
 
 import com.github.carlosrvff.bsreader.controller.ExtractReader;
-import com.github.carlosrvff.bsreader.domain.Statement;
 import com.github.carlosrvff.bsreader.controller.ReportGenerator;
+import com.github.carlosrvff.bsreader.domain.Statement;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;

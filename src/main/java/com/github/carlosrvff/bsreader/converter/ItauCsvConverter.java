@@ -11,28 +11,28 @@ import lombok.NonNull;
 public class ItauCsvConverter extends BankConverter {
 
   @Override
-  public Statement toStatement(@NonNull String text) throws InvalidStatementException {
-    validate(text);
-    String[] parts = text.split(";");
+  public Statement toStatement(@NonNull String line) throws InvalidStatementException {
+    validate(line);
+    String[] parts = line.split(";");
     if (parts.length < 3) {
-      throw new InvalidStatementException("Incorrect numbers of fields.", text);
+      throw new InvalidStatementException("Incorrect numbers of fields.", line);
     }
     String date = parts[0];
     String details = parts[1];
     String value = parts[2];
 
     if (getHashBalanceDetailsValues().contains(details)) {
-      return Balance.builder().date(date).value(value).originalText(text).build();
+      return Balance.builder().date(date).value(value).originalText(line).build();
     } else {
       if (isDebitValue(value)) {
         return Debit.builder()
             .date(date)
             .store(details)
             .value(removeDebitSymbol(value))
-            .originalText(text)
+            .originalText(line)
             .build();
       } else {
-        return Credit.builder().date(date).from(details).value(value).originalText(text).build();
+        return Credit.builder().date(date).from(details).value(value).originalText(line).build();
       }
     }
   }

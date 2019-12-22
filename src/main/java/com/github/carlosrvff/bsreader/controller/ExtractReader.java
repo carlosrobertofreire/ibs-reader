@@ -2,15 +2,13 @@ package com.github.carlosrvff.bsreader.controller;
 
 import com.github.carlosrvff.bsreader.converter.BankConverter;
 import com.github.carlosrvff.bsreader.converter.CheetahConverter;
-import com.github.carlosrvff.bsreader.converter.StatementConverter;
 import com.github.carlosrvff.bsreader.converter.ItauCsvConverter;
 import com.github.carlosrvff.bsreader.converter.ItauSiteConverter;
+import com.github.carlosrvff.bsreader.converter.KbcConverter;
 import com.github.carlosrvff.bsreader.domain.Statement;
-import com.github.carlosrvff.bsreader.exception.InvalidStatementException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -21,26 +19,25 @@ public class ExtractReader {
 
   public List<Statement> load(String fileName) throws IOException {
     log.info("Loading statements from " + fileName);
-    List<Statement> result = new ArrayList<>();
     try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
-      processContent(result, bufferedReader);
+      return load(bufferedReader);
     }
-    return result;
   }
 
-  private void processContent(List<Statement> result, BufferedReader bufferedReader)
-      throws IOException {
-    StatementConverter bankConverter = null;
-    boolean isHeader = true;
+  private List<Statement> load(BufferedReader bufferedReader) throws IOException {
+    BankConverter bankConverter = null;
+    StringBuilder content = new StringBuilder();
     String line;
+    boolean isHeader = true;
     while ((line = bufferedReader.readLine()) != null) {
       if (isHeader) {
         bankConverter = getBankConverter(line);
         isHeader = false;
       } else {
-        processLine(result, bankConverter, line);
+        content.append(line).append(System.lineSeparator());
       }
     }
+    return bankConverter.toStatements(content.toString());
   }
 
   private BankConverter getBankConverter(String header) {
@@ -59,18 +56,7 @@ public class ExtractReader {
     queue.add(new ItauSiteConverter());
     queue.add(new ItauCsvConverter());
     queue.add(new CheetahConverter());
+    queue.add(new KbcConverter());
     return queue;
-  }
-
-  private void processLine(List<Statement> result, StatementConverter bankConverter, String line) {
-    try {
-      Statement statement = bankConverter.toStatement(line);
-      result.add(statement);
-    } catch (InvalidStatementException e) {
-      log.fatal(e.getMessage());
-      if (e.getCause() != null) {
-        log.fatal("  Original exception: " + e.getCause().getMessage());
-      }
-    }
   }
 }

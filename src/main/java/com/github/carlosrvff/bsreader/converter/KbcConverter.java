@@ -10,8 +10,8 @@ public class KbcConverter extends BankConverter {
   public static final char CURRENCY_SYMBOL = '€';
 
   @Override
-  public Statement toStatement(@NonNull String text) throws InvalidStatementException {
-    validate(text);
+  public Statement toStatement(@NonNull String line) throws InvalidStatementException {
+    validate(line);
     return null;
   }
 
