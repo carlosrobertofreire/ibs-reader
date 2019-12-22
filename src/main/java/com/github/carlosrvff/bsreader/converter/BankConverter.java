@@ -28,18 +28,20 @@ public abstract class BankConverter implements StatementConverter {
 
   @Override
   public List<Statement> toStatements(@NonNull String content) {
-    List<Statement> result = new ArrayList<>();
     String[] lines = content.split(System.lineSeparator());
-    if (lines == null || lines.length == 0) {
-      return result;
-    }
+    return toStatements(lines);
+  }
+
+  @Override
+  public List<Statement> toStatements(@NonNull String[] lines) {
+    List<Statement> result = new ArrayList<>();
     for (String line : lines) {
       processLine(result, line);
     }
     return result;
   }
 
-  private void processLine(List<Statement> result, String line) {
+  public void processLine(List<Statement> result, String line) {
     try {
       result.add(toStatement(line));
     } catch (InvalidStatementException e) {

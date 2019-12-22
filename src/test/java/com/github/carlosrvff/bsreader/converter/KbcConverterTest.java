@@ -24,9 +24,9 @@ class KbcConverterTest {
 
   private String generateDebitStatementText() {
     return new StringBuilder(DATE_FIXTURE)
-        .append(System.lineSeparator())
+        .append(target.SEPARATOR)
         .append(TRANSACTION_FIXTURE)
-        .append(System.lineSeparator())
+        .append(target.SEPARATOR)
         .append(target.DEBIT_SYMBOL)
         .append(target.CURRENCY_SYMBOL)
         .append(FIVE_THOUSAND_AMOUNT_FIXTURE)
@@ -38,9 +38,9 @@ class KbcConverterTest {
 
   private String generateCreditStatementText() {
     return new StringBuilder(DATE_FIXTURE)
-        .append(System.lineSeparator())
+        .append(target.SEPARATOR)
         .append(TRANSACTION_FIXTURE)
-        .append(System.lineSeparator())
+        .append(target.SEPARATOR)
         .append(target.CURRENCY_SYMBOL)
         .append(FIVE_THOUSAND_AMOUNT_FIXTURE)
         .append(target.SEPARATOR)

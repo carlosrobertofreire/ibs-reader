@@ -11,6 +11,8 @@ public interface StatementConverter {
 
   List<Statement> toStatements(@NonNull String content) throws InvalidStatementException;
 
+  List<Statement> toStatements(@NonNull String[] lines) throws InvalidStatementException;
+
   String getHeader();
 
 }
