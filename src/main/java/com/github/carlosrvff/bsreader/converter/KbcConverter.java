@@ -1,21 +1,46 @@
 package com.github.carlosrvff.bsreader.converter;
 
+import com.github.carlosrvff.bsreader.domain.Credit;
+import com.github.carlosrvff.bsreader.domain.Debit;
 import com.github.carlosrvff.bsreader.domain.Statement;
 import com.github.carlosrvff.bsreader.exception.InvalidStatementException;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.NonNull;
+import org.apache.commons.lang3.StringUtils;
 
 public class KbcConverter extends BankConverter {
 
-  public static final char SEPARATOR = '\t';
+  public static final String SEPARATOR = "\t";
   public static final char CURRENCY_SYMBOL = '€';
   public static final int TRANSACTION_LINES_QTT = 3;
 
   @Override
   public Statement toStatement(@NonNull String line) throws InvalidStatementException {
     validate(line);
-    return null;
+    String[] parts = line.split(SEPARATOR);
+    if (parts.length < 5) {
+      throw new InvalidStatementException("Incorrect numbers of fields.", line);
+    }
+    String date = parts[0];
+    String details = parts[2];
+    String value = parts[3];
+    if (isDebitValue(value)) {
+      return Debit.builder()
+          .date(date)
+          .store(details)
+          .value(removeExtraSymbols(value))
+          .originalText(line)
+          .build();
+    } else {
+      return Credit.builder().date(date).from(details).value(removeExtraSymbols(value)).originalText(line).build();
+    }
+  }
+
+  private String removeExtraSymbols(String value) {
+    value = StringUtils.remove(value, DEBIT_SYMBOL);
+    value = StringUtils.remove(value, CURRENCY_SYMBOL);
+    return value;
   }
 
   @Override
