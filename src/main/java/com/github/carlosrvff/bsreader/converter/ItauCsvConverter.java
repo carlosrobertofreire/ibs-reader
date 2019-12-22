@@ -52,11 +52,6 @@ public class ItauCsvConverter extends BankConverter {
     return "data;detalhe;valor";
   }
 
-  @Override
-  public boolean isDebitValue(String value) {
-    return value.charAt(0) == DEBIT_SYMBOL;
-  }
-
   private String removeDebitSymbol(String value) {
     return value.substring(1);
   }

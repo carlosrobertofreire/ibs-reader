@@ -10,9 +10,9 @@ import org.apache.commons.lang3.StringUtils;
 public class CheetahConverter extends BankConverter {
 
   public static final String SEPARATOR = ",";
-  public static final Character FEE_MARKER_FIXTURE = '\"';
-  public static final Character CURRENCY_SYMBOL = '€';
-  public static final Character ADD_SYMBOL = '+';
+  public static final char FEE_MARKER_FIXTURE = '\"';
+  public static final char CURRENCY_SYMBOL = '€';
+  public static final char ADD_SYMBOL = '+';
 
   @Override
   public Statement toStatement(@NonNull String text) throws InvalidStatementException {
@@ -53,11 +53,6 @@ public class CheetahConverter extends BankConverter {
     value = StringUtils.remove(value, CURRENCY_SYMBOL);
     value = StringUtils.remove(value, " ");
     return value;
-  }
-
-  @Override
-  public boolean isDebitValue(String value) {
-    return value.charAt(0) == DEBIT_SYMBOL;
   }
 
   @Override

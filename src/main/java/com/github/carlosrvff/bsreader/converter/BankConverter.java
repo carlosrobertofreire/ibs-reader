@@ -17,5 +17,7 @@ public abstract class BankConverter implements StatementConverter {
     }
   }
 
-  public abstract boolean isDebitValue(String value);
+  public boolean isDebitValue(String value){
+    return value.charAt(0) == DEBIT_SYMBOL;
+  }
 }
