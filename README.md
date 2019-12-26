@@ -1,39 +1,44 @@
-# IBS Reader
+# bsreader
 
-A simple Java application to read and organize [Itaú Bank](https://www.itau.com.br/) statements.
+A simple Java application to read and organize Bank statements.
+
+### Supported Banks
+- [Itaú](https://www.itau.com.br/)
+- [Cheetah Money](https://cheetahmoney.com/)
+- [KBC](https://www.kbc.ie/)
 
 ## Getting Started
 
 ### Prerequisites
 
-To run `IBS Reader` you need to have Java 8 installed on your machine.
+To run `bsreader` you need to have Java 8 installed on your machine.
 
 ### Installing
 
-Download and extract the [lastest](https://github.com/carlosrobertofreire/ibs-reader/releases) `ibs-reader.zip` to your home folder.
+Download and extract the [latest](https://github.com/carlosrvff/bsreader/releases) `bsreader.zip` to your home folder.
 
 ```
-/home/your_name/IBSReader
+/home/your_name/bsreader
 ```
 
 ### Editing
 
-Open `IBSReader/debit-kb.txt` and edit your own knowledge base for debit statements, following the pattern already used in the file.
+Open `bsreader/debit-kb.txt` and edit your own knowledge base for debit statements, following the pattern already used in the file.
 
 ## Running
 
-Paste your [Itaú Bank](https://www.itau.com.br/) statements into `IBSReader/input.txt` and execute `IBSReader/IBSReader.jar`.
+Paste your bank statements into `bsreader/input.txt` and execute `bsreader/bsreader-all-{versionNumber}.jar`.
 
 ## Viewing Results
 
-A new file `IBSReader/output.txt` will be generated. 
+A new file `bsreader/output.txt` will be generated. 
 
-Open this file and see how `IBS Reader` organized your [Itaú Bank](https://www.itau.com.br/) statements.
+Open this file and see how `bsreader` organized your bank statements.
 
 ## Authors
 
-* [Carlos Roberto Freire](https://github.com/carlosrobertofreire)
+* [Carlos Freire](https://github.com/carlosrvff)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
