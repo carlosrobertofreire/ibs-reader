@@ -7,6 +7,17 @@ version '1.0'
 
 sourceCompatibility = 1.8
 
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'BSReader',
+                'Implementation-Version': version,
+                'Main-Class': 'com.github.carlosrvff.bsreader.app.BSReaderReport'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
 repositories {
     mavenCentral()
     jcenter()
