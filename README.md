@@ -15,7 +15,7 @@ To run `bsreader` you need to have Java 8 installed on your machine.
 
 ### Installing
 
-Download and extract the [latest](https://github.com/carlosrvff/bsreader/releases) `bsreader.zip` to your home folder.
+Download and extract the [latest](https://github.com/carlosrvff/bsreader/releases) `bsreader` zip to your home folder.
 
 ```
 /home/your_name/bsreader
@@ -23,7 +23,7 @@ Download and extract the [latest](https://github.com/carlosrvff/bsreader/release
 
 ### Editing
 
-Open `bsreader/debit-kb.txt` and edit your own knowledge base for debit statements, following the pattern already used in the file.
+Open `bsreader/debit-kb.txt` and create your own knowledge base for debit statements, following the pattern already used in the file.
 
 ## Running
 
