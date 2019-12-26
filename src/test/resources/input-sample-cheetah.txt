@@ -1,0 +1,4 @@
+Date, Transaction Type, Merchant, Amount, Fee, Result
+24/06/2019   17:36,SEPA Outgoing Payment,Person,- € 5000.00,"",APPROVED
+24/06/2019   12:13,POS Domestic,STORE1,- € 7.15,"- € 0.20",APPROVED
+22/06/2019   16:17,POS Domestic,STORE2,- € 46.50,"- € 0.20",APPROVED
