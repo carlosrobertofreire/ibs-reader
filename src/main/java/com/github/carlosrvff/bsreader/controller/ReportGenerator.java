@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import org.apache.commons.lang3.StringUtils;
 
 public class ReportGenerator {
 
@@ -73,7 +74,7 @@ public class ReportGenerator {
       List<DebitKnowledgeItem> debitKnowledgeItems, Debit debit) {
     for (DebitKnowledgeItem debitKnowledgeItem : debitKnowledgeItems) {
       for (String keyword : debitKnowledgeItem.getKeywords()) {
-        if (keyword.equalsIgnoreCase(debit.getStore())) {
+        if (StringUtils.containsIgnoreCase(debit.getStore(), keyword)) {
           return Optional.of(debitKnowledgeItem);
         }
       }
