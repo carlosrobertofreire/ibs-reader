@@ -1,0 +1,4 @@
+Data			Lançamento		Valor (R$)		Saldo (R$)	
+02/05			SALDO INICIAL				10,00	
+02/05			RSHOP-STORE		15,80-	
+02/05			TBI 9999.88888-0/500		5.000,00
