@@ -35,7 +35,7 @@ A new file `bsreader/output.txt` will be generated.
 
 Open this file and see how `bsreader` organized your bank statements.
 
-## Authors
+## Author
 
 * [Carlos Freire](https://github.com/carlosrvff)
 
