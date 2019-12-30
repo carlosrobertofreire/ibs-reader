@@ -2,6 +2,7 @@ package com.github.carlosrvff.bsreader.domain.report;
 
 import com.github.carlosrvff.bsreader.domain.Statement;
 import com.github.carlosrvff.bsreader.domain.kb.DebitKnowledgeItem;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import lombok.Builder;
@@ -14,5 +15,5 @@ public class ReportData {
   private List<Statement> credits;
   private List<Statement> balances;
   private List<Statement> unknownDebits;
-  private HashMap<DebitKnowledgeItem, List<Statement>> knownDebits;
+  private HashMap<DebitKnowledgeItem, ArrayList<Statement>> knownDebits;
 }

@@ -62,7 +62,7 @@ public class ReportGenerator {
       if (reportData.getKnownDebits().containsKey(debitKnowledgeItemOptional.get())) {
         reportData.getKnownDebits().get(debitKnowledgeItemOptional.get()).add(debit);
       } else {
-        reportData.getKnownDebits().put(debitKnowledgeItemOptional.get(), Arrays.asList(debit));
+        reportData.getKnownDebits().put(debitKnowledgeItemOptional.get(), new ArrayList<>(Arrays.asList(debit)));
       }
     } else {
       reportData.getUnknownDebits().add(debit);
@@ -94,7 +94,7 @@ public class ReportGenerator {
   }
 
   private void appendKnownDebits(
-      StringBuilder content, HashMap<DebitKnowledgeItem, List<Statement>> knownDebits) {
+      StringBuilder content, HashMap<DebitKnowledgeItem, ArrayList<Statement>> knownDebits) {
     knownDebits.forEach(
         (key, value) -> {
           append(content, key.getName(), value, true);
