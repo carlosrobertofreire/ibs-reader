@@ -9,6 +9,7 @@ import com.github.carlosrvff.bsreader.domain.Statement;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -37,7 +38,11 @@ public class ExtractReader {
         content.append(line).append(System.lineSeparator());
       }
     }
-    return bankConverter.toStatements(content.toString());
+    if (bankConverter == null) {
+      return Collections.emptyList();
+    } else {
+      return bankConverter.toStatements(content.toString());
+    }
   }
 
   private BankConverter getBankConverter(String header) {
