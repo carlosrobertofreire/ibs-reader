@@ -8,15 +8,19 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.util.Strings;
 
 @Log4j2
 public class BSReaderReport {
 
   public static void main(String[] args) {
     try {
-      String inputFile = System.getProperty("inputFile", getDefaultFile("input.txt"));
-      String debitKbFile = System.getProperty("debitKbFile", getDefaultFile("debit-kb.txt"));
-      String outputFile = System.getProperty("outputFile", getDefaultFile("output.txt"));
+      String inputFile =
+          getValue(System.getenv("BSREADER_INPUT_FILE"), getDefaultFile("input.txt"));
+      String debitKbFile =
+          getValue(System.getenv("BSREADER_DEBIT_KB_FILE"), getDefaultFile("debit-kb.txt"));
+      String outputFile =
+          getValue(System.getenv("BSREADER_OUTPUT_FILE"), getDefaultFile("output.txt"));
       List<Statement> statements = new ExtractReader().load(inputFile);
       if (statements.isEmpty()) {
         log.info("No statements found.");
@@ -28,6 +32,17 @@ public class BSReaderReport {
       log.info("Finished!");
     } catch (Exception e) {
       log.fatal("Error executing BSReaderReport:", e);
+    }
+  }
+
+  private static String getValue(String inputValue, String defaultValue) {
+    if (Strings.isBlank(defaultValue)) {
+      throw new IllegalArgumentException("Argument defaultValue cannot be blank.");
+    }
+    if (Strings.isNotBlank(inputValue)) {
+      return inputValue;
+    } else {
+      return defaultValue;
     }
   }
 
