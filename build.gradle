@@ -3,7 +3,7 @@ plugins {
     id 'application'
 }
 
-version '1.0.1'
+version '1.2.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
@@ -11,7 +11,7 @@ task fatJar(type: Jar) {
     manifest {
         attributes 'Implementation-Title': 'BSReader',
                 'Implementation-Version': version,
-                'Main-Class': 'com.github.carlosrvff.bsreader.app.BSReaderReport'
+                'Main-Class': 'com.carlosrvff.bsreader.app.BSReaderReport'
     }
     baseName = project.name + '-all'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
@@ -39,4 +39,4 @@ test {
     useJUnitPlatform()
 }
 
-mainClassName = 'com.github.carlosrvff.bsreader.app.BSReaderReport'
+mainClassName = 'com.carlosrvff.bsreader.app.BSReaderReport'
