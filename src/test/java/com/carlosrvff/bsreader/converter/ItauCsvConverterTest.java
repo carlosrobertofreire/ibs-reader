@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.carlosrvff.bsreader.builder.ItauStatementUtils;
+import com.carlosrvff.bsreader.helper.ItauStatementUtils;
 import com.carlosrvff.bsreader.domain.Balance;
 import com.carlosrvff.bsreader.domain.Credit;
 import com.carlosrvff.bsreader.domain.Debit;

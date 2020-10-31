@@ -8,7 +8,7 @@ import com.carlosrvff.bsreader.domain.Balance;
 import com.carlosrvff.bsreader.domain.Credit;
 import com.carlosrvff.bsreader.domain.Debit;
 import com.carlosrvff.bsreader.exception.InvalidStatementException;
-import com.carlosrvff.bsreader.builder.ItauStatementUtils;
+import com.carlosrvff.bsreader.helper.ItauStatementUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package com.carlosrvff.bsreader.builder;
+package com.carlosrvff.bsreader.helper;
 
 import com.carlosrvff.bsreader.domain.Balance;
 import com.carlosrvff.bsreader.domain.Credit;
