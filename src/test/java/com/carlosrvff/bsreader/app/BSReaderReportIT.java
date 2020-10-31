@@ -25,11 +25,6 @@ class BSReaderReportIT {
     assertEquals(expectedContent, generatedContent);
   }
 
-  private String generateContentFrom(String inputFileName) throws IOException {
-    List<Statement> statements = new ExtractReader().load(TEST_RESOURCES_FOLDER + inputFileName);
-    return new ReportGenerator().generate(statements, DEBIT_KB_FILE_NAME);
-  }
-
   private String loadExpectedContentFrom(String outputFileName) throws IOException {
     StringBuilder expectedContent = new StringBuilder();
     try (BufferedReader bufferedReader =
@@ -40,6 +35,11 @@ class BSReaderReportIT {
       }
     }
     return expectedContent.toString();
+  }
+
+  private String generateContentFrom(String inputFileName) throws IOException {
+    List<Statement> statements = new ExtractReader().load(TEST_RESOURCES_FOLDER + inputFileName);
+    return new ReportGenerator().generate(statements, DEBIT_KB_FILE_NAME);
   }
 
   @Test

@@ -29,8 +29,8 @@ class KbcConverterTest {
 
   @Test
   void toStatementWhenTextIsDebit() throws InvalidStatementException {
-    String debitText = generateProcessedDebitStatementText();
-    Debit expectedDebit = getExpectedDebit(debitText);
+    String debitText = createProcessedDebitStatementText();
+    Debit expectedDebit = createExpectedDebit(debitText);
 
     Statement statement = target.toStatement(debitText);
 
@@ -38,7 +38,7 @@ class KbcConverterTest {
     assertEquals(expectedDebit, statement);
   }
 
-  private String generateProcessedDebitStatementText() {
+  private String createProcessedDebitStatementText() {
     return new StringBuilder(DATE_FIXTURE)
         .append(target.SEPARATOR)
         .append(target.SEPARATOR)
@@ -53,7 +53,7 @@ class KbcConverterTest {
         .toString();
   }
 
-  private Debit getExpectedDebit(String textFixture) {
+  private Debit createExpectedDebit(String textFixture) {
     return Debit.builder()
         .originalText(textFixture)
         .value(FIVE_THOUSAND_AMOUNT_FIXTURE)
@@ -64,8 +64,8 @@ class KbcConverterTest {
 
   @Test
   void toStatementWhenTextIsCredit() throws InvalidStatementException {
-    String creditText = generateProcessedCreditStatementText();
-    Credit expectedCredit = getExpectedCredit(creditText);
+    String creditText = createProcessedCreditStatementText();
+    Credit expectedCredit = createExpectedCredit(creditText);
 
     Statement statement = target.toStatement(creditText);
 
@@ -73,7 +73,7 @@ class KbcConverterTest {
     assertEquals(expectedCredit, statement);
   }
 
-  private String generateProcessedCreditStatementText() {
+  private String createProcessedCreditStatementText() {
     return new StringBuilder(DATE_FIXTURE)
         .append(target.SEPARATOR)
         .append(target.SEPARATOR)
@@ -88,7 +88,7 @@ class KbcConverterTest {
         .toString();
   }
 
-  private Credit getExpectedCredit(String textFixture) {
+  private Credit createExpectedCredit(String textFixture) {
     return Credit.builder()
         .originalText(textFixture)
         .from(TRANSACTION_FIXTURE)
@@ -100,12 +100,14 @@ class KbcConverterTest {
   @Test
   void toStatementWhenTextIsEmpty() {
     String textFixture = "";
+
     assertThrows(InvalidStatementException.class, () -> target.toStatement(textFixture));
   }
 
   @Test
   void toStatementWhenTextIsInvalid() {
     String textFixture = "InvalidText";
+
     assertThrows(InvalidStatementException.class, () -> target.toStatement(textFixture));
   }
 
@@ -117,12 +119,13 @@ class KbcConverterTest {
   @Test
   void toStatementWhenTextIsHeader() {
     String textFixture = target.getHeader();
+
     assertThrows(InvalidStatementException.class, () -> target.toStatement(textFixture));
   }
 
   @Test
   void toStatementsWhenTextHasTwoStatements() throws InvalidStatementException {
-    String twoStatementsText = generateTwoStatementsText();
+    String twoStatementsText = createTwoStatementsText();
 
     List<Statement> statements = target.toStatements(twoStatementsText.split(System.lineSeparator()));
 
@@ -130,13 +133,13 @@ class KbcConverterTest {
     assertEquals(2, statements.size());
   }
 
-  private String generateTwoStatementsText() {
-    String debitText = generateOriginalDebitStatementText();
-    String creditText = generateOriginalCreditStatementText();
+  private String createTwoStatementsText() {
+    String debitText = createOriginalDebitStatementText();
+    String creditText = createOriginalCreditStatementText();
     return mergeStrings(debitText, creditText);
   }
 
-  private String generateOriginalDebitStatementText() {
+  private String createOriginalDebitStatementText() {
     return new StringBuilder(DATE_FIXTURE)
         .append(target.SEPARATOR)
         .append(target.SEPARATOR)
@@ -154,7 +157,7 @@ class KbcConverterTest {
         .toString();
   }
 
-  private String generateOriginalCreditStatementText() {
+  private String createOriginalCreditStatementText() {
     return new StringBuilder(DATE_FIXTURE)
         .append(target.SEPARATOR)
         .append(target.SEPARATOR)
