@@ -9,16 +9,13 @@ import com.carlosrvff.bsreader.domain.Credit;
 import com.carlosrvff.bsreader.domain.Debit;
 import com.carlosrvff.bsreader.domain.Statement;
 import com.carlosrvff.bsreader.exception.InvalidStatementException;
+import com.carlosrvff.bsreader.helper.KbcStatementUtils;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class KbcConverterTest {
-
-  private static final String DATE_FIXTURE = "30 Jul 2019";
-  private static final String TRANSACTION_FIXTURE = "ANY STORE";
-  private static final String FIVE_THOUSAND_AMOUNT_FIXTURE = "5,000.00";
 
   private KbcConverter target;
 
@@ -29,8 +26,8 @@ class KbcConverterTest {
 
   @Test
   void toStatementWhenTextIsDebit() throws InvalidStatementException {
-    String debitText = createProcessedDebitStatementText();
-    Debit expectedDebit = createExpectedDebit(debitText);
+    String debitText = KbcStatementUtils.createProcessedDebitStatementText();
+    Debit expectedDebit = KbcStatementUtils.createExpectedDebit(debitText);
 
     Statement statement = target.toStatement(debitText);
 
@@ -38,63 +35,15 @@ class KbcConverterTest {
     assertEquals(expectedDebit, statement);
   }
 
-  private String createProcessedDebitStatementText() {
-    return new StringBuilder(DATE_FIXTURE)
-        .append(target.SEPARATOR)
-        .append(target.SEPARATOR)
-        .append(TRANSACTION_FIXTURE)
-        .append(target.SEPARATOR)
-        .append(target.DEBIT_SYMBOL)
-        .append(target.CURRENCY_SYMBOL)
-        .append(FIVE_THOUSAND_AMOUNT_FIXTURE)
-        .append(target.SEPARATOR)
-        .append(target.CURRENCY_SYMBOL)
-        .append(FIVE_THOUSAND_AMOUNT_FIXTURE)
-        .toString();
-  }
-
-  private Debit createExpectedDebit(String textFixture) {
-    return Debit.builder()
-        .originalText(textFixture)
-        .value(FIVE_THOUSAND_AMOUNT_FIXTURE)
-        .store(TRANSACTION_FIXTURE)
-        .date(DATE_FIXTURE)
-        .build();
-  }
-
   @Test
   void toStatementWhenTextIsCredit() throws InvalidStatementException {
-    String creditText = createProcessedCreditStatementText();
-    Credit expectedCredit = createExpectedCredit(creditText);
+    String creditText = KbcStatementUtils.createProcessedCreditStatementText();
+    Credit expectedCredit = KbcStatementUtils.createExpectedCredit(creditText);
 
     Statement statement = target.toStatement(creditText);
 
     assertTrue(statement instanceof Credit);
     assertEquals(expectedCredit, statement);
-  }
-
-  private String createProcessedCreditStatementText() {
-    return new StringBuilder(DATE_FIXTURE)
-        .append(target.SEPARATOR)
-        .append(target.SEPARATOR)
-        .append(TRANSACTION_FIXTURE)
-        .append(target.SEPARATOR)
-        .append(target.CURRENCY_SYMBOL)
-        .append(FIVE_THOUSAND_AMOUNT_FIXTURE)
-        .append(target.SEPARATOR)
-        .append(target.SEPARATOR)
-        .append(target.CURRENCY_SYMBOL)
-        .append(FIVE_THOUSAND_AMOUNT_FIXTURE)
-        .toString();
-  }
-
-  private Credit createExpectedCredit(String textFixture) {
-    return Credit.builder()
-        .originalText(textFixture)
-        .from(TRANSACTION_FIXTURE)
-        .date(DATE_FIXTURE)
-        .value(FIVE_THOUSAND_AMOUNT_FIXTURE)
-        .build();
   }
 
   @Test
@@ -125,67 +74,18 @@ class KbcConverterTest {
 
   @Test
   void toStatementsWhenTextHasTwoStatements() throws InvalidStatementException {
-    String twoStatementsText = createTwoStatementsText();
+    String twoStatementsText = KbcStatementUtils.createTwoStatementsText();
 
-    List<Statement> statements = target.toStatements(twoStatementsText.split(System.lineSeparator()));
+    List<Statement> statements =
+        target.toStatements(twoStatementsText.split(System.lineSeparator()));
 
     assertNotNull(statements);
     assertEquals(2, statements.size());
   }
 
-  private String createTwoStatementsText() {
-    String debitText = createOriginalDebitStatementText();
-    String creditText = createOriginalCreditStatementText();
-    return mergeStrings(debitText, creditText);
-  }
-
-  private String createOriginalDebitStatementText() {
-    return new StringBuilder(DATE_FIXTURE)
-        .append(target.SEPARATOR)
-        .append(target.SEPARATOR)
-        .append(System.lineSeparator())
-        .append(TRANSACTION_FIXTURE)
-        .append(target.SEPARATOR)
-        .append(System.lineSeparator())
-        .append(target.DEBIT_SYMBOL)
-        .append(target.CURRENCY_SYMBOL)
-        .append(FIVE_THOUSAND_AMOUNT_FIXTURE)
-        .append(target.SEPARATOR)
-        .append(target.CURRENCY_SYMBOL)
-        .append(FIVE_THOUSAND_AMOUNT_FIXTURE)
-        .append(System.lineSeparator())
-        .toString();
-  }
-
-  private String createOriginalCreditStatementText() {
-    return new StringBuilder(DATE_FIXTURE)
-        .append(target.SEPARATOR)
-        .append(target.SEPARATOR)
-        .append(System.lineSeparator())
-        .append(TRANSACTION_FIXTURE)
-        .append(target.SEPARATOR)
-        .append(System.lineSeparator())
-        .append(target.CURRENCY_SYMBOL)
-        .append(FIVE_THOUSAND_AMOUNT_FIXTURE)
-        .append(target.SEPARATOR)
-        .append(target.SEPARATOR)
-        .append(target.CURRENCY_SYMBOL)
-        .append(FIVE_THOUSAND_AMOUNT_FIXTURE)
-        .append(System.lineSeparator())
-        .toString();
-  }
-
-  private String mergeStrings(String... texts){
-    StringBuilder result = new StringBuilder();
-    for (String text : texts){
-      result.append(text);
-    }
-    return result.toString();
-  }
-
   @Test
   void toStatementsWhenTextIsInvalid() throws InvalidStatementException {
-    List<Statement> statements = target.toStatements(new String[]{"Invalid"});
+    List<Statement> statements = target.toStatements(new String[] {"Invalid"});
 
     assertNotNull(statements);
     assertTrue(statements.isEmpty());

@@ -9,14 +9,12 @@ import com.carlosrvff.bsreader.domain.Credit;
 import com.carlosrvff.bsreader.domain.Debit;
 import com.carlosrvff.bsreader.domain.Statement;
 import com.carlosrvff.bsreader.exception.InvalidStatementException;
-import com.carlosrvff.bsreader.helper.ItauStatementUtils;
+import com.carlosrvff.bsreader.helper.ItauCsvStatementUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ItauCsvConverterTest {
-
-  public static final String SEPARATOR = ";";
 
   private ItauCsvConverter target;
 
@@ -27,8 +25,8 @@ class ItauCsvConverterTest {
 
   @Test
   void toStatementWhenTextIsDebit() throws InvalidStatementException {
-    String textFixture = createDebitStatementText();
-    Debit expectedDebit = ItauStatementUtils.createDebitStatement(textFixture);
+    String textFixture = ItauCsvStatementUtils.createDebitStatementText();
+    Debit expectedDebit = ItauCsvStatementUtils.createDebitStatement(textFixture);
 
     Statement statement = target.toStatement(textFixture);
 
@@ -36,20 +34,10 @@ class ItauCsvConverterTest {
     assertEquals(expectedDebit, statement);
   }
 
-  private String createDebitStatementText() {
-    return new StringBuilder(ItauStatementUtils.DATE_FIXTURE)
-        .append(SEPARATOR)
-        .append(ItauStatementUtils.DEBIT_DETAIL_FIXTURE)
-        .append(SEPARATOR)
-        .append(target.DEBIT_SYMBOL)
-        .append(ItauStatementUtils.VALUE_FIXTURE)
-        .toString();
-  }
-
   @Test
   void toStatementWhenTextIsBalance() throws InvalidStatementException {
-    String textFixture = createBalanceStatementText();
-    Balance expectedBalance = ItauStatementUtils.createBalanceStatement(textFixture);
+    String textFixture = ItauCsvStatementUtils.createBalanceStatementText();
+    Balance expectedBalance = ItauCsvStatementUtils.createBalanceStatement(textFixture);
 
     Statement statement = target.toStatement(textFixture);
 
@@ -57,33 +45,15 @@ class ItauCsvConverterTest {
     assertEquals(expectedBalance, statement);
   }
 
-  private String createBalanceStatementText() {
-    return new StringBuilder(ItauStatementUtils.DATE_FIXTURE)
-        .append(SEPARATOR)
-        .append(ItauStatementUtils.BALANCE_DETAIL_FIXTURE)
-        .append(SEPARATOR)
-        .append(ItauStatementUtils.VALUE_FIXTURE)
-        .toString();
-  }
-
   @Test
   void toStatementWhenTextIsCredit() throws InvalidStatementException {
-    String textFixture = createCreditStatementText();
-    Credit expectedCredit = ItauStatementUtils.createCreditStatement(textFixture);
+    String textFixture = ItauCsvStatementUtils.createCreditStatementText();
+    Credit expectedCredit = ItauCsvStatementUtils.createCreditStatement(textFixture);
 
     Statement statement = target.toStatement(textFixture);
 
     assertTrue(statement instanceof Credit);
     assertEquals(expectedCredit, statement);
-  }
-
-  private String createCreditStatementText() {
-    return new StringBuilder(ItauStatementUtils.DATE_FIXTURE)
-        .append(SEPARATOR)
-        .append(ItauStatementUtils.CREDIT_DETAIL_FIXTURE)
-        .append(SEPARATOR)
-        .append(ItauStatementUtils.VALUE_FIXTURE)
-        .toString();
   }
 
   @Test
