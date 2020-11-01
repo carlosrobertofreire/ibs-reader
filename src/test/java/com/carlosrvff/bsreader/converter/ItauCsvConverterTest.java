@@ -10,6 +10,7 @@ import com.carlosrvff.bsreader.domain.Debit;
 import com.carlosrvff.bsreader.domain.Statement;
 import com.carlosrvff.bsreader.exception.InvalidStatementException;
 import com.carlosrvff.bsreader.helper.ItauCsvStatementUtils;
+import com.carlosrvff.bsreader.helper.ItauSiteStatementUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,16 +18,18 @@ import org.junit.jupiter.api.Test;
 class ItauCsvConverterTest {
 
   private ItauCsvConverter target;
+  private ItauCsvStatementUtils utils;
 
   @BeforeEach
   void setUp() {
     target = new ItauCsvConverter();
+    utils = new ItauCsvStatementUtils();
   }
 
   @Test
   void toStatementWhenTextIsDebit() throws InvalidStatementException {
-    String textFixture = ItauCsvStatementUtils.createDebitStatementText();
-    Debit expectedDebit = ItauCsvStatementUtils.createDebitStatement(textFixture);
+    String textFixture = utils.createDebitStatementText();
+    Debit expectedDebit = utils.createDebitStatement(textFixture);
 
     Statement statement = target.toStatement(textFixture);
 
@@ -36,8 +39,8 @@ class ItauCsvConverterTest {
 
   @Test
   void toStatementWhenTextIsBalance() throws InvalidStatementException {
-    String textFixture = ItauCsvStatementUtils.createBalanceStatementText();
-    Balance expectedBalance = ItauCsvStatementUtils.createBalanceStatement(textFixture);
+    String textFixture = utils.createBalanceStatementText();
+    Balance expectedBalance = utils.createBalanceStatement(textFixture);
 
     Statement statement = target.toStatement(textFixture);
 
@@ -47,8 +50,8 @@ class ItauCsvConverterTest {
 
   @Test
   void toStatementWhenTextIsCredit() throws InvalidStatementException {
-    String textFixture = ItauCsvStatementUtils.createCreditStatementText();
-    Credit expectedCredit = ItauCsvStatementUtils.createCreditStatement(textFixture);
+    String textFixture = utils.createCreditStatementText();
+    Credit expectedCredit = utils.createCreditStatement(textFixture);
 
     Statement statement = target.toStatement(textFixture);
 

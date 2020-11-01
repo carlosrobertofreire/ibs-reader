@@ -16,16 +16,18 @@ import org.junit.jupiter.api.Test;
 class CheetahConverterTest {
 
   private CheetahConverter target;
+  private CheetahStatementUtils utils;
 
   @BeforeEach
   void setUp() {
     target = new CheetahConverter();
+    utils = new CheetahStatementUtils();
   }
 
   @Test
   void toStatementWhenTextIsFeeDebit() throws InvalidStatementException {
-    String textFixture = CheetahStatementUtils.createFeeDebitStatementText();
-    Debit expectedFeeDebit = CheetahStatementUtils.createFeeDebit(textFixture);
+    String textFixture = utils.createFeeDebitStatementText();
+    Debit expectedFeeDebit = utils.createFeeDebit(textFixture);
 
     Statement statement = target.toStatement(textFixture);
 
@@ -35,8 +37,8 @@ class CheetahConverterTest {
 
   @Test
   void toStatementWhenTextIsPurchaseDebit() throws InvalidStatementException {
-    String textFixture = CheetahStatementUtils.createPurchaseDebitStatementText();
-    Debit expectedPurchaseDebit = CheetahStatementUtils.createPurchaseDebit(textFixture);
+    String textFixture = utils.createDebitStatementText();
+    Debit expectedPurchaseDebit = utils.createDebitStatement(textFixture);
 
     Statement statement = target.toStatement(textFixture);
 
@@ -46,8 +48,8 @@ class CheetahConverterTest {
 
   @Test
   void toStatementWhenTextIsCredit() throws InvalidStatementException {
-    String textFixture = CheetahStatementUtils.createCreditStatementText();
-    Credit expectedCredit = CheetahStatementUtils.createCredit(textFixture);
+    String textFixture = utils.createCreditStatementText();
+    Credit expectedCredit = utils.createCreditStatement(textFixture);
 
     Statement statement = target.toStatement(textFixture);
 

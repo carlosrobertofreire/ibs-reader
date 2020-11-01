@@ -17,16 +17,18 @@ import org.junit.jupiter.api.Test;
 class ItauSiteConverterTest {
 
   private ItauSiteConverter target;
+  private ItauSiteStatementUtils utils;
 
   @BeforeEach
   void setUp() {
     target = new ItauSiteConverter();
+    utils = new ItauSiteStatementUtils();
   }
 
   @Test
   void toStatementWhenTextIsDebit() throws InvalidStatementException {
-    String textFixture = ItauSiteStatementUtils.createDebitStatementText();
-    Debit expectedDebit = ItauSiteStatementUtils.createDebitStatement(textFixture);
+    String textFixture = utils.createDebitStatementText();
+    Debit expectedDebit = utils.createDebitStatement(textFixture);
 
     Statement statement = target.toStatement(textFixture);
 
@@ -36,8 +38,8 @@ class ItauSiteConverterTest {
 
   @Test
   void toStatementWhenTextIsBalance() throws InvalidStatementException {
-    String textFixture = ItauSiteStatementUtils.createBalanceStatementText();
-    Balance expectedBalance = ItauSiteStatementUtils.createBalanceStatement(textFixture);
+    String textFixture = utils.createBalanceStatementText();
+    Balance expectedBalance = utils.createBalanceStatement(textFixture);
 
     Statement statement = target.toStatement(textFixture);
 
@@ -47,8 +49,8 @@ class ItauSiteConverterTest {
 
   @Test
   void toStatementWhenTextIsCredit() throws InvalidStatementException {
-    String textFixture = ItauSiteStatementUtils.createCreditStatementText();
-    Credit expectedCredit = ItauSiteStatementUtils.createCreditStatement(textFixture);
+    String textFixture = utils.createCreditStatementText();
+    Credit expectedCredit = utils.createCreditStatement(textFixture);
 
     Statement statement = target.toStatement(textFixture);
 

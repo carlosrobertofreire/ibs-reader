@@ -18,16 +18,18 @@ import org.junit.jupiter.api.Test;
 class KbcConverterTest {
 
   private KbcConverter target;
+  private KbcStatementUtils utils;
 
   @BeforeEach
   void setUp() {
     target = new KbcConverter();
+    utils = new KbcStatementUtils();
   }
 
   @Test
   void toStatementWhenTextIsDebit() throws InvalidStatementException {
-    String debitText = KbcStatementUtils.createProcessedDebitStatementText();
-    Debit expectedDebit = KbcStatementUtils.createExpectedDebit(debitText);
+    String debitText = utils.createDebitStatementText();
+    Debit expectedDebit = utils.createDebitStatement(debitText);
 
     Statement statement = target.toStatement(debitText);
 
@@ -37,8 +39,8 @@ class KbcConverterTest {
 
   @Test
   void toStatementWhenTextIsCredit() throws InvalidStatementException {
-    String creditText = KbcStatementUtils.createProcessedCreditStatementText();
-    Credit expectedCredit = KbcStatementUtils.createExpectedCredit(creditText);
+    String creditText = utils.createCreditStatementText();
+    Credit expectedCredit = utils.createCreditStatement(creditText);
 
     Statement statement = target.toStatement(creditText);
 
@@ -74,7 +76,7 @@ class KbcConverterTest {
 
   @Test
   void toStatementsWhenTextHasTwoStatements() throws InvalidStatementException {
-    String twoStatementsText = KbcStatementUtils.createTwoStatementsText();
+    String twoStatementsText = utils.createTwoStatementsText();
 
     List<Statement> statements =
         target.toStatements(twoStatementsText.split(System.lineSeparator()));

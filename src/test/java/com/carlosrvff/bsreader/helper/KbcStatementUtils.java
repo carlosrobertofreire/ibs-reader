@@ -1,16 +1,17 @@
 package com.carlosrvff.bsreader.helper;
 
 import com.carlosrvff.bsreader.converter.KbcConverter;
+import com.carlosrvff.bsreader.domain.Balance;
 import com.carlosrvff.bsreader.domain.Credit;
 import com.carlosrvff.bsreader.domain.Debit;
 
-public class KbcStatementUtils {
+public class KbcStatementUtils implements BankStatementUtils {
 
   private static final String DATE_FIXTURE = "30 Jul 2019";
   private static final String TRANSACTION_FIXTURE = "ANY STORE";
   private static final String FIVE_THOUSAND_AMOUNT_FIXTURE = "5,000.00";
 
-  public static String createProcessedDebitStatementText() {
+  public String createDebitStatementText() {
     return new StringBuilder(DATE_FIXTURE)
         .append(KbcConverter.SEPARATOR)
         .append(KbcConverter.SEPARATOR)
@@ -25,7 +26,7 @@ public class KbcStatementUtils {
         .toString();
   }
 
-  public static Debit createExpectedDebit(String textFixture) {
+  public Debit createDebitStatement(String textFixture) {
     return Debit.builder()
         .originalText(textFixture)
         .value(FIVE_THOUSAND_AMOUNT_FIXTURE)
@@ -34,7 +35,7 @@ public class KbcStatementUtils {
         .build();
   }
 
-  public static String createProcessedCreditStatementText() {
+  public String createCreditStatementText() {
     return new StringBuilder(DATE_FIXTURE)
         .append(KbcConverter.SEPARATOR)
         .append(KbcConverter.SEPARATOR)
@@ -49,7 +50,7 @@ public class KbcStatementUtils {
         .toString();
   }
 
-  public static Credit createExpectedCredit(String textFixture) {
+  public Credit createCreditStatement(String textFixture) {
     return Credit.builder()
         .originalText(textFixture)
         .from(TRANSACTION_FIXTURE)
@@ -107,5 +108,4 @@ public class KbcStatementUtils {
     }
     return result.toString();
   }
-
 }

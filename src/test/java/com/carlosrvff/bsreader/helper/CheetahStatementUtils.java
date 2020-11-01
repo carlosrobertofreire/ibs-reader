@@ -1,10 +1,11 @@
 package com.carlosrvff.bsreader.helper;
 
 import com.carlosrvff.bsreader.converter.CheetahConverter;
+import com.carlosrvff.bsreader.domain.Balance;
 import com.carlosrvff.bsreader.domain.Credit;
 import com.carlosrvff.bsreader.domain.Debit;
 
-public class CheetahStatementUtils {
+public class CheetahStatementUtils implements BankStatementUtils {
 
   private static final String DATE_FIXTURE = "24/06/2019   17:36";
   private static final String TRANSACTION_TYPE_FIXTURE = "POS Domestic";
@@ -14,7 +15,7 @@ public class CheetahStatementUtils {
   private static final String FEE_FIXTURE = "0.20";
   private static final String RESULT_FIXTURE = "APPROVED";
 
-  public static String createFeeDebitStatementText() {
+  public String createFeeDebitStatementText() {
     return new StringBuilder(DATE_FIXTURE)
         .append(CheetahConverter.SEPARATOR)
         .append(TRANSACTION_TYPE_FIXTURE)
@@ -36,7 +37,7 @@ public class CheetahStatementUtils {
         .toString();
   }
 
-  public static Debit createFeeDebit(String textFixture) {
+  public Debit createFeeDebit(String textFixture) {
     return Debit.builder()
         .originalText(textFixture)
         .value(
@@ -48,7 +49,7 @@ public class CheetahStatementUtils {
         .build();
   }
 
-  public static  String createPurchaseDebitStatementText() {
+  public String createDebitStatementText() {
     return new StringBuilder(DATE_FIXTURE)
         .append(CheetahConverter.SEPARATOR)
         .append(TRANSACTION_TYPE_FIXTURE)
@@ -73,7 +74,7 @@ public class CheetahStatementUtils {
         .toString();
   }
 
-  public static Debit createPurchaseDebit(String textFixture) {
+  public Debit createDebitStatement(String textFixture) {
     return Debit.builder()
         .originalText(textFixture)
         .value(
@@ -86,7 +87,7 @@ public class CheetahStatementUtils {
         .build();
   }
 
-  public static String createCreditStatementText() {
+  public String createCreditStatementText() {
     return new StringBuilder(DATE_FIXTURE)
         .append(CheetahConverter.SEPARATOR)
         .append(TRANSACTION_TYPE_FIXTURE)
@@ -104,7 +105,7 @@ public class CheetahStatementUtils {
         .toString();
   }
 
-  public static Credit createCredit(String textFixture) {
+  public Credit createCreditStatement(String textFixture) {
     return Credit.builder()
         .originalText(textFixture)
         .from(MERCHANT_FIXTURE)
@@ -112,6 +113,5 @@ public class CheetahStatementUtils {
         .value(FIVE_THOUSAND_AMOUNT_FIXTURE)
         .build();
   }
-
 
 }

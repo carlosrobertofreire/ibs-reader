@@ -1,8 +1,8 @@
 package com.carlosrvff.bsreader.helper;
 
-public class ItauSiteStatementUtils extends ItauStatementUtils {
+public class ItauSiteStatementUtils extends ItauStatementUtils implements BankStatementUtils {
 
-  public static String createDebitStatementText() {
+  public String createDebitStatementText() {
     return new StringBuilder(ItauStatementUtils.DATE_FIXTURE)
         .append("\t\t\t")
         .append(ItauStatementUtils.DEBIT_DETAIL_FIXTURE)
@@ -13,7 +13,7 @@ public class ItauSiteStatementUtils extends ItauStatementUtils {
         .toString();
   }
 
-  public static String createBalanceStatementText() {
+  public String createBalanceStatementText() {
     return new StringBuilder(ItauStatementUtils.DATE_FIXTURE)
         .append("\t\t\t")
         .append(ItauStatementUtils.BALANCE_DETAIL_FIXTURE)
@@ -23,7 +23,7 @@ public class ItauSiteStatementUtils extends ItauStatementUtils {
         .toString();
   }
 
-  public static String createCreditStatementText() {
+  public String createCreditStatementText() {
     return new StringBuilder(ItauStatementUtils.DATE_FIXTURE)
         .append("\t\t\t")
         .append(ItauStatementUtils.CREDIT_DETAIL_FIXTURE)
