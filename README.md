@@ -5,6 +5,7 @@ A simple Java application to read and organize Bank statements.
 - [Itaú](https://www.itau.com.br/)
 - [Cheetah Money](https://cheetahmoney.com/)
 - [KBC](https://www.kbc.ie/)
+- [Revolut](https://www.revolut.com/)
 
 ## Getting Started
 
