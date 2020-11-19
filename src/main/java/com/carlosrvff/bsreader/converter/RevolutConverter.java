@@ -1,9 +1,11 @@
 package com.carlosrvff.bsreader.converter;
 
+import com.carlosrvff.bsreader.domain.Credit;
 import com.carlosrvff.bsreader.domain.Debit;
 import com.carlosrvff.bsreader.domain.Statement;
 import com.carlosrvff.bsreader.exception.InvalidStatementException;
 import lombok.NonNull;
+import org.apache.commons.lang3.StringUtils;
 
 public class RevolutConverter extends BankConverter {
 
@@ -14,16 +16,22 @@ public class RevolutConverter extends BankConverter {
     validate(line);
     String[] parts = line.split(SEPARATOR);
 
+    if (parts.length != 9) {
+      throw new InvalidStatementException("Incorrect numbers of fields.", line);
+    }
+
     String date = parts[0];
     String details = parts[1];
-    String value = parts[2];
+    String paidOut = parts[2];
+    String paidIn = parts[3];
 
-    return Debit.builder()
-        .date(date)
-        .store(details)
-        .value(value)
-        .originalText(line)
-        .build();
+    if (StringUtils.isNotBlank(paidOut)) {
+      return Debit.builder().date(date).store(details).value(paidOut).originalText(line).build();
+    } else if (StringUtils.isNotBlank(paidIn)) {
+      return Credit.builder().date(date).from(details).value(paidIn).originalText(line).build();
+    } else {
+      throw new InvalidStatementException("Invalid transaction.", line);
+    }
   }
 
   @Override

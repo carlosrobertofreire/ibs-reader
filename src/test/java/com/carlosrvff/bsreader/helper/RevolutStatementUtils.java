@@ -69,6 +69,7 @@ public class RevolutStatementUtils implements BankStatementUtils {
   @Override
   public Credit createCreditStatement(String originalText) {
     return Credit.builder()
+        .originalText(originalText)
         .from(REFERENCE)
         .date(COMPLETED_DATE)
         .value(PAID_IN_EUR)
