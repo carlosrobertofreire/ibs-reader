@@ -2,9 +2,9 @@ package com.carlosrvff.bsreader.app;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.carlosrvff.bsreader.domain.Statement;
 import com.carlosrvff.bsreader.controller.ExtractReader;
 import com.carlosrvff.bsreader.controller.ReportGenerator;
+import com.carlosrvff.bsreader.domain.Statement;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -65,6 +65,15 @@ class BSReaderReportIT {
     String expectedContent = loadExpectedContentFrom("output-sample-kbc.txt");
 
     String generatedContent = generateContentFrom("input-sample-kbc.txt");
+
+    assertEquals(expectedContent, generatedContent);
+  }
+
+  @Test
+  void runWhenFileIsRevolut() throws IOException {
+    String expectedContent = loadExpectedContentFrom("output-sample-revolut.txt");
+
+    String generatedContent = generateContentFrom("input-sample-revolut.txt");
 
     assertEquals(expectedContent, generatedContent);
   }
