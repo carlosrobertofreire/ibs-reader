@@ -5,6 +5,7 @@ import com.carlosrvff.bsreader.converter.CheetahConverter;
 import com.carlosrvff.bsreader.converter.ItauCsvConverter;
 import com.carlosrvff.bsreader.converter.ItauSiteConverter;
 import com.carlosrvff.bsreader.converter.KbcConverter;
+import com.carlosrvff.bsreader.converter.RevolutConverter;
 import com.carlosrvff.bsreader.domain.Statement;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -62,6 +63,7 @@ public class ExtractReader {
     queue.add(new ItauCsvConverter());
     queue.add(new CheetahConverter());
     queue.add(new KbcConverter());
+    queue.add(new RevolutConverter());
     return queue;
   }
 }
