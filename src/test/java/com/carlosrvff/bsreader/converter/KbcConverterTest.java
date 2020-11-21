@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.carlosrvff.bsreader.domain.Statement;
-import com.carlosrvff.bsreader.exception.InvalidStatementException;
 import com.carlosrvff.bsreader.helper.BankStatementUtils;
 import com.carlosrvff.bsreader.helper.KbcStatementUtils;
 import java.util.List;
@@ -35,7 +34,7 @@ class KbcConverterTest extends BankConverterTest {
   }
 
   @Test
-  void toStatementsWhenTextHasTwoStatements() throws InvalidStatementException {
+  void toStatementsWhenTextHasTwoStatements() {
     String twoStatementsText = utils.createTwoStatementsText();
 
     List<Statement> statements =
@@ -46,11 +45,10 @@ class KbcConverterTest extends BankConverterTest {
   }
 
   @Test
-  void toStatementsWhenTextIsInvalid() throws InvalidStatementException {
+  void toStatementsWhenTextIsInvalid() {
     List<Statement> statements = target.toStatements(new String[] {"Invalid"});
 
     assertNotNull(statements);
     assertTrue(statements.isEmpty());
   }
-
 }

@@ -3,7 +3,6 @@ package com.carlosrvff.bsreader.converter;
 import com.carlosrvff.bsreader.domain.Credit;
 import com.carlosrvff.bsreader.domain.Debit;
 import com.carlosrvff.bsreader.domain.Statement;
-import com.carlosrvff.bsreader.exception.InvalidStatementException;
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 
@@ -15,11 +14,11 @@ public class CheetahConverter extends BankConverter {
   public static final char ADD_SYMBOL = '+';
 
   @Override
-  public Statement toStatement(@NonNull String line) throws InvalidStatementException {
+  public Statement toStatement(@NonNull String line) {
     validate(line);
     String[] parts = line.split(SEPARATOR);
     if (parts.length != 6) {
-      throw new InvalidStatementException("Incorrect numbers of fields.", line);
+      throw new IllegalArgumentException("Incorrect numbers of fields: " + line);
     }
 
     String date = parts[0];

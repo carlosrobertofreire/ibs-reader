@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.carlosrvff.bsreader.domain.Credit;
 import com.carlosrvff.bsreader.domain.Debit;
 import com.carlosrvff.bsreader.domain.Statement;
-import com.carlosrvff.bsreader.exception.InvalidStatementException;
 import com.carlosrvff.bsreader.helper.BankStatementUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,7 +28,7 @@ abstract class BankConverterTest {
   }
 
   @Test
-  protected void toStatementWhenTextIsDebit() throws InvalidStatementException {
+  protected void toStatementWhenTextIsDebit() {
     String textFixture = utils.createDebitStatementText();
     Debit expectedFeeDebit = utils.createDebitStatement(textFixture);
 
@@ -40,7 +39,7 @@ abstract class BankConverterTest {
   }
 
   @Test
-  protected void toStatementWhenTextIsCredit() throws InvalidStatementException {
+  protected void toStatementWhenTextIsCredit() {
     String textFixture = utils.createCreditStatementText();
     Credit expectedCredit = utils.createCreditStatement(textFixture);
 
@@ -53,13 +52,13 @@ abstract class BankConverterTest {
   @Test
   protected void toStatementWhenTextIsEmpty() {
     String textFixture = "";
-    assertThrows(InvalidStatementException.class, () -> target.toStatement(textFixture));
+    assertThrows(IllegalArgumentException.class, () -> target.toStatement(textFixture));
   }
 
   @Test
   protected void toStatementWhenTextIsInvalid() {
     String textFixture = "InvalidText";
-    assertThrows(InvalidStatementException.class, () -> target.toStatement(textFixture));
+    assertThrows(IllegalArgumentException.class, () -> target.toStatement(textFixture));
   }
 
   @Test
@@ -70,7 +69,7 @@ abstract class BankConverterTest {
   @Test
   protected void toStatementWhenTextIsHeader() {
     String textFixture = target.getHeader();
-    assertThrows(InvalidStatementException.class, () -> target.toStatement(textFixture));
+    assertThrows(IllegalArgumentException.class, () -> target.toStatement(textFixture));
   }
 
   @Test

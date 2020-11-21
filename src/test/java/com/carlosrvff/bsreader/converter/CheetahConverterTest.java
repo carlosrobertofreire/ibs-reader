@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.carlosrvff.bsreader.domain.Debit;
 import com.carlosrvff.bsreader.domain.Statement;
-import com.carlosrvff.bsreader.exception.InvalidStatementException;
 import com.carlosrvff.bsreader.helper.BankStatementUtils;
 import com.carlosrvff.bsreader.helper.CheetahStatementUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +33,7 @@ class CheetahConverterTest extends BankConverterTest {
   }
 
   @Test
-  void toStatementWhenTextIsFeeDebit() throws InvalidStatementException {
+  void toStatementWhenTextIsFeeDebit() {
     String textFixture = utils.createFeeDebitStatementText();
     Debit expectedFeeDebit = utils.createFeeDebit(textFixture);
 

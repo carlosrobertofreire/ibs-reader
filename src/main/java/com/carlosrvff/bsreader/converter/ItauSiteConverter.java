@@ -4,18 +4,17 @@ import com.carlosrvff.bsreader.domain.Balance;
 import com.carlosrvff.bsreader.domain.Credit;
 import com.carlosrvff.bsreader.domain.Debit;
 import com.carlosrvff.bsreader.domain.Statement;
-import com.carlosrvff.bsreader.exception.InvalidStatementException;
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 
 public class ItauSiteConverter extends BankConverter {
 
   @Override
-  public Statement toStatement(@NonNull String line) throws InvalidStatementException {
+  public Statement toStatement(@NonNull String line) {
     validate(line);
     String[] parts = line.split("\t");
     if (parts.length < 6) {
-      throw new InvalidStatementException("Incorrect numbers of fields.", line);
+      throw new IllegalArgumentException("Incorrect numbers of fields: " + line);
     }
     if (parts.length >= 8) {
       return Balance.builder().date(parts[0]).value(parts[7]).originalText(line).build();

@@ -3,7 +3,6 @@ package com.carlosrvff.bsreader.converter;
 import com.carlosrvff.bsreader.domain.Credit;
 import com.carlosrvff.bsreader.domain.Debit;
 import com.carlosrvff.bsreader.domain.Statement;
-import com.carlosrvff.bsreader.exception.InvalidStatementException;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.NonNull;
@@ -16,11 +15,11 @@ public class KbcConverter extends BankConverter {
   public static final int TRANSACTION_LINES_QTT = 3;
 
   @Override
-  public Statement toStatement(@NonNull String line) throws InvalidStatementException {
+  public Statement toStatement(@NonNull String line) {
     validate(line);
     String[] parts = line.split(SEPARATOR);
     if (parts.length < 5) {
-      throw new InvalidStatementException("Incorrect numbers of fields.", line);
+      throw new IllegalArgumentException("Incorrect numbers of fields: " + line);
     }
     String date = parts[0];
     String details = parts[2];

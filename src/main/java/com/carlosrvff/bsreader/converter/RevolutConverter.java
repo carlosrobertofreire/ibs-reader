@@ -3,7 +3,6 @@ package com.carlosrvff.bsreader.converter;
 import com.carlosrvff.bsreader.domain.Credit;
 import com.carlosrvff.bsreader.domain.Debit;
 import com.carlosrvff.bsreader.domain.Statement;
-import com.carlosrvff.bsreader.exception.InvalidStatementException;
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 
@@ -12,12 +11,12 @@ public class RevolutConverter extends BankConverter {
   public static final String SEPARATOR = ";";
 
   @Override
-  public Statement toStatement(@NonNull String line) throws InvalidStatementException {
+  public Statement toStatement(@NonNull String line) {
     validate(line);
     String[] parts = line.split(SEPARATOR);
 
     if (parts.length != 9) {
-      throw new InvalidStatementException("Incorrect numbers of fields.", line);
+      throw new IllegalArgumentException("Incorrect numbers of fields: " + line);
     }
 
     String date = parts[0];
@@ -30,7 +29,7 @@ public class RevolutConverter extends BankConverter {
     } else if (StringUtils.isNotBlank(paidIn)) {
       return Credit.builder().date(date).from(details).value(paidIn).originalText(line).build();
     } else {
-      throw new InvalidStatementException("Invalid transaction.", line);
+      throw new IllegalArgumentException("Invalid transaction: " + line);
     }
   }
 

@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.carlosrvff.bsreader.domain.Balance;
 import com.carlosrvff.bsreader.domain.Statement;
-import com.carlosrvff.bsreader.exception.InvalidStatementException;
 import com.carlosrvff.bsreader.helper.BankStatementUtils;
 import com.carlosrvff.bsreader.helper.ItauSiteStatementUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +33,7 @@ class ItauSiteConverterTest extends BankConverterTest {
   }
 
   @Test
-  void toStatementWhenTextIsBalance() throws InvalidStatementException {
+  void toStatementWhenTextIsBalance() {
     String textFixture = utils.createBalanceStatementText();
     Balance expectedBalance = utils.createBalanceStatement(textFixture);
 

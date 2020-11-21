@@ -1,7 +1,6 @@
 package com.carlosrvff.bsreader.converter;
 
 import com.carlosrvff.bsreader.domain.Statement;
-import com.carlosrvff.bsreader.exception.InvalidStatementException;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.NonNull;
@@ -15,12 +14,12 @@ public abstract class BankConverter {
 
   public abstract String getHeader();
 
-  protected void validate(@NonNull String text) throws InvalidStatementException {
+  protected void validate(@NonNull String text) {
     if (StringUtils.isBlank(text)) {
-      throw new InvalidStatementException("Statement cannot be blank.", text);
+      throw new IllegalArgumentException("Statement cannot be blank: " + text);
     }
     if (text.equalsIgnoreCase(getHeader())) {
-      throw new InvalidStatementException("Header cannot be considered a Statement.", text);
+      throw new IllegalArgumentException("Header cannot be considered a Statement: " + text);
     }
   }
 
@@ -44,7 +43,7 @@ public abstract class BankConverter {
   protected void processLine(List<Statement> result, String line) {
     try {
       result.add(toStatement(line));
-    } catch (InvalidStatementException e) {
+    } catch (IllegalArgumentException e) {
       log.fatal(e.getMessage());
       if (e.getCause() != null) {
         log.fatal("  Original exception: " + e.getCause().getMessage());
@@ -52,6 +51,6 @@ public abstract class BankConverter {
     }
   }
 
-  protected abstract Statement toStatement(@NonNull String line) throws InvalidStatementException;
+  protected abstract Statement toStatement(@NonNull String line);
 
 }
