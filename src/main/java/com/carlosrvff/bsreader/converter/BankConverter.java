@@ -9,11 +9,13 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 
 @Log4j2
-public abstract class BankConverter implements StatementConverter {
+public abstract class BankConverter {
 
   public static final char DEBIT_SYMBOL = '-';
 
-  public void validate(@NonNull String text) throws InvalidStatementException {
+  public abstract String getHeader();
+
+  protected void validate(@NonNull String text) throws InvalidStatementException {
     if (StringUtils.isBlank(text)) {
       throw new InvalidStatementException("Statement cannot be blank.", text);
     }
@@ -22,18 +24,16 @@ public abstract class BankConverter implements StatementConverter {
     }
   }
 
-  public boolean isDebitValue(String value) {
+  protected boolean isDebitValue(String value) {
     return value.charAt(0) == DEBIT_SYMBOL;
   }
 
-  @Override
   public List<Statement> toStatements(@NonNull String content) {
     String[] lines = content.split(System.lineSeparator());
     return toStatements(lines);
   }
 
-  @Override
-  public List<Statement> toStatements(@NonNull String[] lines) {
+  protected List<Statement> toStatements(@NonNull String[] lines) {
     List<Statement> result = new ArrayList<>();
     for (String line : lines) {
       processLine(result, line);
@@ -41,7 +41,7 @@ public abstract class BankConverter implements StatementConverter {
     return result;
   }
 
-  public void processLine(List<Statement> result, String line) {
+  protected void processLine(List<Statement> result, String line) {
     try {
       result.add(toStatement(line));
     } catch (InvalidStatementException e) {
@@ -51,4 +51,7 @@ public abstract class BankConverter implements StatementConverter {
       }
     }
   }
+
+  protected abstract Statement toStatement(@NonNull String line) throws InvalidStatementException;
+
 }
