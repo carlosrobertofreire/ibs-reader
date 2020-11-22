@@ -1,12 +1,12 @@
 package com.carlosrvff.bsreader.helper;
 
 import com.carlosrvff.bsreader.converter.CheetahConverter;
-import com.carlosrvff.bsreader.domain.Balance;
 import com.carlosrvff.bsreader.domain.Credit;
 import com.carlosrvff.bsreader.domain.Debit;
 
 public class CheetahStatementUtils implements BankStatementUtils {
 
+  public static final String SEPARATOR = ",";
   private static final String DATE_FIXTURE = "24/06/2019   17:36";
   private static final String TRANSACTION_TYPE_FIXTURE = "POS Domestic";
   private static final String MERCHANT_FIXTURE = "ANY STORE";
@@ -17,14 +17,14 @@ public class CheetahStatementUtils implements BankStatementUtils {
 
   public String createFeeDebitStatementText() {
     return new StringBuilder(DATE_FIXTURE)
-        .append(CheetahConverter.SEPARATOR)
+        .append(SEPARATOR)
         .append(TRANSACTION_TYPE_FIXTURE)
-        .append(CheetahConverter.SEPARATOR)
-        .append(CheetahConverter.SEPARATOR)
+        .append(SEPARATOR)
+        .append(SEPARATOR)
         .append(CheetahConverter.CURRENCY_SYMBOL)
         .append(" ")
         .append(ZERO_AMOUNT_FIXTURE)
-        .append(CheetahConverter.SEPARATOR)
+        .append(SEPARATOR)
         .append(CheetahConverter.FEE_MARKER_FIXTURE)
         .append(CheetahConverter.DEBIT_SYMBOL)
         .append(" ")
@@ -32,7 +32,7 @@ public class CheetahStatementUtils implements BankStatementUtils {
         .append(" ")
         .append(FEE_FIXTURE)
         .append(CheetahConverter.FEE_MARKER_FIXTURE)
-        .append(CheetahConverter.SEPARATOR)
+        .append(SEPARATOR)
         .append(RESULT_FIXTURE)
         .toString();
   }
@@ -51,17 +51,17 @@ public class CheetahStatementUtils implements BankStatementUtils {
 
   public String createDebitStatementText() {
     return new StringBuilder(DATE_FIXTURE)
-        .append(CheetahConverter.SEPARATOR)
+        .append(SEPARATOR)
         .append(TRANSACTION_TYPE_FIXTURE)
-        .append(CheetahConverter.SEPARATOR)
+        .append(SEPARATOR)
         .append(MERCHANT_FIXTURE)
-        .append(CheetahConverter.SEPARATOR)
+        .append(SEPARATOR)
         .append(CheetahConverter.DEBIT_SYMBOL)
         .append(" ")
         .append(CheetahConverter.CURRENCY_SYMBOL)
         .append(" ")
         .append(FIVE_THOUSAND_AMOUNT_FIXTURE)
-        .append(CheetahConverter.SEPARATOR)
+        .append(SEPARATOR)
         .append(CheetahConverter.FEE_MARKER_FIXTURE)
         .append(CheetahConverter.DEBIT_SYMBOL)
         .append(" ")
@@ -69,7 +69,7 @@ public class CheetahStatementUtils implements BankStatementUtils {
         .append(" ")
         .append(FEE_FIXTURE)
         .append(CheetahConverter.FEE_MARKER_FIXTURE)
-        .append(CheetahConverter.SEPARATOR)
+        .append(SEPARATOR)
         .append(RESULT_FIXTURE)
         .toString();
   }
@@ -89,18 +89,18 @@ public class CheetahStatementUtils implements BankStatementUtils {
 
   public String createCreditStatementText() {
     return new StringBuilder(DATE_FIXTURE)
-        .append(CheetahConverter.SEPARATOR)
+        .append(SEPARATOR)
         .append(TRANSACTION_TYPE_FIXTURE)
-        .append(CheetahConverter.SEPARATOR)
+        .append(SEPARATOR)
         .append(MERCHANT_FIXTURE)
-        .append(CheetahConverter.SEPARATOR)
+        .append(SEPARATOR)
         .append(CheetahConverter.CURRENCY_SYMBOL)
         .append(" ")
         .append(FIVE_THOUSAND_AMOUNT_FIXTURE)
-        .append(CheetahConverter.SEPARATOR)
+        .append(SEPARATOR)
         .append(CheetahConverter.FEE_MARKER_FIXTURE)
         .append(CheetahConverter.FEE_MARKER_FIXTURE)
-        .append(CheetahConverter.SEPARATOR)
+        .append(SEPARATOR)
         .append(RESULT_FIXTURE)
         .toString();
   }

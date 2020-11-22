@@ -12,7 +12,7 @@ public class ItauCsvConverter extends BankConverter {
   @Override
   public Statement toStatement(@NonNull String line) {
     validate(line);
-    String[] parts = line.split(";");
+    String[] parts = line.split(getSeparator());
     if (parts.length < 3) {
       throw new IllegalArgumentException("Incorrect numbers of fields: " + line);
     }
@@ -49,6 +49,11 @@ public class ItauCsvConverter extends BankConverter {
   @Override
   public String getHeader() {
     return "data;detalhe;valor";
+  }
+
+  @Override
+  protected String getSeparator() {
+    return ";";
   }
 
   private String removeDebitSymbol(String value) {

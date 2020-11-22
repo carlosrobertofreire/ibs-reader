@@ -8,7 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 
 public class CheetahConverter extends BankConverter {
 
-  public static final String SEPARATOR = ",";
   public static final char FEE_MARKER_FIXTURE = '\"';
   public static final char CURRENCY_SYMBOL = '€';
   public static final char ADD_SYMBOL = '+';
@@ -16,7 +15,7 @@ public class CheetahConverter extends BankConverter {
   @Override
   public Statement toStatement(@NonNull String line) {
     validate(line);
-    String[] parts = line.split(SEPARATOR);
+    String[] parts = line.split(getSeparator());
     if (parts.length != 6) {
       throw new IllegalArgumentException("Incorrect numbers of fields: " + line);
     }
@@ -57,5 +56,10 @@ public class CheetahConverter extends BankConverter {
   @Override
   public String getHeader() {
     return "Date, Transaction Type, Merchant, Amount, Fee, Result";
+  }
+
+  @Override
+  protected String getSeparator() {
+    return ",";
   }
 }

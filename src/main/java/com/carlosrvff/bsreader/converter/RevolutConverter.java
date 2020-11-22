@@ -8,12 +8,10 @@ import org.apache.commons.lang3.StringUtils;
 
 public class RevolutConverter extends BankConverter {
 
-  public static final String SEPARATOR = ";";
-
   @Override
   public Statement toStatement(@NonNull String line) {
     validate(line);
-    String[] parts = line.split(SEPARATOR);
+    String[] parts = line.split(getSeparator());
 
     if (parts.length != 9) {
       throw new IllegalArgumentException("Incorrect numbers of fields: " + line);
@@ -36,5 +34,10 @@ public class RevolutConverter extends BankConverter {
   @Override
   public String getHeader() {
     return "Completed Date;Reference;Paid Out (EUR);Paid In (EUR);Exchange Out;Exchange In; Balance (EUR);Exchange Rate;Category";
+  }
+
+  @Override
+  protected String getSeparator() {
+    return ";";
   }
 }

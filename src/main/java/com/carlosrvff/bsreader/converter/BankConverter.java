@@ -12,8 +12,6 @@ public abstract class BankConverter {
 
   public static final char DEBIT_SYMBOL = '-';
 
-  public abstract String getHeader();
-
   protected void validate(@NonNull String text) {
     if (StringUtils.isBlank(text)) {
       throw new IllegalArgumentException("Statement cannot be blank: " + text);
@@ -50,6 +48,10 @@ public abstract class BankConverter {
       }
     }
   }
+
+  public abstract String getHeader();
+
+  protected abstract String getSeparator();
 
   protected abstract Statement toStatement(@NonNull String line);
 

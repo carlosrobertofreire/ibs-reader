@@ -12,7 +12,7 @@ public class ItauSiteConverter extends BankConverter {
   @Override
   public Statement toStatement(@NonNull String line) {
     validate(line);
-    String[] parts = line.split("\t");
+    String[] parts = line.split(getSeparator());
     if (parts.length < 6) {
       throw new IllegalArgumentException("Incorrect numbers of fields: " + line);
     }
@@ -46,5 +46,10 @@ public class ItauSiteConverter extends BankConverter {
   @Override
   public String getHeader() {
     return "Data\t\t\tLançamento\t\tValor (R$)\t\tSaldo (R$)\t";
+  }
+
+  @Override
+  protected String getSeparator() {
+    return "\t";
   }
 }

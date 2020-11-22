@@ -10,14 +10,13 @@ import org.apache.commons.lang3.StringUtils;
 
 public class KbcConverter extends BankConverter {
 
-  public static final String SEPARATOR = "\t";
   public static final char CURRENCY_SYMBOL = '€';
   public static final int TRANSACTION_LINES_QTT = 3;
 
   @Override
   public Statement toStatement(@NonNull String line) {
     validate(line);
-    String[] parts = line.split(SEPARATOR);
+    String[] parts = line.split(getSeparator());
     if (parts.length < 5) {
       throw new IllegalArgumentException("Incorrect numbers of fields: " + line);
     }
@@ -50,9 +49,9 @@ public class KbcConverter extends BankConverter {
       String kbcTransactionLine =
           new StringBuilder()
               .append(lines[index++])
-              .append(SEPARATOR)
+              .append(getSeparator())
               .append(lines[index++])
-              .append(SEPARATOR)
+              .append(getSeparator())
               .append(lines[index++])
               .toString();
       processLine(result, kbcTransactionLine);
@@ -63,5 +62,10 @@ public class KbcConverter extends BankConverter {
   @Override
   public String getHeader() {
     return "Date\tTransaction\tMoney In\tMoney Out\tBalance";
+  }
+
+  @Override
+  protected String getSeparator() {
+    return "\t";
   }
 }
