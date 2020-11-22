@@ -5,17 +5,16 @@ import com.carlosrvff.bsreader.domain.Credit;
 import com.carlosrvff.bsreader.domain.Debit;
 import com.carlosrvff.bsreader.domain.Statement;
 import java.util.HashSet;
-import lombok.NonNull;
 
 public class ItauCsvConverter extends BankConverter {
 
   @Override
-  public Statement toStatement(@NonNull String line) {
-    validate(line);
-    String[] parts = line.split(getSeparator());
-    if (parts.length < 3) {
-      throw new IllegalArgumentException("Incorrect numbers of fields: " + line);
-    }
+  protected boolean arePartsInvalid(String[] parts) {
+    return parts.length < 3;
+  }
+
+  @Override
+  protected Statement toStatement(String[] parts, String line) {
     String date = parts[0];
     String details = parts[1];
     String value = parts[2];

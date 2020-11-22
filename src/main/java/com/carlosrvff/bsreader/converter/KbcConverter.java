@@ -13,13 +13,14 @@ public class KbcConverter extends BankConverter {
   public static final char CURRENCY_SYMBOL = '€';
   public static final int TRANSACTION_LINES_QTT = 3;
 
+
   @Override
-  public Statement toStatement(@NonNull String line) {
-    validate(line);
-    String[] parts = line.split(getSeparator());
-    if (parts.length < 5) {
-      throw new IllegalArgumentException("Incorrect numbers of fields: " + line);
-    }
+  protected boolean arePartsInvalid(String[] parts) {
+    return parts.length < 5;
+  }
+
+  @Override
+  protected Statement toStatement(String[] parts, String line) {
     String date = parts[0];
     String details = parts[2];
     String value = parts[3];

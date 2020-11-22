@@ -3,20 +3,17 @@ package com.carlosrvff.bsreader.converter;
 import com.carlosrvff.bsreader.domain.Credit;
 import com.carlosrvff.bsreader.domain.Debit;
 import com.carlosrvff.bsreader.domain.Statement;
-import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 
 public class RevolutConverter extends BankConverter {
 
   @Override
-  public Statement toStatement(@NonNull String line) {
-    validate(line);
-    String[] parts = line.split(getSeparator());
+  protected boolean arePartsInvalid(String[] parts) {
+    return parts.length != 9;
+  }
 
-    if (parts.length != 9) {
-      throw new IllegalArgumentException("Incorrect numbers of fields: " + line);
-    }
-
+  @Override
+  protected Statement toStatement(String[] parts, String line) {
     String date = parts[0];
     String details = parts[1];
     String paidOut = parts[2];
