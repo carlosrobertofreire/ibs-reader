@@ -1,8 +1,8 @@
 package com.carlosrvff.bsreader.helper;
 
-import com.carlosrvff.bsreader.domain.Balance;
-import com.carlosrvff.bsreader.domain.Credit;
-import com.carlosrvff.bsreader.domain.Debit;
+import com.carlosrvff.bsreader.domain.statement.Balance;
+import com.carlosrvff.bsreader.domain.statement.Credit;
+import com.carlosrvff.bsreader.domain.statement.Debit;
 
 public class ItauStatementUtils {
 

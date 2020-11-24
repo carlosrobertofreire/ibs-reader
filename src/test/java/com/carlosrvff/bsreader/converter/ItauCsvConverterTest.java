@@ -3,8 +3,8 @@ package com.carlosrvff.bsreader.converter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.carlosrvff.bsreader.domain.Balance;
 import com.carlosrvff.bsreader.domain.Statement;
+import com.carlosrvff.bsreader.domain.statement.Balance;
 import com.carlosrvff.bsreader.helper.BankStatementUtils;
 import com.carlosrvff.bsreader.helper.ItauCsvStatementUtils;
 import org.junit.jupiter.api.BeforeEach;

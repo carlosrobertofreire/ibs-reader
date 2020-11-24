@@ -1,11 +1,11 @@
 package com.carlosrvff.bsreader.controller;
 
-import com.carlosrvff.bsreader.domain.Balance;
-import com.carlosrvff.bsreader.domain.Credit;
-import com.carlosrvff.bsreader.domain.Debit;
 import com.carlosrvff.bsreader.domain.Statement;
 import com.carlosrvff.bsreader.domain.kb.DebitKnowledgeItem;
 import com.carlosrvff.bsreader.domain.report.ReportData;
+import com.carlosrvff.bsreader.domain.statement.Balance;
+import com.carlosrvff.bsreader.domain.statement.Credit;
+import com.carlosrvff.bsreader.domain.statement.Debit;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;

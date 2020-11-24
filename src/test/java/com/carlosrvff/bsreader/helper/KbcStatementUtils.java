@@ -1,8 +1,8 @@
 package com.carlosrvff.bsreader.helper;
 
 import com.carlosrvff.bsreader.converter.KbcConverter;
-import com.carlosrvff.bsreader.domain.Credit;
-import com.carlosrvff.bsreader.domain.Debit;
+import com.carlosrvff.bsreader.domain.statement.Credit;
+import com.carlosrvff.bsreader.domain.statement.Debit;
 
 public class KbcStatementUtils implements BankStatementUtils {
 

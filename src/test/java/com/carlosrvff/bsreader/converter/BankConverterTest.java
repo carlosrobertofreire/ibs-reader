@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.carlosrvff.bsreader.domain.Credit;
-import com.carlosrvff.bsreader.domain.Debit;
 import com.carlosrvff.bsreader.domain.Statement;
+import com.carlosrvff.bsreader.domain.statement.Credit;
+import com.carlosrvff.bsreader.domain.statement.Debit;
 import com.carlosrvff.bsreader.helper.BankStatementUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;

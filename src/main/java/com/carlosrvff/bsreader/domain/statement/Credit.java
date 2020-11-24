@@ -1,5 +1,6 @@
-package com.carlosrvff.bsreader.domain;
+package com.carlosrvff.bsreader.domain.statement;
 
+import com.carlosrvff.bsreader.domain.Statement;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
