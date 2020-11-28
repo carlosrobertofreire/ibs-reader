@@ -1,12 +1,14 @@
 package com.carlosrvff.bsreader.helper;
 
-import com.carlosrvff.bsreader.converter.KbcConverter;
 import com.carlosrvff.bsreader.domain.statement.Credit;
 import com.carlosrvff.bsreader.domain.statement.Debit;
 
 public class KbcStatementUtils implements BankStatementUtils {
 
   public static final String SEPARATOR = "\t";
+
+  public static final char CURRENCY_SYMBOL = '€';
+  public static final char DEBIT_SYMBOL = '-';
 
   private static final String DATE_FIXTURE = "30 Jul 2019";
   private static final String TRANSACTION_FIXTURE = "ANY STORE";
@@ -18,11 +20,11 @@ public class KbcStatementUtils implements BankStatementUtils {
         .append(SEPARATOR)
         .append(TRANSACTION_FIXTURE)
         .append(SEPARATOR)
-        .append(KbcConverter.DEBIT_SYMBOL)
-        .append(KbcConverter.CURRENCY_SYMBOL)
+        .append(DEBIT_SYMBOL)
+        .append(CURRENCY_SYMBOL)
         .append(FIVE_THOUSAND_AMOUNT_FIXTURE)
         .append(SEPARATOR)
-        .append(KbcConverter.CURRENCY_SYMBOL)
+        .append(CURRENCY_SYMBOL)
         .append(FIVE_THOUSAND_AMOUNT_FIXTURE)
         .toString();
   }
@@ -42,11 +44,11 @@ public class KbcStatementUtils implements BankStatementUtils {
         .append(SEPARATOR)
         .append(TRANSACTION_FIXTURE)
         .append(SEPARATOR)
-        .append(KbcConverter.CURRENCY_SYMBOL)
+        .append(CURRENCY_SYMBOL)
         .append(FIVE_THOUSAND_AMOUNT_FIXTURE)
         .append(SEPARATOR)
         .append(SEPARATOR)
-        .append(KbcConverter.CURRENCY_SYMBOL)
+        .append(CURRENCY_SYMBOL)
         .append(FIVE_THOUSAND_AMOUNT_FIXTURE)
         .toString();
   }
@@ -68,11 +70,11 @@ public class KbcStatementUtils implements BankStatementUtils {
         .append(TRANSACTION_FIXTURE)
         .append(SEPARATOR)
         .append(System.lineSeparator())
-        .append(KbcConverter.DEBIT_SYMBOL)
-        .append(KbcConverter.CURRENCY_SYMBOL)
+        .append(DEBIT_SYMBOL)
+        .append(CURRENCY_SYMBOL)
         .append(FIVE_THOUSAND_AMOUNT_FIXTURE)
         .append(SEPARATOR)
-        .append(KbcConverter.CURRENCY_SYMBOL)
+        .append(CURRENCY_SYMBOL)
         .append(FIVE_THOUSAND_AMOUNT_FIXTURE)
         .append(System.lineSeparator())
         .toString();
@@ -86,11 +88,11 @@ public class KbcStatementUtils implements BankStatementUtils {
         .append(TRANSACTION_FIXTURE)
         .append(SEPARATOR)
         .append(System.lineSeparator())
-        .append(KbcConverter.CURRENCY_SYMBOL)
+        .append(CURRENCY_SYMBOL)
         .append(FIVE_THOUSAND_AMOUNT_FIXTURE)
         .append(SEPARATOR)
         .append(SEPARATOR)
-        .append(KbcConverter.CURRENCY_SYMBOL)
+        .append(CURRENCY_SYMBOL)
         .append(FIVE_THOUSAND_AMOUNT_FIXTURE)
         .append(System.lineSeparator())
         .toString();

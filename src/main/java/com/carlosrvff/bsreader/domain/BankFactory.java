@@ -22,9 +22,9 @@ public class BankFactory {
       return new ItauSite(statementsText);
     } else if (header.equalsIgnoreCase(Kbc.getHeader())) {
       return new Kbc(statementsText);
-    }else if (header.equalsIgnoreCase(Revolut.getHeader())) {
+    } else if (header.equalsIgnoreCase(Revolut.getHeader())) {
       return new Revolut(statementsText);
-    }else {
+    } else {
       throw new IllegalArgumentException("Invalid header: " + header);
     }
   }

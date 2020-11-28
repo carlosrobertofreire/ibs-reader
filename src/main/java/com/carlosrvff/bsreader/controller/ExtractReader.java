@@ -21,13 +21,12 @@ public class ExtractReader {
   }
 
   private List<Statement> load(BufferedReader bufferedReader) throws IOException {
-    Bank bank = null;
     StringBuilder content = new StringBuilder();
     String line;
     while ((line = bufferedReader.readLine()) != null) {
       content.append(line).append(System.lineSeparator());
     }
-    bank = getBank(content.toString());
+    Bank bank = getBank(content.toString());
     if (bank == null) {
       return Collections.emptyList();
     } else {
