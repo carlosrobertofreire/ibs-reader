@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.carlosrvff.bsreader.domain.bank.Cheetah;
 import com.carlosrvff.bsreader.domain.bank.ItauCsv;
+import com.carlosrvff.bsreader.domain.bank.ItauSite;
 import org.junit.jupiter.api.Test;
 
 class BankFactoryTest {
@@ -19,6 +20,12 @@ class BankFactoryTest {
   void getBankWhenInputIsItauCsv() {
     Bank bank = BankFactory.getBank(ItauCsv.getHeader());
     assertTrue(bank instanceof ItauCsv);
+  }
+
+  @Test
+  void getBankWhenInputIsItauSite() {
+    Bank bank = BankFactory.getBank(ItauSite.getHeader());
+    assertTrue(bank instanceof ItauSite);
   }
 
   @Test

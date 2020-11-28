@@ -2,6 +2,7 @@ package com.carlosrvff.bsreader.domain;
 
 import com.carlosrvff.bsreader.domain.bank.Cheetah;
 import com.carlosrvff.bsreader.domain.bank.ItauCsv;
+import com.carlosrvff.bsreader.domain.bank.ItauSite;
 import org.apache.commons.lang3.StringUtils;
 
 public class BankFactory {
@@ -15,7 +16,9 @@ public class BankFactory {
       return new Cheetah(statementsText);
     } else if (header.equalsIgnoreCase(ItauCsv.getHeader())) {
       return new ItauCsv(statementsText);
-    } else {
+    } else if (header.equalsIgnoreCase(ItauSite.getHeader())) {
+      return new ItauSite(statementsText);
+    }else {
       throw new IllegalArgumentException("Invalid header: " + header);
     }
   }
