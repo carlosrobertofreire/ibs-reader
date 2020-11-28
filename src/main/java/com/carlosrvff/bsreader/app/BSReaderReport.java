@@ -1,8 +1,8 @@
 package com.carlosrvff.bsreader.app;
 
-import com.carlosrvff.bsreader.domain.Statement;
 import com.carlosrvff.bsreader.controller.ExtractReader;
 import com.carlosrvff.bsreader.controller.ReportGenerator;
+import com.carlosrvff.bsreader.domain.Statement;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -29,7 +29,7 @@ public class BSReaderReport {
       log.info("Processing data...");
       String content = new ReportGenerator().generate(statements, debitKbFile);
       writeToFile(content, outputFile);
-      log.info("Finished!");
+      log.info("Finished! " + statements.size() + " statements read!");
     } catch (Exception e) {
       log.fatal("Error executing BSReaderReport:", e);
     }
