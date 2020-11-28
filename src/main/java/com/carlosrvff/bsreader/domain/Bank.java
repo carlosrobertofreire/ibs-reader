@@ -2,6 +2,7 @@ package com.carlosrvff.bsreader.domain;
 
 import com.carlosrvff.bsreader.converter.StatementConverter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
@@ -21,7 +22,12 @@ public abstract class Bank {
 
   public List<Statement> getStatements() {
     String[] lines = statementsText.split(System.lineSeparator());
+    lines = removeHeader(lines);
     return getStatements(lines);
+  }
+
+  private String[] removeHeader(String[] lines){
+    return Arrays.copyOfRange(lines, 1, lines.length);
   }
 
   protected List<Statement> getStatements(@NonNull String[] lines) {
