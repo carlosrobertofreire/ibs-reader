@@ -11,6 +11,8 @@ public abstract class Bank {
 
   private String statementsText;
 
+  public Bank() {}
+
   public Bank(String statementsText) {
     this.statementsText = statementsText;
   }
@@ -22,7 +24,7 @@ public abstract class Bank {
     return getStatements(lines);
   }
 
-  private List<Statement> getStatements(@NonNull String[] lines) {
+  protected List<Statement> getStatements(@NonNull String[] lines) {
     List<Statement> result = new ArrayList<>();
     for (String line : lines) {
       processLine(result, line);
@@ -30,7 +32,7 @@ public abstract class Bank {
     return result;
   }
 
-  private void processLine(List<Statement> result, String line) {
+  protected void processLine(List<Statement> result, String line) {
     try {
       result.add(getStatementConverter().toStatement(line));
     } catch (IllegalArgumentException e) {
@@ -40,5 +42,4 @@ public abstract class Bank {
       }
     }
   }
-
 }

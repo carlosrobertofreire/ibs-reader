@@ -3,6 +3,7 @@ package com.carlosrvff.bsreader.domain;
 import com.carlosrvff.bsreader.domain.bank.Cheetah;
 import com.carlosrvff.bsreader.domain.bank.ItauCsv;
 import com.carlosrvff.bsreader.domain.bank.ItauSite;
+import com.carlosrvff.bsreader.domain.bank.Kbc;
 import org.apache.commons.lang3.StringUtils;
 
 public class BankFactory {
@@ -18,6 +19,8 @@ public class BankFactory {
       return new ItauCsv(statementsText);
     } else if (header.equalsIgnoreCase(ItauSite.getHeader())) {
       return new ItauSite(statementsText);
+    } else if (header.equalsIgnoreCase(Kbc.getHeader())) {
+      return new Kbc(statementsText);
     }else {
       throw new IllegalArgumentException("Invalid header: " + header);
     }
