@@ -1,6 +1,7 @@
 package com.carlosrvff.bsreader.domain;
 
 import com.carlosrvff.bsreader.domain.bank.Cheetah;
+import com.carlosrvff.bsreader.domain.bank.ItauCsv;
 import org.apache.commons.lang3.StringUtils;
 
 public class BankFactory {
@@ -12,6 +13,8 @@ public class BankFactory {
     String header = getHeader(statementsText);
     if (header.equalsIgnoreCase(Cheetah.getHeader())) {
       return new Cheetah(statementsText);
+    } else if (header.equalsIgnoreCase(ItauCsv.getHeader())) {
+      return new ItauCsv(statementsText);
     } else {
       throw new IllegalArgumentException("Invalid header: " + header);
     }
