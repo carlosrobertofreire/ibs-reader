@@ -7,6 +7,7 @@ import com.carlosrvff.bsreader.domain.bank.Cheetah;
 import com.carlosrvff.bsreader.domain.bank.ItauCsv;
 import com.carlosrvff.bsreader.domain.bank.ItauSite;
 import com.carlosrvff.bsreader.domain.bank.Kbc;
+import com.carlosrvff.bsreader.domain.bank.Revolut;
 import org.junit.jupiter.api.Test;
 
 class BankFactoryTest {
@@ -33,6 +34,12 @@ class BankFactoryTest {
   void getBankWhenInputIsKbc() {
     Bank bank = BankFactory.getBank(Kbc.getHeader());
     assertTrue(bank instanceof Kbc);
+  }
+
+  @Test
+  void getBankWhenInputIsRevolut() {
+    Bank bank = BankFactory.getBank(Revolut.getHeader());
+    assertTrue(bank instanceof Revolut);
   }
 
   @Test

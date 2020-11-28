@@ -4,6 +4,7 @@ import com.carlosrvff.bsreader.domain.bank.Cheetah;
 import com.carlosrvff.bsreader.domain.bank.ItauCsv;
 import com.carlosrvff.bsreader.domain.bank.ItauSite;
 import com.carlosrvff.bsreader.domain.bank.Kbc;
+import com.carlosrvff.bsreader.domain.bank.Revolut;
 import org.apache.commons.lang3.StringUtils;
 
 public class BankFactory {
@@ -21,6 +22,8 @@ public class BankFactory {
       return new ItauSite(statementsText);
     } else if (header.equalsIgnoreCase(Kbc.getHeader())) {
       return new Kbc(statementsText);
+    }else if (header.equalsIgnoreCase(Revolut.getHeader())) {
+      return new Revolut(statementsText);
     }else {
       throw new IllegalArgumentException("Invalid header: " + header);
     }
