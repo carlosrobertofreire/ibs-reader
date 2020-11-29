@@ -1,4 +1,7 @@
 # bsreader
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/385f1b4fafe0457796199146ba10ab3b)](https://app.codacy.com/gh/carlosrvff/bsreader?utm_source=github.com&utm_medium=referral&utm_content=carlosrvff/bsreader&utm_campaign=Badge_Grade)
+
 A simple Java application to read and organize Bank statements.
 
 ![Java CI with Gradle](https://github.com/carlosrvff/bsreader/workflows/Java%20CI%20with%20Gradle/badge.svg?branch=master)
