@@ -1,6 +1,8 @@
 # bsreader
 A simple Java application to read and organize Bank statements.
 
+![Java CI with Gradle](https://github.com/carlosrvff/bsreader/workflows/Java%20CI%20with%20Gradle/badge.svg?branch=master)
+
 ### Supported Banks
 - [Itaú](https://www.itau.com.br/)
 - [Cheetah Money](https://cheetahmoney.com/)
