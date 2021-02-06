@@ -23,9 +23,16 @@ public class RevolutStatementConverter extends StatementConverter {
     String details = parts[1];
     String paidOut = parts[2];
     String paidIn = parts[3];
+    String category = parts[8];
 
     if (StringUtils.isNotBlank(paidOut)) {
-      return Debit.builder().date(date).store(details).value(paidOut).originalText(line).build();
+      return Debit.builder()
+          .date(date)
+          .store(details)
+          .value(paidOut)
+          .originalText(line)
+          .category(category)
+          .build();
     } else if (StringUtils.isNotBlank(paidIn)) {
       return Credit.builder().date(date).from(details).value(paidIn).originalText(line).build();
     } else {

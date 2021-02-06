@@ -17,7 +17,6 @@ public class RevolutStatementUtils implements BankStatementUtils {
   private static final String EXCHANGE_RATE = "FX-rate €1 = £0.8875";
   private static final String CATEGORY = "Shopping";
 
-
   @Override
   public String createDebitStatementText() {
     return new StringBuilder()
@@ -63,6 +62,7 @@ public class RevolutStatementUtils implements BankStatementUtils {
         .value(PAID_OUT_EUR)
         .store(REFERENCE)
         .date(COMPLETED_DATE)
+        .category(CATEGORY)
         .build();
   }
 

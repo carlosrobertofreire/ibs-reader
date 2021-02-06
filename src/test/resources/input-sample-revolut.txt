@@ -9,4 +9,4 @@ Completed Date;Reference;Paid Out (EUR);Paid In (EUR);Exchange Out;Exchange In; 
 29 Sep 2020;From someone 3;;12.00;;;759.01;;Transfers
 29 Sep 2020;From someone 3;;12.00;;;759.01;;Transfers
 16 Sep 2020;STORE2;80.00;;;;500.80;;Shopping
-12 Sep 2020;STORE2;140.00;;;;500.80;;Shopping
+12 Sep 2020;STORE4;140.00;;;;500.80;;Shopping

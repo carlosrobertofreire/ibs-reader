@@ -63,7 +63,9 @@ public class ReportGenerator {
       if (reportData.getKnownDebits().containsKey(debitKnowledgeItemOptional.get())) {
         reportData.getKnownDebits().get(debitKnowledgeItemOptional.get()).add(debit);
       } else {
-        reportData.getKnownDebits().put(debitKnowledgeItemOptional.get(), new ArrayList<>(Arrays.asList(debit)));
+        reportData
+            .getKnownDebits()
+            .put(debitKnowledgeItemOptional.get(), new ArrayList<>(Arrays.asList(debit)));
       }
     } else {
       reportData.getUnknownDebits().add(debit);
@@ -74,7 +76,9 @@ public class ReportGenerator {
       List<DebitKnowledgeItem> debitKnowledgeItems, Debit debit) {
     for (DebitKnowledgeItem debitKnowledgeItem : debitKnowledgeItems) {
       for (String keyword : debitKnowledgeItem.getKeywords()) {
-        if (StringUtils.containsIgnoreCase(debit.getStore(), keyword)) {
+        if (StringUtils.containsIgnoreCase(debit.getCategory(), keyword)) {
+          return Optional.of(debitKnowledgeItem);
+        } else if (StringUtils.containsIgnoreCase(debit.getStore(), keyword)) {
           return Optional.of(debitKnowledgeItem);
         }
       }
