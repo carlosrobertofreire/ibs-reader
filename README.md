@@ -1,4 +1,7 @@
 # bsreader
+
+![Java CI with Gradle](https://github.com/carlosrvff/bsreader/workflows/Java%20CI%20with%20Gradle/badge.svg?branch=master)
+
 A simple Java application to read and organize Bank statements.
 
 ### Supported Banks
