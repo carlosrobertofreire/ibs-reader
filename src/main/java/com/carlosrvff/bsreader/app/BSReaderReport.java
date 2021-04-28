@@ -18,7 +18,7 @@ public class BSReaderReport {
       String inputFile =
           getValue(System.getenv("BSREADER_INPUT_FILE"), getDefaultFile("input.txt"));
       String debitKbFile =
-          getValue(System.getenv("BSREADER_DEBIT_KB_FILE"), getDefaultFile("debit-kb.txt"));
+          getValue(System.getenv("BSREADER_DEBIT_KB_FILE"), getDefaultFile("debit-kb.org"));
       String outputFile =
           getValue(System.getenv("BSREADER_OUTPUT_FILE"), getDefaultFile("output.txt"));
       List<Statement> statements = new ExtractReader().load(inputFile);

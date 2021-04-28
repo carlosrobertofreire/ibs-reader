@@ -1,10 +1,10 @@
 -----------------------------------------------------
-# SAMPLE CATEGORY 2
+* SAMPLE CATEGORY 2
 22/06/2019   16:17,POS Domestic,STORE2,- € 46.50,"- € 0.20",APPROVED
 
 46.50+0.20
 -----------------------------------------------------
-# SAMPLE CATEGORY 1
+* SAMPLE CATEGORY 1
 24/06/2019   12:13,POS Domestic,STORE1,- € 7.15,"- € 0.20",APPROVED
 
 7.15+0.20

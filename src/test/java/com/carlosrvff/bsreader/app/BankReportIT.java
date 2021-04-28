@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 abstract class BankReportIT {
 
   public static final String TEST_RESOURCES_FOLDER = "src/test/resources/";
-  public static final String DEBIT_KB_FILE_NAME = TEST_RESOURCES_FOLDER + "debit-kb.txt";
+  public static final String DEBIT_KB_FILE_NAME = TEST_RESOURCES_FOLDER + "debit-kb.org";
 
   protected abstract String getInputFileName();
 

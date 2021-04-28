@@ -1,11 +1,5 @@
 -----------------------------------------------------
-# SAMPLE CATEGORY 2
-16 Sep 2020;STORE2;80.00;;;;500.80;;Shopping
-12 Sep 2020;STORE4;140.00;;;;500.80;;Shopping
-
-80.00+140.00
------------------------------------------------------
-# SAMPLE: EXPENSES - FOOD
+* SAMPLE: EXPENSES - FOOD
 20 Nov 2020;RESTAURANT1;6.50;;;;500.80;;Restaurants
 19 Nov 2020;RESTAURANT1;10.20;;;;500.80;;Restaurants
 12 Nov 2020;RESTAURANT2;10.30;;;;500.80;;Restaurants
@@ -13,6 +7,12 @@
 05 Nov 2020;RESTAURANT1;200.00;;;;500.80;;Restaurants
 
 6.50+10.20+10.30+100.19+200.00
+-----------------------------------------------------
+* SAMPLE CATEGORY 2
+16 Sep 2020;STORE2;80.00;;;;500.80;;Shopping
+12 Sep 2020;STORE4;140.00;;;;500.80;;Shopping
+
+80.00+140.00
 -----------------------------------------------------
 CREDITS
 19 Nov 2020;From someone;;800.00;;;759.01;;Transfers

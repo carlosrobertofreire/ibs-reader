@@ -1,10 +1,10 @@
 -----------------------------------------------------
-# SAMPLE CATEGORY 2
+* SAMPLE CATEGORY 2
 02/05			RSHOP-STORE2		380,80-
 
 380,80
 -----------------------------------------------------
-# SAMPLE CATEGORY 1
+* SAMPLE CATEGORY 1
 02/05			RSHOP-STORE1		15,80-
 
 15,80

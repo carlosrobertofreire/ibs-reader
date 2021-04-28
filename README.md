@@ -27,12 +27,12 @@ You also can change the default location creating the follow environment variabl
 
 ```
 export BSREADER_INPUT_FILE=“/Users/your_name/MyNewLocation/input.txt”
-export BSREADER_DEBIT_KB_FILE=“/Users/your_name/MyNewLocation/debit-kb.txt”
+export BSREADER_DEBIT_KB_FILE=“/Users/your_name/MyNewLocation/debit-kb.org”
 export BSREADER_OUTPUT_FILE=“/Users/your_name/MyNewLocation/output.txt” 
 ```
 
 ### Editing
-Open `debit-kb.txt` and create your own knowledge base for debit statements, following the pattern already used in the file.
+Open `debit-kb.org` and create your own knowledge base for debit statements, following the pattern already used in the file.
 
 ## Running
 Paste your bank statements into `input.txt` and execute `bsreader-all-{versionNumber}.jar`.
