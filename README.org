@@ -1,0 +1,88 @@
+* bsreader
+  :PROPERTIES:
+  :CUSTOM_ID: bsreader
+  :END:
+[[https://github.com/carlosrvff/bsreader/workflows/Java%20CI%20with%20Gradle/badge.svg?branch=master]]
+
+A simple Java application to read and organize Bank statements.
+
+*** Supported Banks
+    :PROPERTIES:
+    :CUSTOM_ID: supported-banks
+    :END:
+
+- [[https://www.itau.com.br/][Itaú]]
+- [[https://cheetahmoney.com/][Cheetah Money]]
+- [[https://www.kbc.ie/][KBC]]
+- [[https://www.revolut.com/][Revolut]]
+
+** Getting Started
+   :PROPERTIES:
+   :CUSTOM_ID: getting-started
+   :END:
+*** Prerequisites
+    :PROPERTIES:
+    :CUSTOM_ID: prerequisites
+    :END:
+To run *bsreader* you need to have Java 8 installed on your machine.
+
+*** Installing
+    :PROPERTIES:
+    :CUSTOM_ID: installing
+    :END:
+Download and extract the
+[[https://github.com/carlosrvff/bsreader/releases][latest]] *bsreader*
+zip to your home folder.
+
+#+begin_example
+  /Users/your_name/bsreader
+#+end_example
+
+**** Changing the default location for bsreader files
+     :PROPERTIES:
+     :CUSTOM_ID: changing-the-default-location-for-bsreader-files
+     :END:
+You also can change the default location creating the follow environment
+variables:
+
+#+begin_example
+  export BSREADER_INPUT_FILE=“/Users/your_name/MyNewLocation/input.txt”
+  export BSREADER_DEBIT_KB_FILE=“/Users/your_name/MyNewLocation/debit-kb.org”
+  export BSREADER_OUTPUT_FILE=“/Users/your_name/MyNewLocation/output.txt” 
+#+end_example
+
+*** Editing
+    :PROPERTIES:
+    :CUSTOM_ID: editing
+    :END:
+Open =debit-kb.org= and create your own knowledge base for debit
+statements, following the pattern already used in the file.
+
+** Running
+   :PROPERTIES:
+   :CUSTOM_ID: running
+   :END:
+Paste your bank statements into =input.txt= and execute
+=bsreader-all-{versionNumber}.jar=.
+
+** Viewing Results
+   :PROPERTIES:
+   :CUSTOM_ID: viewing-results
+   :END:
+A new file =output.txt= will be generated.
+
+Open this file and see how *bsreader* organized your bank statements.
+
+** Author
+   :PROPERTIES:
+   :CUSTOM_ID: author
+   :END:
+
+- [[https://github.com/carlosrvff][Carlos Freire]]
+
+** License
+   :PROPERTIES:
+   :CUSTOM_ID: license
+   :END:
+This project is licensed under the MIT License - see the
+[[file:LICENSE]] file for details.
